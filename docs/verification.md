@@ -68,8 +68,8 @@ Notes:
 | Check | Expected | Pass |
 |---|---|---|
 | Fresh page load | Shape is Circle, diameter field shows 20, a 20 mm circle is drawn | ☐ |
-| Open the shape dropdown | Circle, Square, Rectangle, Triangle, Polygon are listed | ☐ |
-| Pick each shape | Input fields change to that shape's fields and the shape redraws immediately | ☐ |
+| Look at the shape toolbar | Buttons for Circle, Square, Rectangle, Triangle and Polygon are shown, and Circle is highlighted as selected | ☐ |
+| Click each shape button | That button becomes highlighted, the others are not, the input fields change to that shape's fields and the shape redraws immediately | ☐ |
 | Type in a field | The shape redraws on every keystroke, not only on blur | ☐ |
 
 ### 4.1 Values are kept when switching
@@ -129,7 +129,8 @@ Test with the operating system or browser set to each theme. If the app has no m
 | Shape fill and outline visible against the grid | ☐ | ☐ |
 | Labels, inputs and the note are readable | ☐ | ☐ |
 | Error message is readable | ☐ | ☐ |
-| Focus outline visible on the dropdown and each input (use Tab) | ☐ | ☐ |
+| Focus outline visible on each toolbar button and each input (use Tab) | ☐ | ☐ |
+| Selected toolbar button is clearly distinguishable from the others | ☐ | ☐ |
 
 ## 8. Narrow-screen layout
 
@@ -140,6 +141,7 @@ Check with a real phone, or browser developer tools set to a width of 640 px or 
 | Control panel position | Stacks above the drawing area | ☐ |
 | Panel border | Line sits below the panel, not beside it | ☐ |
 | Drawing area | Fills the remaining height and shows the grid | ☐ |
+| Shape toolbar | Buttons wrap onto extra rows if needed, none are cut off, and each is easy to tap | ☐ |
 | Inputs | Full width, tappable, number keyboard appears on a phone | ☐ |
 | Shape wider than the screen (for example Rectangle 300 x 20) | Scrolls inside the drawing area, not the page | ☐ |
 | Rotate to landscape | Layout switches correctly at the breakpoint | ☐ |

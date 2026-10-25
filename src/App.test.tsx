@@ -12,13 +12,13 @@ const setField = async (user: User, label: string, value: string) => {
 }
 
 const chooseShape = (user: User, id: string) =>
-  user.selectOptions(screen.getByLabelText('Shape'), id)
+  user.click(screen.getByRole('button', { name: new RegExp(`^${id}$`, 'i') }))
 
 describe('first load', () => {
   it('shows a 20 mm circle by default', () => {
     render(<App />)
 
-    expect(screen.getByLabelText('Shape')).toHaveValue('circle')
+    expect(screen.getByRole('button', { name: 'Circle' })).toHaveAttribute('aria-pressed', 'true')
     expect(screen.getByLabelText('Diameter')).toHaveValue(20)
     expect(screen.getByRole('img', { name: 'Circle, 20 millimetres diameter' })).toBeInTheDocument()
   })
@@ -28,10 +28,21 @@ describe('first load', () => {
     expect(screen.getByRole('alert')).toBeEmptyDOMElement()
   })
 
-  it('lists all five shapes in the dropdown', () => {
+  it('shows a toolbar button for each of the five shapes', () => {
     render(<App />)
-    const options = screen.getAllByRole('option').map((o) => o.textContent)
-    expect(options).toEqual(['Circle', 'Square', 'Rectangle', 'Triangle', 'Polygon'])
+    const toolbar = screen.getByRole('toolbar', { name: 'Shapes' })
+    const buttons = Array.from(toolbar.querySelectorAll('button')).map((b) => b.textContent)
+    expect(buttons).toEqual(['Circle', 'Square', 'Rectangle', 'Triangle', 'Polygon'])
+    expect(screen.getByRole('button', { name: 'Square' })).toHaveAttribute('aria-pressed', 'false')
+  })
+
+  it('marks only the clicked shape button as pressed', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'triangle')
+    expect(screen.getByRole('button', { name: 'Triangle' })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', { name: 'Circle' })).toHaveAttribute('aria-pressed', 'false')
   })
 })
 

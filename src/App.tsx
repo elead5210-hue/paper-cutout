@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { DEFAULT_SHAPE_ID, SHAPES, defaultRaw, getShape, parseValues, type RawValues } from './shapes'
-import ShapeSelect from './components/ShapeSelect'
+import ShapeToolbar from './components/ShapeToolbar'
 import ShapeInputs from './components/ShapeInputs'
 import ShapeCanvas from './components/ShapeCanvas'
 
@@ -22,7 +22,7 @@ export default function App() {
     <div className="layout">
       <aside className="panel">
         <h1>Shape viewer</h1>
-        <ShapeSelect shapes={SHAPES} value={shape.id} onChange={setShapeId} />
+        <ShapeToolbar shapes={SHAPES} value={shape.id} onChange={setShapeId} />
         <ShapeInputs fields={shape.fields} raw={raw} onChange={setField} />
         <p className="msg" role="alert">{result.ok ? '' : result.error}</p>
         <p className="note">

@@ -1,6 +1,6 @@
 # paper-cutout
 
-A small React app that draws a shape at its true size in millimetres. Pick a shape, type its dimensions, and the shape redraws on every keystroke over a 10 mm grid.
+A small React app that draws a shape at its true size in millimetres. Click a shape in the toolbar, type its dimensions, and the shape redraws on every keystroke over a 10 mm grid.
 
 Shapes: circle, square, rectangle, triangle and regular polygon.
 
@@ -23,7 +23,7 @@ To typecheck on its own, run `npx tsc --noEmit`.
 
 ## How it works
 
-- The left panel holds the shape dropdown and one number input per dimension.
+- The left panel holds a toolbar of shape buttons and one number input per dimension. The selected shape's button is highlighted and marked with `aria-pressed`.
 - The right area draws the shape in an SVG where 1 SVG unit is 1 mm. The SVG's width and height are set in `mm`, so it renders at real size.
 - Each shape remembers the values you last entered, so switching away and back loses nothing. Values are not saved between page loads.
 - If a value is empty, out of range, or not a whole number where one is needed, the shape is hidden and a message appears in the panel. The page never shows `NaN`.
@@ -40,7 +40,7 @@ src/
   shapes.ts                   shape definitions, geometry helpers and validation
   styles.css                  global styles, theme variables and the grid background
   components/
-    ShapeSelect.tsx           the shape dropdown
+    ShapeToolbar.tsx          the toolbar of shape buttons
     ShapeInputs.tsx           one number input per field of the selected shape
     ShapeCanvas.tsx           the SVG drawing
   test/setup.ts               test setup (jest-dom matchers, cleanup)
@@ -52,11 +52,11 @@ docs/
 
 ## Adding a shape
 
-All shapes are defined in the `SHAPES` array in `src/shapes.ts`. Add one entry and the dropdown, inputs, validation, drawing and label pick it up automatically.
+All shapes are defined in the `SHAPES` array in `src/shapes.ts`. Add one entry and the toolbar, inputs, validation, drawing and label pick it up automatically.
 
 Each entry has:
 
-- `id` and `label`: the dropdown value and text.
+- `id` and `label`: the shape's identifier and the text on its toolbar button.
 - `fields`: the inputs, each with `key`, `label`, `unit`, `defaultValue`, `min`, `max` and optionally `integer`.
 - `build(values)`: returns the shape's `width` and `height` in mm and either a circle radius or a list of polygon points. Points are measured from the top-left of the bounding box.
 - `describe(values)`: the plain-language text used as the SVG's accessible label, for example "Rectangle, 30 by 20 millimetres".
