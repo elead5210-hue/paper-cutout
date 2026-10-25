@@ -2,11 +2,10 @@ import type { ShapeDef } from '../shapes'
 
 interface Props {
   shapes: ShapeDef[]
-  value: string
-  onChange: (id: string) => void
+  onPlace: (shapeId: string) => void
 }
 
-export default function ShapeToolbar({ shapes, value, onChange }: Props) {
+export default function ShapeToolbar({ shapes, onPlace }: Props) {
   return (
     <div className="toolbar" role="toolbar" aria-label="Shapes">
       {shapes.map((s) => (
@@ -14,8 +13,7 @@ export default function ShapeToolbar({ shapes, value, onChange }: Props) {
           key={s.id}
           type="button"
           className="toolbar-button"
-          aria-pressed={s.id === value}
-          onClick={() => onChange(s.id)}
+          onClick={() => onPlace(s.id)}
         >
           {s.label}
         </button>

@@ -1,6 +1,6 @@
 # paper-cutout
 
-A small React app that draws a shape at its true size in millimetres. Click a shape in the toolbar, type its dimensions, and the shape redraws on every keystroke over a 10 mm grid.
+A small React app that draws shapes at their true size in millimetres. Click a shape in the toolbar to place it in the work area, then select it and type its dimensions. The shape redraws on every keystroke over a 10 mm grid.
 
 Shapes: circle, square, rectangle, triangle and regular polygon.
 
@@ -23,10 +23,12 @@ To typecheck on its own, run `npx tsc --noEmit`.
 
 ## How it works
 
-- The left panel holds a toolbar of shape buttons and one number input per dimension. The selected shape's button is highlighted and marked with `aria-pressed`.
-- The right area draws the shape in an SVG where 1 SVG unit is 1 mm. The SVG's width and height are set in `mm`, so it renders at real size.
-- Each shape remembers the values you last entered, so switching away and back loses nothing. Values are not saved between page loads.
-- If a value is empty, out of range, or not a whole number where one is needed, the shape is hidden and a message appears in the panel. The page never shows `NaN`.
+- The work area starts empty. Clicking a button in the toolbar places a new shape at that shape's default size and selects it. Clicking the same button again places another shape.
+- The left panel holds the toolbar and one number input per dimension of the selected shape. Click a placed shape in the work area to select it and edit its dimensions. The selected shape has a solid outline and is marked with `aria-pressed`.
+- The work area draws each placed shape in an SVG where 1 SVG unit is 1 mm. The SVG's width and height are set in `mm`, so it renders at real size.
+- Every placed shape keeps its own values. Values are not saved between page loads.
+- If a value is empty, out of range, or not a whole number where one is needed, that shape is hidden and a message appears in the panel. The page never shows `NaN`.
+- Placed shapes currently flow left to right in the work area. Centring them on a centre point is planned for a later update.
 - Light and dark themes follow your system setting.
 
 On-screen size depends on the pixel density your display reports, so measure against the grid or a ruler if you need exact size. `docs/verification.md` has a checklist for doing this.
@@ -36,13 +38,15 @@ On-screen size depends on the pixel density your display reports, so measure aga
 ```
 src/
   main.tsx                    entry point
-  App.tsx                     page layout and state (selected shape, entered values)
+  App.tsx                     page layout and state (placed shapes, which one is selected)
+  placed.ts                   the PlacedShape type and createPlaced(), which starts a new shape at its defaults
   shapes.ts                   shape definitions, geometry helpers and validation
   styles.css                  global styles, theme variables and the grid background
   components/
-    ShapeToolbar.tsx          the toolbar of shape buttons
+    ShapeToolbar.tsx          the toolbar of shape buttons that place shapes
     ShapeInputs.tsx           one number input per field of the selected shape
-    ShapeCanvas.tsx           the SVG drawing
+    WorkArea.tsx              renders every placed shape and handles selecting one
+    ShapeCanvas.tsx           the SVG drawing of one shape
   test/setup.ts               test setup (jest-dom matchers, cleanup)
   shapes.test.ts              geometry, validation and accessible label tests
   App.test.tsx                component tests for the behaviour
@@ -73,6 +77,8 @@ Add tests for the new shape's size and label in `src/shapes.test.ts`.
 | Stroke | 0.3 mm, centred on the outline. The viewBox is padded by half the stroke width so nothing clips. The outline therefore extends about 0.15 mm beyond the stated size on each side. |
 | ViewBox | Calculated from the shape's own bounding box, not a fixed size, so shapes are never clipped or offset. |
 | Size limits | Dimensions run from 0.1 mm to 1000 mm. Change them in the `size()` helper in `src/shapes.ts`. |
-| Input handling | Raw input is kept as text so a field can be cleared and retyped. It is validated on every change and the shape is only drawn when all fields are valid. |
+| Placing shapes | A toolbar button places a new shape every time it is clicked, with that shape's default values, and selects it. The work area is empty on load. |
+| Placed shape values | Each placed shape has its own id and its own values, so the same shape type can be placed more than once without the copies sharing values. |
+| Input handling | Raw input is kept as text so a field can be cleared and retyped. It is validated on every change and a shape is only drawn when all its fields are valid. |
 | Accessibility | Every input has a visible label, errors are announced through a `role="alert"` region, and the SVG has an accessible label that updates with the values. |
 | Theming | Colours are CSS variables in `src/styles.css`. Dark mode follows the system setting. |
