@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from './App'
 
@@ -17,6 +17,12 @@ const chooseShape = (user: User, id: string) =>
 
 // The button wrapping a placed shape, found through the shape's accessible label.
 const placedButton = (name: string) => screen.getByRole('img', { name }).closest('button')!
+
+// The tree row (list item) for a component in the hierarchy panel, found by the component's name.
+const treeNode = (name: string) =>
+  within(screen.getByRole('tree', { name: 'Components' }))
+    .getByRole('button', { name })
+    .closest('li')!
 
 // Placed shape drawings only: the work area's centre point marker is also an image role.
 const shapeImages = () =>
@@ -217,6 +223,98 @@ describe('components', () => {
       'data-component',
       'Component 1'
     )
+  })
+})
+
+describe('hierarchy panel', () => {
+  it('is shown on the page and has no components on load', () => {
+    render(<App />)
+
+    const panel = screen.getByRole('complementary', { name: 'Hierarchy' })
+    expect(panel).toBeInTheDocument()
+    expect(within(panel).getByText('No components yet.')).toBeInTheDocument()
+    expect(screen.queryByRole('tree')).not.toBeInTheDocument()
+  })
+
+  it('lists each component by name', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await chooseShape(user, 'square')
+    await chooseShape(user, 'circle')
+
+    const tree = screen.getByRole('tree', { name: 'Components' })
+    const names = Array.from(tree.querySelectorAll('.tree-name')).map((el) => el.textContent)
+    expect(names).toEqual(['Component 1', 'Component 2', 'Component 3'])
+    expect(screen.queryByText('No components yet.')).not.toBeInTheDocument()
+  })
+
+  it('nests the shape under its component as a child', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await chooseShape(user, 'rectangle')
+
+    const first = within(treeNode('Component 1')).getByRole('group')
+    expect(within(first).getByText('Circle')).toBeInTheDocument()
+    expect(within(first).queryByText('Rectangle')).not.toBeInTheDocument()
+
+    const second = within(treeNode('Component 2')).getByRole('group')
+    expect(within(second).getByText('Rectangle')).toBeInTheDocument()
+  })
+
+  it('marks the newest component as selected', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await chooseShape(user, 'square')
+
+    expect(treeNode('Component 2')).toHaveAttribute('aria-selected', 'true')
+    expect(treeNode('Component 1')).toHaveAttribute('aria-selected', 'false')
+  })
+
+  it('selects a component when its tree row is clicked', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await chooseShape(user, 'rectangle')
+    expect(screen.queryByLabelText('Diameter')).not.toBeInTheDocument()
+
+    await user.click(within(treeNode('Component 1')).getByRole('button', { name: 'Component 1' }))
+
+    expect(screen.getByLabelText('Diameter')).toHaveValue(20)
+    expect(treeNode('Component 1')).toHaveAttribute('aria-selected', 'true')
+    expect(treeNode('Component 2')).toHaveAttribute('aria-selected', 'false')
+    expect(placedButton('Circle, 20 millimetres diameter')).toHaveAttribute('aria-pressed', 'true')
+    expect(placedButton('Rectangle, 30 by 20 millimetres')).toHaveAttribute('aria-pressed', 'false')
+  })
+
+  it('follows the selection when a shape is clicked in the work area', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await chooseShape(user, 'square')
+    await user.click(placedButton('Circle, 20 millimetres diameter'))
+
+    expect(treeNode('Component 1')).toHaveAttribute('aria-selected', 'true')
+    expect(treeNode('Component 2')).toHaveAttribute('aria-selected', 'false')
+  })
+
+  it('keeps a component listed while its shape is hidden by invalid input', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await setField(user, 'Diameter', '')
+
+    expect(shapeImages()).toHaveLength(0)
+    expect(treeNode('Component 1')).toBeInTheDocument()
+    expect(within(treeNode('Component 1')).getByText('Circle')).toBeInTheDocument()
   })
 })
 

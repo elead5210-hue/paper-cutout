@@ -93,7 +93,7 @@ Reloading the page empties the work area. That is expected, as shapes and values
 
 ### 4.2 Components and default names
 
-Each placed shape is added as part of a new component with a default name. The name is not shown in a panel yet, so check it by hovering over the placed shape (the tooltip shows the name) or by inspecting the element in the browser developer tools, where it appears as the `data-component` attribute on the shape's button.
+Each placed shape is added as part of a new component with a default name. The name is listed in the hierarchy panel (see 4.4). You can also check it by hovering over the placed shape (the tooltip shows the name) or by inspecting the element in the browser developer tools, where it appears as the `data-component` attribute on the shape's button.
 
 | Check | Expected | Pass |
 |---|---|---|
@@ -119,6 +119,24 @@ Each placed shape is added as part of a new component with a default name. The n
 | Click a shape in the overlap | The topmost shape under the pointer is selected, and the centre point does not block the click | ☐ |
 | Resize the browser window, and rotate to landscape on a phone | The centre point stays in the middle of the work area and the shapes stay centred on it | ☐ |
 | Set a shape's value to something invalid | The shape is hidden but the centre point stays visible | ☐ |
+
+### 4.4 Hierarchy panel
+
+| Check | Expected | Pass |
+|---|---|---|
+| Fresh page load | A panel headed "Hierarchy" sits on the right of the page, beside the work area, and says "No components yet." | ☐ |
+| Place a Circle | A row "Component 1" appears in the panel, with a smaller, indented row "Circle" nested beneath it as a child, joined by a vertical guide line | ☐ |
+| Place a Square, then a Rectangle | "Component 2" with child "Square" and "Component 3" with child "Rectangle" are added below, in the order placed, and every component has exactly one child | ☐ |
+| Place the same shape twice | Two separate components are listed, each with its own child, and the names differ | ☐ |
+| Newest component | The row for the component just placed is highlighted, matching the selected outline on the shape in the work area | ☐ |
+| Click a component row | That component is selected: its row is highlighted, its shape in the work area gets the selected outline, and the left panel shows that shape's fields and values | ☐ |
+| Click a placed shape in the work area | The matching row in the hierarchy panel becomes highlighted and the previous row loses its highlight | ☐ |
+| Click the child (shape) row | Nothing changes, as only the component row is clickable | ☐ |
+| Make a shape invalid | The shape disappears from the work area but its component and child stay listed in the panel, and return to normal once the value is fixed | ☐ |
+| Long list (place 20 or more shapes) | The panel scrolls inside itself, and the page and work area layout do not change | ☐ |
+| Keyboard | Tab reaches each component row in order, a clear focus outline shows on the focused row, and Enter or Space selects it | ☐ |
+| Screen reader (optional) | The panel is announced as "Hierarchy", the list as a tree of "Components", and the selected component is announced as selected | ☐ |
+| Reload the page | The panel is empty again, as components are not saved between visits | ☐ |
 
 ## 5. Invalid input
 
@@ -165,6 +183,9 @@ Test with the operating system or browser set to each theme. If the app has no m
 | Error message is readable | ☐ | ☐ |
 | Focus outline visible on each toolbar button, each placed shape and each input (use Tab) | ☐ | ☐ |
 | Selected placed shape has an outline that is clearly visible compared with unselected shapes | ☐ | ☐ |
+| Hierarchy panel background, border, heading and tree text are readable, and the guide line and marker symbols are visible but subtle | ☐ | ☐ |
+| Selected component row in the hierarchy panel is clearly highlighted compared with the others | ☐ | ☐ |
+| Focus outline visible on each hierarchy panel row (use Tab) | ☐ | ☐ |
 
 ## 8. Narrow-screen layout
 
@@ -175,6 +196,9 @@ Check with a real phone, or browser developer tools set to a width of 640 px or 
 | Control panel position | Stacks above the drawing area | ☐ |
 | Panel border | Line sits below the panel, not beside it | ☐ |
 | Drawing area | Fills the remaining height and shows the grid | ☐ |
+| Hierarchy panel position | Sits below the drawing area, full width, with a line above it rather than beside it | ☐ |
+| Hierarchy panel height | Is limited in height and scrolls inside itself when many components are listed, without pushing the drawing area off screen | ☐ |
+| Hierarchy panel rows | Each component row is easy to tap and the names are not cut off unreadably | ☐ |
 | Shape toolbar | Buttons wrap onto extra rows if needed, none are cut off, and each is easy to tap | ☐ |
 | Inputs | Full width, tappable, number keyboard appears on a phone | ☐ |
 | Shape wider than the screen (for example Rectangle 300 x 20) | Stays centred on the centre point and is cropped at the sides of the drawing area, and the page does not scroll sideways | ☐ |

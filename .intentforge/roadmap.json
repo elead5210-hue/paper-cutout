@@ -94,13 +94,13 @@
       "feature_id": null,
       "title": "Create a default-named component for each added shape",
       "summary": "Adding a new shape by default creates a component with a default name, with the shape added to the canvas area as part of that component.",
-      "detail": "{\"planState\":\"tasks_created\",\"planPromptText\":\"Goal: Create a default-named component for each added shape\\nDescription: Adding a new shape by default creates a component with a default name, with the shape added to the canvas area as part of that component.\\n\\nBelow is the current file tree for this project: one path per line,\\nfollowed by a short content fingerprint (format:\\nL<byte length>:H<8-char hash> - see shared/fingerprint.js if you’ve\\nseen this project before). No file contents are included here.\\n\\nPlan the set of file changes needed to implement the goal above.\\nRespond with ONLY this JSON object, no other text before or after it:\\n{\\n  \\\"tasks\\\": [\\n    {\\n      \\\"path\\\": \\\"components/example/example.js\\\",\\n      \\\"action\\\": \\\"create\\\" | \\\"modify\\\" | \\\"delete\\\",\\n      \\\"description\\\": \\\"one-line description of the change\\\",\\n      \\\"needsFileContent\\\": true,\\n      \\\"needsMetadata\\\": false,\\n      \\\"confident\\\": true\\n    }\\n  ]\\n}\\n\\n- needsFileContent: true unless this task is a plain delete with\\n  nothing else to write.\\n- needsMetadata: true only if this task needs you to author extra\\n  structured data beyond the file’s content (leave false if unsure).\\n- confident: for \\\"modify\\\"/\\\"delete\\\" tasks, whether your memory of\\n  that file’s current content matches the fingerprint shown above.\\n  Always true for \\\"create\\\" tasks (there’s nothing to remember yet).\\n\\nCurrent file tree:\\n.gitignore  L17:H2802602b\\ndocs/verification.md  L9603:H765a1a4a\\nindex.html  L317:H07fab284\\npackage.json  L654:H5cfd7117\\nREADME.md  L6020:H40f0691f\\nsrc/App.test.tsx  L10124:H102f90b8\\nsrc/App.tsx  L1875:Hcaed057e\\nsrc/components/ShapeCanvas.tsx  L1076:H54560002\\nsrc/components/ShapeInputs.tsx  L887:H1747e119\\nsrc/components/ShapeToolbar.tsx  L504:Hbae8b152\\nsrc/components/WorkArea.tsx  L1220:H708bb8c0\\nsrc/main.tsx  L225:H32e7e1bb\\nsrc/placed.ts  L712:Hb8b09eb8\\nsrc/shapes.test.ts  L3045:H47ce558e\\nsrc/shapes.ts  L4707:H6efb0303\\nsrc/styles.css  L3625:H18422c79\\nsrc/test/setup.ts  L305:H3c9b5c21\\ntsconfig.json  L300:Ha447bb7a\\nvite.config.ts  L224:H915bfc06\"}",
+      "detail": "{\"planState\":\"tasks_created\",\"planPromptText\":\"Goal: Create a default-named component for each added shape\\nDescription: Adding a new shape by default creates a component with a default name, with the shape added to the canvas area as part of that component.\\n\\nBelow is the current file tree for this project: one path per line,\\nfollowed by a short content fingerprint (format:\\nL<byte length>:H<8-char hash> - see shared/fingerprint.js if you’ve\\nseen this project before). No file contents are included here.\\n\\nPlan the set of file changes needed to implement the goal above.\\nRespond with ONLY this JSON object, no other text before or after it:\\n{\\n  \\\"tasks\\\": [\\n    {\\n      \\\"path\\\": \\\"components/example/example.js\\\",\\n      \\\"action\\\": \\\"create\\\" | \\\"modify\\\" | \\\"delete\\\",\\n      \\\"description\\\": \\\"one-line description of the change\\\",\\n      \\\"needsFileContent\\\": true,\\n      \\\"needsMetadata\\\": false,\\n      \\\"confident\\\": true\\n    }\\n  ]\\n}\\n\\n- needsFileContent: true unless this task is a plain delete with\\n  nothing else to write.\\n- needsMetadata: true only if this task needs you to author extra\\n  structured data beyond the file’s content (leave false if unsure).\\n- confident: for \\\"modify\\\"/\\\"delete\\\" tasks, whether your memory of\\n  that file’s current content matches the fingerprint shown above.\\n  Always true for \\\"create\\\" tasks (there’s nothing to remember yet).\\n\\nCurrent file tree:\\n.gitignore  L17:H2802602b\\ndocs/verification.md  L9603:H765a1a4a\\nindex.html  L317:H07fab284\\npackage.json  L654:H5cfd7117\\nREADME.md  L6020:H40f0691f\\nsrc/App.test.tsx  L10124:H102f90b8\\nsrc/App.tsx  L1875:Hcaed057e\\nsrc/components/ShapeCanvas.tsx  L1076:H54560002\\nsrc/components/ShapeInputs.tsx  L887:H1747e119\\nsrc/components/ShapeToolbar.tsx  L504:Hbae8b152\\nsrc/components/WorkArea.tsx  L1220:H708bb8c0\\nsrc/main.tsx  L225:H32e7e1bb\\nsrc/placed.ts  L712:Hb8b09eb8\\nsrc/shapes.test.ts  L3045:H47ce558e\\nsrc/shapes.ts  L4707:H6efb0303\\nsrc/styles.css  L3625:H18422c79\\nsrc/test/setup.ts  L305:H3c9b5c21\\ntsconfig.json  L300:Ha447bb7a\\nvite.config.ts  L224:H915bfc06\",\"pushOutcome\":{\"status\":\"pushed\",\"sha\":\"2a9f3f57bb9920795b394784fd60b8bec5279ee7\",\"at\":\"2026-10-25T13:16:30.145Z\"}}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": "",
       "createdAt": "2026-10-25T13:00:00.711Z",
-      "updatedAt": "2026-10-25T13:13:55.579Z"
+      "updatedAt": "2026-10-25T13:16:30.173Z"
     },
     {
       "roadmap_node_id": "rmn_d79f91b3f9c5426dab66f525",
@@ -114,13 +114,13 @@
       "feature_id": null,
       "title": "Show components in a file-explorer style hierarchy panel",
       "summary": "A hierarchy panel on the right of the page lists each component's name in a file-explorer style tree. Nested under each component as a child is a reference to the shape just added to the canvas area.",
-      "detail": "",
+      "detail": "{\"planState\":\"tasks_created\",\"planPromptText\":\"Goal: Show components in a file-explorer style hierarchy panel\\nDescription: A hierarchy panel on the right of the page lists each component's name in a file-explorer style tree. Nested under each component as a child is a reference to the shape just added to the canvas area.\\n\\nBelow is the current file tree for this project: one path per line,\\nfollowed by a short content fingerprint (format:\\nL<byte length>:H<8-char hash> - see shared/fingerprint.js if you’ve\\nseen this project before). No file contents are included here.\\n\\nPlan the set of file changes needed to implement the goal above.\\nRespond with ONLY this JSON object, no other text before or after it:\\n{\\n  \\\"tasks\\\": [\\n    {\\n      \\\"path\\\": \\\"components/example/example.js\\\",\\n      \\\"action\\\": \\\"create\\\" | \\\"modify\\\" | \\\"delete\\\",\\n      \\\"description\\\": \\\"one-line description of the change\\\",\\n      \\\"needsFileContent\\\": true,\\n      \\\"needsMetadata\\\": false,\\n      \\\"confident\\\": true\\n    }\\n  ]\\n}\\n\\n- needsFileContent: true unless this task is a plain delete with\\n  nothing else to write.\\n- needsMetadata: true only if this task needs you to author extra\\n  structured data beyond the file’s content (leave false if unsure).\\n- confident: for \\\"modify\\\"/\\\"delete\\\" tasks, whether your memory of\\n  that file’s current content matches the fingerprint shown above.\\n  Always true for \\\"create\\\" tasks (there’s nothing to remember yet).\\n\\nCurrent file tree:\\n.gitignore  L17:H2802602b\\ndocs/verification.md  L11180:Ha2971b3c\\nindex.html  L317:H07fab284\\npackage.json  L654:H5cfd7117\\nREADME.md  L7027:H8e102080\\nsrc/App.test.tsx  L13121:Hb4569782\\nsrc/App.tsx  L2070:Hcfb57ff3\\nsrc/component.test.ts  L2165:Hee9d51f2\\nsrc/component.ts  L1416:Hb51353e7\\nsrc/components/ShapeCanvas.tsx  L1076:H54560002\\nsrc/components/ShapeInputs.tsx  L887:H1747e119\\nsrc/components/ShapeToolbar.tsx  L504:Hbae8b152\\nsrc/components/WorkArea.tsx  L1310:H541c3a86\\nsrc/main.tsx  L225:H32e7e1bb\\nsrc/placed.ts  L712:Hb8b09eb8\\nsrc/shapes.test.ts  L3045:H47ce558e\\nsrc/shapes.ts  L4707:H6efb0303\\nsrc/styles.css  L3625:H18422c79\\nsrc/test/setup.ts  L305:H3c9b5c21\\ntsconfig.json  L300:Ha447bb7a\\nvite.config.ts  L224:H915bfc06\"}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": "",
       "createdAt": "2026-10-25T13:00:00.711Z",
-      "updatedAt": "2026-10-25T13:00:00.711Z"
+      "updatedAt": "2026-10-25T13:16:58.660Z"
     },
     {
       "roadmap_node_id": "rmn_355568cf99e73f7c96e2555b",
@@ -203,6 +203,26 @@
       "updatedAt": "2026-10-25T13:14:13.983Z"
     },
     {
+      "roadmap_node_id": "rmn_a3b85cde7e5e7682fe48fe09",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_d79f91b3f9c5426dab66f525",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 0,
+      "feature_id": null,
+      "title": "src/components/HierarchyPanel.tsx",
+      "summary": "New file-explorer style tree panel (role=tree) listing each component's name as a node with its shape nested beneath it as a child reference, highlighting the selected component and selecting it on click",
+      "detail": "{\"fileChangeMode\":\"write-file\",\"action\":\"create\",\"description\":\"New file-explorer style tree panel (role=tree) listing each component's name as a node with its shape nested beneath it as a child reference, highlighting the selected component and selecting it on click\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T13:16:58.200Z",
+      "updatedAt": "2026-10-25T13:17:20.065Z"
+    },
+    {
       "roadmap_node_id": "rmn_ba1fda8b9748b43f15e30347",
       "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
       "parent_roadmap_node_id": "rmn_115f980ac4e4e844481ee409",
@@ -281,6 +301,26 @@
       "notes": "",
       "createdAt": "2026-10-25T13:13:55.095Z",
       "updatedAt": "2026-10-25T13:14:34.276Z"
+    },
+    {
+      "roadmap_node_id": "rmn_8991cc014c15a36c80e1c356",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_d79f91b3f9c5426dab66f525",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 1,
+      "feature_id": null,
+      "title": "src/App.tsx",
+      "summary": "Render HierarchyPanel as a right-hand aside beside the work area, passing the components, selected id and the same select handler",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Render HierarchyPanel as a right-hand aside beside the work area, passing the components, selected id and the same select handler\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T13:16:58.317Z",
+      "updatedAt": "2026-10-25T13:17:41.221Z"
     },
     {
       "roadmap_node_id": "rmn_d141a7e5f3c5ead702239efa",
@@ -363,6 +403,26 @@
       "updatedAt": "2026-10-25T13:14:53.951Z"
     },
     {
+      "roadmap_node_id": "rmn_fae92ba8d244152e21aa7853",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_d79f91b3f9c5426dab66f525",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 2,
+      "feature_id": null,
+      "title": "src/styles.css",
+      "summary": "Add a third grid column for the hierarchy panel on the right and tree styles (indented children, expand/collapse markers, selected row highlight, focus outline, empty state), and stack the panel below the work area on narrow screens",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Add a third grid column for the hierarchy panel on the right and tree styles (indented children, expand/collapse markers, selected row highlight, focus outline, empty state), and stack the panel below the work area on narrow screens\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T13:16:58.412Z",
+      "updatedAt": "2026-10-25T13:17:59.378Z"
+    },
+    {
       "roadmap_node_id": "rmn_f43247fda2e107ec72b09557",
       "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
       "parent_roadmap_node_id": "rmn_115f980ac4e4e844481ee409",
@@ -441,6 +501,26 @@
       "notes": "",
       "createdAt": "2026-10-25T13:13:55.278Z",
       "updatedAt": "2026-10-25T13:15:11.527Z"
+    },
+    {
+      "roadmap_node_id": "rmn_4fcd99b3c4aba28670f36af5",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_d79f91b3f9c5426dab66f525",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 3,
+      "feature_id": null,
+      "title": "src/App.test.tsx",
+      "summary": "Add tests that the hierarchy panel is empty on load, lists each component's name with its shape nested as a child, selects a component when its tree row is clicked, and keeps the selected row in sync with the work area",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Add tests that the hierarchy panel is empty on load, lists each component's name with its shape nested as a child, selects a component when its tree row is clicked, and keeps the selected row in sync with the work area\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T13:16:58.471Z",
+      "updatedAt": "2026-10-25T13:18:26.476Z"
     },
     {
       "roadmap_node_id": "rmn_fafed2c907b83875e35134ea",
@@ -523,6 +603,26 @@
       "updatedAt": "2026-10-25T13:15:34.822Z"
     },
     {
+      "roadmap_node_id": "rmn_478c8f4c9967d1c64cf8acf8",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_d79f91b3f9c5426dab66f525",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 4,
+      "feature_id": null,
+      "title": "README.md",
+      "summary": "Describe the hierarchy panel in the intro and 'How it works', add HierarchyPanel.tsx to the project structure, and add design decisions for the tree layout and child shape reference",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Describe the hierarchy panel in the intro and 'How it works', add HierarchyPanel.tsx to the project structure, and add design decisions for the tree layout and child shape reference\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T13:16:58.539Z",
+      "updatedAt": "2026-10-25T13:18:43.695Z"
+    },
+    {
       "roadmap_node_id": "rmn_6af53a0131d77dd44caf418d",
       "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
       "parent_roadmap_node_id": "rmn_115f980ac4e4e844481ee409",
@@ -581,6 +681,26 @@
       "notes": "",
       "createdAt": "2026-10-25T13:13:55.433Z",
       "updatedAt": "2026-10-25T13:15:53.148Z"
+    },
+    {
+      "roadmap_node_id": "rmn_455b9f26e33982d995804664",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_d79f91b3f9c5426dab66f525",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 5,
+      "feature_id": null,
+      "title": "docs/verification.md",
+      "summary": "Add manual checks for the hierarchy panel: position on the right, component names and nested shape children, selection sync, keyboard use, theming and narrow-screen layout",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Add manual checks for the hierarchy panel: position on the right, component names and nested shape children, selection sync, keyboard use, theming and narrow-screen layout\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T13:16:58.600Z",
+      "updatedAt": "2026-10-25T13:19:08.588Z"
     },
     {
       "roadmap_node_id": "rmn_99f5ed694aea2dd2327862c6",

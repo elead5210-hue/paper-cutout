@@ -4,6 +4,7 @@ import { createComponent, type Component } from './component'
 import ShapeToolbar from './components/ShapeToolbar'
 import ShapeInputs from './components/ShapeInputs'
 import WorkArea from './components/WorkArea'
+import HierarchyPanel from './components/HierarchyPanel'
 
 export default function App() {
   // The work area starts empty. Placing a shape creates a default-named component that
@@ -49,6 +50,7 @@ export default function App() {
       <main className="stage">
         <WorkArea components={components} selectedId={selectedId} onSelect={setSelectedId} />
       </main>
+      <HierarchyPanel components={components} selectedId={selectedId} onSelect={setSelectedId} />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 # paper-cutout
 
-A small React app that draws shapes at their true size in millimetres. Click a shape in the toolbar to place it in the work area, then select it and type its dimensions. The work area shows a centre point, and every placed shape is centred on it. The shape redraws on every keystroke over a 10 mm grid.
+A small React app that draws shapes at their true size in millimetres. Click a shape in the toolbar to place it in the work area, then select it and type its dimensions. The work area shows a centre point, and every placed shape is centred on it. A hierarchy panel on the right lists each component and its shape in a file-explorer style tree. The shape redraws on every keystroke over a 10 mm grid.
 
 Shapes: circle, square, rectangle, triangle and regular polygon.
 
@@ -25,6 +25,7 @@ To typecheck on its own, run `npx tsc --noEmit`.
 
 - The work area starts empty. Clicking a button in the toolbar places a new shape at that shape's default size and selects it. Clicking the same button again places another shape.
 - Every placed shape is added as part of a new component. The component gets a default name ("Component 1", "Component 2", and so on) and contains the shape that was just added to the canvas area. The name is exposed on the placed shape as a `data-component` attribute and as its tooltip.
+- The hierarchy panel on the right lists every component by name in a tree. Each component is a top-level row, and the shape that was added to the canvas area as part of it is nested beneath as its child. Click a component's row to select it, which also selects its shape in the work area. The selected row is highlighted and marked with `aria-selected`. The panel shows "No components yet." until a shape is placed.
 - The left panel holds the toolbar and one number input per dimension of the selected shape. Click a placed shape (its component) in the work area to select it and edit its dimensions. The selected shape has a solid outline and is marked with `aria-pressed`.
 - The work area draws each placed shape in an SVG where 1 SVG unit is 1 mm. The SVG's width and height are set in `mm`, so it renders at real size.
 - Every placed shape keeps its own values. Values are not saved between page loads.
@@ -44,11 +45,12 @@ src/
   component.test.ts           tests for default naming, unique ids and default values
   placed.ts                   the PlacedShape type and createPlaced(), which starts a new shape at its defaults
   shapes.ts                   shape definitions, geometry helpers and validation
-  styles.css                  global styles, theme variables, the grid background and the centre point and centring layout
+  styles.css                  global styles, theme variables, the grid background, the centre point and centring layout and the hierarchy tree
   components/
     ShapeToolbar.tsx          the toolbar of shape buttons that place shapes
     ShapeInputs.tsx           one number input per field of the selected shape
     WorkArea.tsx              renders the centre point and every component's shape, and handles selecting one
+    HierarchyPanel.tsx        the right-hand tree of components, each with its shape nested as a child, and selecting a component from it
     ShapeCanvas.tsx           the SVG drawing of one shape
   test/setup.ts               test setup (jest-dom matchers, cleanup)
   shapes.test.ts              geometry, validation and accessible label tests
@@ -85,6 +87,10 @@ Add tests for the new shape's size and label in `src/shapes.test.ts`.
 | Centring | Every placed shape is positioned at the centre of the work area with CSS (`left: 50%; top: 50%` and `translate(-50%, -50%)`), so it stays centred whatever its size or the window size. Shapes are not draggable. |
 | Components | Placing a shape creates a component that contains it: `{ id, name, shape }`. The shape is the `PlacedShape` with its own values, so edits to a shape change only the component it belongs to. |
 | Default names | A new component is named "Component N", where N is one more than the highest default number already in use, so a name is never repeated, even after a gap. Names that are not in that format are ignored when numbering. Components cannot be renamed or removed yet. |
+| Hierarchy panel | A panel on the right of the page, as the third column of the page grid. On narrow screens it moves below the work area, with a limited height so it scrolls inside itself. It lists components in the order they were placed. |
+| Tree structure | The tree uses `role="tree"`, with each component as a `treeitem` and a `group` holding its shape as a child `treeitem`. Components are always expanded, and the marker beside each is decorative (`aria-hidden`), as there is nothing to collapse yet. |
+| Child shape reference | The child under a component shows the shape's type label (for example "Circle") and carries the shape's instance id as `data-shape-ref`. It stays listed while the shape is hidden by invalid input, so the tree always matches the components that exist. |
+| Tree selection | Only the component row is a button. Clicking it selects the component, the same as clicking its shape in the work area, and both views stay in sync because they share one selected id. The child row is not clickable, and is highlighted along with its parent. |
 | Placed shape values | Each placed shape has its own id and its own values, so the same shape type can be placed more than once without the copies sharing values. |
 | Input handling | Raw input is kept as text so a field can be cleared and retyped. It is validated on every change and a shape is only drawn when all its fields are valid. |
 | Accessibility | Every input has a visible label, errors are announced through a `role="alert"` region, and the SVG has an accessible label that updates with the values. |
