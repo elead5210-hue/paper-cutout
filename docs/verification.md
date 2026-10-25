@@ -91,7 +91,23 @@ Notes:
 
 Reloading the page empties the work area. That is expected, as shapes and values are not saved between visits.
 
-### 4.2 Centre point and centring
+### 4.2 Components and default names
+
+Each placed shape is added as part of a new component with a default name. The name is not shown in a panel yet, so check it by hovering over the placed shape (the tooltip shows the name) or by inspecting the element in the browser developer tools, where it appears as the `data-component` attribute on the shape's button.
+
+| Check | Expected | Pass |
+|---|---|---|
+| Fresh page load | No components exist: hovering the work area shows no component names, and no element has a `data-component` attribute | ☐ |
+| Place the first shape (any type) | The shape is drawn inside a component named "Component 1" | ☐ |
+| Place a second and third shape of different types | They are named "Component 2" and "Component 3", in the order they were placed | ☐ |
+| Place the same shape type twice | Each click creates its own new component with its own next name, and the two do not share a component or values | ☐ |
+| Hover over each placed shape | The tooltip shows the name of the component that contains that shape | ☐ |
+| Select a component by clicking it and edit a field | Only the shape inside that component changes, and its component name stays the same | ☐ |
+| Make a shape invalid, then fix it | The shape disappears while invalid and comes back in the same component with the same name | ☐ |
+| Place ten or more shapes | Names keep counting up ("Component 10", "Component 11") and no name is repeated | ☐ |
+| Reload the page, then place a shape | The count starts again from "Component 1", as components are not saved between visits | ☐ |
+
+### 4.3 Centre point and centring
 
 | Check | Expected | Pass |
 |---|---|---|

@@ -24,7 +24,8 @@ To typecheck on its own, run `npx tsc --noEmit`.
 ## How it works
 
 - The work area starts empty. Clicking a button in the toolbar places a new shape at that shape's default size and selects it. Clicking the same button again places another shape.
-- The left panel holds the toolbar and one number input per dimension of the selected shape. Click a placed shape in the work area to select it and edit its dimensions. The selected shape has a solid outline and is marked with `aria-pressed`.
+- Every placed shape is added as part of a new component. The component gets a default name ("Component 1", "Component 2", and so on) and contains the shape that was just added to the canvas area. The name is exposed on the placed shape as a `data-component` attribute and as its tooltip.
+- The left panel holds the toolbar and one number input per dimension of the selected shape. Click a placed shape (its component) in the work area to select it and edit its dimensions. The selected shape has a solid outline and is marked with `aria-pressed`.
 - The work area draws each placed shape in an SVG where 1 SVG unit is 1 mm. The SVG's width and height are set in `mm`, so it renders at real size.
 - Every placed shape keeps its own values. Values are not saved between page loads.
 - If a value is empty, out of range, or not a whole number where one is needed, that shape is hidden and a message appears in the panel. The page never shows `NaN`.
@@ -38,14 +39,16 @@ On-screen size depends on the pixel density your display reports, so measure aga
 ```
 src/
   main.tsx                    entry point
-  App.tsx                     page layout and state (placed shapes, which one is selected)
+  App.tsx                     page layout and state (components, which one is selected)
+  component.ts                the Component type and createComponent(), which wraps a new shape in a default-named component
+  component.test.ts           tests for default naming, unique ids and default values
   placed.ts                   the PlacedShape type and createPlaced(), which starts a new shape at its defaults
   shapes.ts                   shape definitions, geometry helpers and validation
   styles.css                  global styles, theme variables, the grid background and the centre point and centring layout
   components/
     ShapeToolbar.tsx          the toolbar of shape buttons that place shapes
     ShapeInputs.tsx           one number input per field of the selected shape
-    WorkArea.tsx              renders the centre point and every placed shape, and handles selecting one
+    WorkArea.tsx              renders the centre point and every component's shape, and handles selecting one
     ShapeCanvas.tsx           the SVG drawing of one shape
   test/setup.ts               test setup (jest-dom matchers, cleanup)
   shapes.test.ts              geometry, validation and accessible label tests
@@ -80,6 +83,8 @@ Add tests for the new shape's size and label in `src/shapes.test.ts`.
 | Placing shapes | A toolbar button places a new shape every time it is clicked, with that shape's default values, and selects it. The work area is empty on load. |
 | Centre point | The work area always draws a small ring at its exact centre, including when it is empty. It ignores pointer events, so it never blocks clicking a shape. |
 | Centring | Every placed shape is positioned at the centre of the work area with CSS (`left: 50%; top: 50%` and `translate(-50%, -50%)`), so it stays centred whatever its size or the window size. Shapes are not draggable. |
+| Components | Placing a shape creates a component that contains it: `{ id, name, shape }`. The shape is the `PlacedShape` with its own values, so edits to a shape change only the component it belongs to. |
+| Default names | A new component is named "Component N", where N is one more than the highest default number already in use, so a name is never repeated, even after a gap. Names that are not in that format are ignored when numbering. Components cannot be renamed or removed yet. |
 | Placed shape values | Each placed shape has its own id and its own values, so the same shape type can be placed more than once without the copies sharing values. |
 | Input handling | Raw input is kept as text so a field can be cleared and retyped. It is validated on every change and a shape is only drawn when all its fields are valid. |
 | Accessibility | Every input has a visible label, errors are announced through a `role="alert"` region, and the SVG has an accessible label that updates with the values. |

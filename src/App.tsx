@@ -1,29 +1,34 @@
 import { useState } from 'react'
 import { SHAPES, getShape, parseValues } from './shapes'
-import { createPlaced, type PlacedShape } from './placed'
+import { createComponent, type Component } from './component'
 import ShapeToolbar from './components/ShapeToolbar'
 import ShapeInputs from './components/ShapeInputs'
 import WorkArea from './components/WorkArea'
 
 export default function App() {
-  // The work area starts empty. Each placed shape keeps its own values.
-  const [placed, setPlaced] = useState<PlacedShape[]>([])
+  // The work area starts empty. Placing a shape creates a default-named component that
+  // contains it, and each shape keeps its own values.
+  const [components, setComponents] = useState<Component[]>([])
   const [selectedId, setSelectedId] = useState<string | null>(null)
 
-  const selected = placed.find((p) => p.id === selectedId) ?? null
-  const shape = selected ? getShape(selected.shapeId) : null
-  const result = selected && shape ? parseValues(shape, selected.raw) : null
+  const selected = components.find((c) => c.id === selectedId) ?? null
+  const shape = selected ? getShape(selected.shape.shapeId) : null
+  const result = selected && shape ? parseValues(shape, selected.shape.raw) : null
 
   const place = (shapeId: string) => {
-    const next = createPlaced(shapeId)
-    setPlaced((prev) => [...prev, next])
+    const next = createComponent(shapeId, components)
+    setComponents((prev) => [...prev, next])
     setSelectedId(next.id)
   }
 
   const setField = (key: string, value: string) => {
     if (!selected) return
-    setPlaced((prev) =>
-      prev.map((p) => (p.id === selected.id ? { ...p, raw: { ...p.raw, [key]: value } } : p))
+    setComponents((prev) =>
+      prev.map((c) =>
+        c.id === selected.id
+          ? { ...c, shape: { ...c.shape, raw: { ...c.shape.raw, [key]: value } } }
+          : c
+      )
     )
   }
 
@@ -33,7 +38,7 @@ export default function App() {
         <h1>Shape viewer</h1>
         <ShapeToolbar shapes={SHAPES} onPlace={place} />
         {selected && shape && (
-          <ShapeInputs fields={shape.fields} raw={selected.raw} onChange={setField} />
+          <ShapeInputs fields={shape.fields} raw={selected.shape.raw} onChange={setField} />
         )}
         <p className="msg" role="alert">{result && !result.ok ? result.error : ''}</p>
         <p className="note">
@@ -42,7 +47,7 @@ export default function App() {
         </p>
       </aside>
       <main className="stage">
-        <WorkArea placed={placed} selectedId={selectedId} onSelect={setSelectedId} />
+        <WorkArea components={components} selectedId={selectedId} onSelect={setSelectedId} />
       </main>
     </div>
   )

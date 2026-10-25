@@ -134,6 +134,92 @@ describe('placing and selecting shapes', () => {
   })
 })
 
+describe('components', () => {
+  it('has no components on load', () => {
+    const { container } = render(<App />)
+
+    expect(container.querySelectorAll('[data-component]')).toHaveLength(0)
+  })
+
+  it('creates a component named "Component 1" containing the first shape placed', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+
+    const component = placedButton('Circle, 20 millimetres diameter')
+    expect(component).toHaveAttribute('data-component', 'Component 1')
+    expect(component).toHaveAttribute('title', 'Component 1')
+    expect(component).toContainElement(screen.getByRole('img', { name: 'Circle, 20 millimetres diameter' }))
+  })
+
+  it('gives each further shape the next default name, whatever its type', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await chooseShape(user, 'square')
+    await chooseShape(user, 'circle')
+    await chooseShape(user, 'polygon')
+
+    const { container } = render(<></>)
+    expect(container).toBeEmptyDOMElement()
+
+    const names = Array.from(document.querySelectorAll('[data-component]')).map((el) =>
+      el.getAttribute('data-component')
+    )
+    expect(names).toEqual(['Component 1', 'Component 2', 'Component 3', 'Component 4'])
+  })
+
+  it('creates a separate component each time the same shape is placed', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'triangle')
+    await chooseShape(user, 'triangle')
+
+    const components = Array.from(document.querySelectorAll('[data-component]'))
+    expect(components).toHaveLength(2)
+    for (const component of components) {
+      expect(component.querySelectorAll('svg, [role="img"]').length).toBeGreaterThan(0)
+    }
+  })
+
+  it('selects a component by clicking it and edits the shape inside it', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await chooseShape(user, 'square')
+    await user.click(placedButton('Circle, 20 millimetres diameter'))
+
+    expect(placedButton('Circle, 20 millimetres diameter')).toHaveAttribute('aria-pressed', 'true')
+    await setField(user, 'Diameter', '33')
+
+    const resized = placedButton('Circle, 33 millimetres diameter')
+    expect(resized).toHaveAttribute('data-component', 'Component 1')
+    expect(placedButton('Square, 20 millimetres per side')).toHaveAttribute(
+      'data-component',
+      'Component 2'
+    )
+  })
+
+  it('keeps the component name when the shape is hidden by invalid input and restored', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await setField(user, 'Diameter', '')
+    expect(document.querySelectorAll('[data-component]')).toHaveLength(0)
+
+    await setField(user, 'Diameter', '25')
+    expect(placedButton('Circle, 25 millimetres diameter')).toHaveAttribute(
+      'data-component',
+      'Component 1'
+    )
+  })
+})
+
 describe('centre point', () => {
   it('is shown on load, before any shape is placed', () => {
     render(<App />)
