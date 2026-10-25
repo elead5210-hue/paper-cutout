@@ -18,11 +18,15 @@ const chooseShape = (user: User, id: string) =>
 // The button wrapping a placed shape, found through the shape's accessible label.
 const placedButton = (name: string) => screen.getByRole('img', { name }).closest('button')!
 
+// Placed shape drawings only: the work area's centre point marker is also an image role.
+const shapeImages = () =>
+  screen.queryAllByRole('img').filter((el) => el.getAttribute('data-testid') !== 'centre-point')
+
 describe('first load', () => {
   it('starts with an empty work area', () => {
     render(<App />)
 
-    expect(screen.queryByRole('img')).not.toBeInTheDocument()
+    expect(shapeImages()).toHaveLength(0)
     expect(screen.getByText('Click a shape in the toolbar to place it here.')).toBeInTheDocument()
     expect(screen.queryByLabelText('Diameter')).not.toBeInTheDocument()
   })
@@ -70,7 +74,7 @@ describe('placing and selecting shapes', () => {
     await chooseShape(user, 'circle')
     await chooseShape(user, 'circle')
 
-    expect(screen.getAllByRole('img')).toHaveLength(2)
+    expect(shapeImages()).toHaveLength(2)
   })
 
   it('selects the newest shape and lets you reselect another by clicking it', async () => {
@@ -130,6 +134,69 @@ describe('placing and selecting shapes', () => {
   })
 })
 
+describe('centre point', () => {
+  it('is shown on load, before any shape is placed', () => {
+    render(<App />)
+
+    expect(screen.getByRole('img', { name: 'Centre point' })).toBeInTheDocument()
+    expect(screen.getAllByTestId('centre-point')).toHaveLength(1)
+  })
+
+  it('stays a single marker as shapes are placed', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await chooseShape(user, 'square')
+    await chooseShape(user, 'polygon')
+
+    expect(screen.getAllByTestId('centre-point')).toHaveLength(1)
+    expect(shapeImages()).toHaveLength(3)
+  })
+
+  it('renders every placed shape in the work area alongside the centre point', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await chooseShape(user, 'rectangle')
+
+    const workArea = screen.getByTestId('work-area')
+    const centre = screen.getByTestId('centre-point')
+    expect(centre.parentElement).toBe(workArea)
+
+    const circle = placedButton('Circle, 20 millimetres diameter')
+    const rectangle = placedButton('Rectangle, 30 by 20 millimetres')
+    for (const button of [circle, rectangle]) {
+      expect(button).toHaveClass('placed')
+      expect(button.parentElement).toBe(workArea)
+    }
+  })
+
+  it('keeps a resized shape in the centred layout', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await setField(user, 'Diameter', '45')
+
+    const resized = placedButton('Circle, 45 millimetres diameter')
+    expect(resized).toHaveClass('placed')
+    expect(resized.parentElement).toBe(screen.getByTestId('work-area'))
+  })
+
+  it('stays visible when a shape is hidden by invalid input', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await setField(user, 'Diameter', '')
+
+    expect(shapeImages()).toHaveLength(0)
+    expect(screen.getByRole('img', { name: 'Centre point' })).toBeInTheDocument()
+  })
+})
+
 describe('invalid input', () => {
   it('hides the shape and announces a message when the field is empty', async () => {
     const user = userEvent.setup()
@@ -139,7 +206,7 @@ describe('invalid input', () => {
     await setField(user, 'Diameter', '')
 
     expect(screen.getByRole('alert')).toHaveTextContent('Diameter: enter a number.')
-    expect(screen.queryByRole('img')).not.toBeInTheDocument()
+    expect(shapeImages()).toHaveLength(0)
   })
 
   it.each([
@@ -155,7 +222,7 @@ describe('invalid input', () => {
     await setField(user, 'Diameter', value)
 
     expect(screen.getByRole('alert')).toHaveTextContent(message)
-    expect(screen.queryByRole('img')).not.toBeInTheDocument()
+    expect(shapeImages()).toHaveLength(0)
   })
 
   it('rejects a fractional number of sides', async () => {
@@ -166,7 +233,7 @@ describe('invalid input', () => {
     await setField(user, 'Number of sides', '5.5')
 
     expect(screen.getByRole('alert')).toHaveTextContent('Number of sides: use a whole number.')
-    expect(screen.queryByRole('img')).not.toBeInTheDocument()
+    expect(shapeImages()).toHaveLength(0)
   })
 
   it('rejects too few sides', async () => {
@@ -185,7 +252,7 @@ describe('invalid input', () => {
 
     await chooseShape(user, 'circle')
     await setField(user, 'Diameter', '0')
-    expect(screen.queryByRole('img')).not.toBeInTheDocument()
+    expect(shapeImages()).toHaveLength(0)
 
     await setField(user, 'Diameter', '25')
     expect(screen.getByRole('alert')).toBeEmptyDOMElement()

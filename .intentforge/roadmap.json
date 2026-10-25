@@ -54,13 +54,13 @@
       "feature_id": null,
       "title": "Place shapes in the work area on click",
       "summary": "Clicking a shape button places that shape in the work area.",
-      "detail": "{\"planState\":\"tasks_created\",\"planPromptText\":\"Goal: Place shapes in the work area on click\\nDescription: Clicking a shape button places that shape in the work area.\\n\\nBelow is the current file tree for this project: one path per line,\\nfollowed by a short content fingerprint (format:\\nL<byte length>:H<8-char hash> - see shared/fingerprint.js if you’ve\\nseen this project before). No file contents are included here.\\n\\nPlan the set of file changes needed to implement the goal above.\\nRespond with ONLY this JSON object, no other text before or after it:\\n{\\n  \\\"tasks\\\": [\\n    {\\n      \\\"path\\\": \\\"components/example/example.js\\\",\\n      \\\"action\\\": \\\"create\\\" | \\\"modify\\\" | \\\"delete\\\",\\n      \\\"description\\\": \\\"one-line description of the change\\\",\\n      \\\"needsFileContent\\\": true,\\n      \\\"needsMetadata\\\": false,\\n      \\\"confident\\\": true\\n    }\\n  ]\\n}\\n\\n- needsFileContent: true unless this task is a plain delete with\\n  nothing else to write.\\n- needsMetadata: true only if this task needs you to author extra\\n  structured data beyond the file’s content (leave false if unsure).\\n- confident: for \\\"modify\\\"/\\\"delete\\\" tasks, whether your memory of\\n  that file’s current content matches the fingerprint shown above.\\n  Always true for \\\"create\\\" tasks (there’s nothing to remember yet).\\n\\nCurrent file tree:\\n.gitignore  L17:H2802602b\\ndocs/verification.md  L7312:H2b28c276\\nindex.html  L317:H07fab284\\npackage.json  L654:H5cfd7117\\nREADME.md  L4413:H3fe9531f\\nsrc/App.test.tsx  L7050:H7a7af945\\nsrc/App.tsx  L1593:Ha68c43a9\\nsrc/components/ShapeCanvas.tsx  L1076:H54560002\\nsrc/components/ShapeInputs.tsx  L887:H1747e119\\nsrc/components/ShapeToolbar.tsx  L565:H56a4b6c4\\nsrc/main.tsx  L225:H32e7e1bb\\nsrc/shapes.test.ts  L3045:H47ce558e\\nsrc/shapes.ts  L4707:H6efb0303\\nsrc/styles.css  L2913:H7e63f21f\\nsrc/test/setup.ts  L305:H3c9b5c21\\ntsconfig.json  L300:Ha447bb7a\\nvite.config.ts  L224:H915bfc06\"}",
+      "detail": "{\"planState\":\"tasks_created\",\"planPromptText\":\"Goal: Place shapes in the work area on click\\nDescription: Clicking a shape button places that shape in the work area.\\n\\nBelow is the current file tree for this project: one path per line,\\nfollowed by a short content fingerprint (format:\\nL<byte length>:H<8-char hash> - see shared/fingerprint.js if you’ve\\nseen this project before). No file contents are included here.\\n\\nPlan the set of file changes needed to implement the goal above.\\nRespond with ONLY this JSON object, no other text before or after it:\\n{\\n  \\\"tasks\\\": [\\n    {\\n      \\\"path\\\": \\\"components/example/example.js\\\",\\n      \\\"action\\\": \\\"create\\\" | \\\"modify\\\" | \\\"delete\\\",\\n      \\\"description\\\": \\\"one-line description of the change\\\",\\n      \\\"needsFileContent\\\": true,\\n      \\\"needsMetadata\\\": false,\\n      \\\"confident\\\": true\\n    }\\n  ]\\n}\\n\\n- needsFileContent: true unless this task is a plain delete with\\n  nothing else to write.\\n- needsMetadata: true only if this task needs you to author extra\\n  structured data beyond the file’s content (leave false if unsure).\\n- confident: for \\\"modify\\\"/\\\"delete\\\" tasks, whether your memory of\\n  that file’s current content matches the fingerprint shown above.\\n  Always true for \\\"create\\\" tasks (there’s nothing to remember yet).\\n\\nCurrent file tree:\\n.gitignore  L17:H2802602b\\ndocs/verification.md  L7312:H2b28c276\\nindex.html  L317:H07fab284\\npackage.json  L654:H5cfd7117\\nREADME.md  L4413:H3fe9531f\\nsrc/App.test.tsx  L7050:H7a7af945\\nsrc/App.tsx  L1593:Ha68c43a9\\nsrc/components/ShapeCanvas.tsx  L1076:H54560002\\nsrc/components/ShapeInputs.tsx  L887:H1747e119\\nsrc/components/ShapeToolbar.tsx  L565:H56a4b6c4\\nsrc/main.tsx  L225:H32e7e1bb\\nsrc/shapes.test.ts  L3045:H47ce558e\\nsrc/shapes.ts  L4707:H6efb0303\\nsrc/styles.css  L2913:H7e63f21f\\nsrc/test/setup.ts  L305:H3c9b5c21\\ntsconfig.json  L300:Ha447bb7a\\nvite.config.ts  L224:H915bfc06\",\"pushOutcome\":{\"status\":\"pushed\",\"sha\":\"28699519fe81d5cc17172a6b8e1272377f8e78a4\",\"at\":\"2026-10-25T13:07:44.076Z\"}}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": "",
       "createdAt": "2026-10-25T13:00:00.711Z",
-      "updatedAt": "2026-10-25T13:03:32.542Z"
+      "updatedAt": "2026-10-25T13:07:44.104Z"
     },
     {
       "roadmap_node_id": "rmn_e122c1cb80028f99c7aa4830",
@@ -74,13 +74,13 @@
       "feature_id": null,
       "title": "Add a centre point and always centre the shape",
       "summary": "Show a centre point in the work area, and always keep the placed shape centred on it.",
-      "detail": "",
+      "detail": "{\"planState\":\"tasks_created\",\"planPromptText\":\"Goal: Add a centre point and always centre the shape\\nDescription: Show a centre point in the work area, and always keep the placed shape centred on it.\\n\\nBelow is the current file tree for this project: one path per line,\\nfollowed by a short content fingerprint (format:\\nL<byte length>:H<8-char hash> - see shared/fingerprint.js if you’ve\\nseen this project before). No file contents are included here.\\n\\nPlan the set of file changes needed to implement the goal above.\\nRespond with ONLY this JSON object, no other text before or after it:\\n{\\n  \\\"tasks\\\": [\\n    {\\n      \\\"path\\\": \\\"components/example/example.js\\\",\\n      \\\"action\\\": \\\"create\\\" | \\\"modify\\\" | \\\"delete\\\",\\n      \\\"description\\\": \\\"one-line description of the change\\\",\\n      \\\"needsFileContent\\\": true,\\n      \\\"needsMetadata\\\": false,\\n      \\\"confident\\\": true\\n    }\\n  ]\\n}\\n\\n- needsFileContent: true unless this task is a plain delete with\\n  nothing else to write.\\n- needsMetadata: true only if this task needs you to author extra\\n  structured data beyond the file’s content (leave false if unsure).\\n- confident: for \\\"modify\\\"/\\\"delete\\\" tasks, whether your memory of\\n  that file’s current content matches the fingerprint shown above.\\n  Always true for \\\"create\\\" tasks (there’s nothing to remember yet).\\n\\nCurrent file tree:\\n.gitignore  L17:H2802602b\\ndocs/verification.md  L8165:Hb3a30c7e\\nindex.html  L317:H07fab284\\npackage.json  L654:H5cfd7117\\nREADME.md  L5368:H2e2ccd94\\nsrc/App.test.tsx  L7991:Ha772c67f\\nsrc/App.tsx  L1875:Hcaed057e\\nsrc/components/ShapeCanvas.tsx  L1076:H54560002\\nsrc/components/ShapeInputs.tsx  L887:H1747e119\\nsrc/components/ShapeToolbar.tsx  L504:Hbae8b152\\nsrc/components/WorkArea.tsx  L1022:Hb6bc011c\\nsrc/main.tsx  L225:H32e7e1bb\\nsrc/placed.ts  L712:Hb8b09eb8\\nsrc/shapes.test.ts  L3045:H47ce558e\\nsrc/shapes.ts  L4707:H6efb0303\\nsrc/styles.css  L3205:Hc45c612a\\nsrc/test/setup.ts  L305:H3c9b5c21\\ntsconfig.json  L300:Ha447bb7a\\nvite.config.ts  L224:H915bfc06\"}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": "",
       "createdAt": "2026-10-25T13:00:00.711Z",
-      "updatedAt": "2026-10-25T13:00:00.711Z"
+      "updatedAt": "2026-10-25T13:10:53.543Z"
     },
     {
       "roadmap_node_id": "rmn_ce2a5f14b987f7d24e551c59",
@@ -163,6 +163,26 @@
       "updatedAt": "2026-10-25T13:03:50.303Z"
     },
     {
+      "roadmap_node_id": "rmn_036cddcde82a316af7dbc668",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_e122c1cb80028f99c7aa4830",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 0,
+      "feature_id": null,
+      "title": "src/components/WorkArea.tsx",
+      "summary": "Always render a centre point marker in the work area (even when empty) and position every placed shape centred on it, with the empty hint kept clear of the marker",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Always render a centre point marker in the work area (even when empty) and position every placed shape centred on it, with the empty hint kept clear of the marker\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T13:10:53.207Z",
+      "updatedAt": "2026-10-25T13:11:12.535Z"
+    },
+    {
       "roadmap_node_id": "rmn_ba1fda8b9748b43f15e30347",
       "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
       "parent_roadmap_node_id": "rmn_115f980ac4e4e844481ee409",
@@ -201,6 +221,26 @@
       "notes": "",
       "createdAt": "2026-10-25T13:03:31.966Z",
       "updatedAt": "2026-10-25T13:04:09.846Z"
+    },
+    {
+      "roadmap_node_id": "rmn_5646199cd22e6b7c464fdf21",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_e122c1cb80028f99c7aa4830",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 1,
+      "feature_id": null,
+      "title": "src/styles.css",
+      "summary": "Replace the flowing placed-shape layout with a positioned work area: add a centre point marker style and absolutely position each placed shape at the centre via translate(-50%, -50%), keeping the selected outline",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Replace the flowing placed-shape layout with a positioned work area: add a centre point marker style and absolutely position each placed shape at the centre via translate(-50%, -50%), keeping the selected outline\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T13:10:53.333Z",
+      "updatedAt": "2026-10-25T13:11:36.326Z"
     },
     {
       "roadmap_node_id": "rmn_d141a7e5f3c5ead702239efa",
@@ -243,6 +283,26 @@
       "updatedAt": "2026-10-25T13:04:31.717Z"
     },
     {
+      "roadmap_node_id": "rmn_137ca4c349bfdc2ea38abec0",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_e122c1cb80028f99c7aa4830",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 2,
+      "feature_id": null,
+      "title": "src/App.test.tsx",
+      "summary": "Add tests that the centre point is shown on load and with shapes placed, and that each placed shape is rendered in the centred position",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Add tests that the centre point is shown on load and with shapes placed, and that each placed shape is rendered in the centred position\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T13:10:53.389Z",
+      "updatedAt": "2026-10-25T13:12:13.066Z"
+    },
+    {
       "roadmap_node_id": "rmn_f43247fda2e107ec72b09557",
       "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
       "parent_roadmap_node_id": "rmn_115f980ac4e4e844481ee409",
@@ -283,6 +343,26 @@
       "updatedAt": "2026-10-25T13:04:50.028Z"
     },
     {
+      "roadmap_node_id": "rmn_83a92fb68b9802cc9472add8",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_e122c1cb80028f99c7aa4830",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 3,
+      "feature_id": null,
+      "title": "README.md",
+      "summary": "Describe the centre point and the always-centred placement in the intro, 'How it works' and design decisions",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Describe the centre point and the always-centred placement in the intro, 'How it works' and design decisions\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":false,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T13:10:53.442Z",
+      "updatedAt": "2026-10-25T13:12:33.204Z"
+    },
+    {
       "roadmap_node_id": "rmn_fafed2c907b83875e35134ea",
       "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
       "parent_roadmap_node_id": "rmn_115f980ac4e4e844481ee409",
@@ -321,6 +401,26 @@
       "notes": "",
       "createdAt": "2026-10-25T13:03:32.248Z",
       "updatedAt": "2026-10-25T13:05:09.254Z"
+    },
+    {
+      "roadmap_node_id": "rmn_af8b3ba4745812a82dc30e13",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_e122c1cb80028f99c7aa4830",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 4,
+      "feature_id": null,
+      "title": "docs/verification.md",
+      "summary": "Add manual checks that the centre point is visible on load and that placed shapes stay centred on it, and update the empty work area and placement checks accordingly",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Add manual checks that the centre point is visible on load and that placed shapes stay centred on it, and update the empty work area and placement checks accordingly\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":false,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T13:10:53.492Z",
+      "updatedAt": "2026-10-25T13:13:01.744Z"
     },
     {
       "roadmap_node_id": "rmn_6af53a0131d77dd44caf418d",

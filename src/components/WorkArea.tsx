@@ -9,12 +9,17 @@ interface Props {
 }
 
 export default function WorkArea({ placed, selectedId, onSelect }: Props) {
-  if (placed.length === 0) {
-    return <p className="empty-hint">Click a shape in the toolbar to place it here.</p>
-  }
-
   return (
-    <>
+    <div className="work-area" data-testid="work-area">
+      <span
+        className="centre-point"
+        role="img"
+        aria-label="Centre point"
+        data-testid="centre-point"
+      />
+      {placed.length === 0 && (
+        <p className="empty-hint">Click a shape in the toolbar to place it here.</p>
+      )}
       {placed.map((p) => {
         const shape = getShape(p.shapeId)
         const result = parseValues(shape, p.raw)
@@ -33,6 +38,6 @@ export default function WorkArea({ placed, selectedId, onSelect }: Props) {
           </button>
         )
       })}
-    </>
+    </div>
   )
 }

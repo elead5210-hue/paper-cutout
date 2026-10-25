@@ -54,8 +54,7 @@ input:focus-visible, .toolbar-button:focus-visible, .placed:focus-visible { outl
 .note { margin-top: 1.5rem; font-size: 0.8rem; line-height: 1.5; color: var(--muted); }
 
 .stage {
-  overflow: auto; display: flex; flex-wrap: wrap; align-content: flex-start; align-items: flex-start;
-  gap: 1.5rem; padding: 1.5rem;
+  position: relative; overflow: hidden; min-height: 20rem;
   background-image:
     linear-gradient(to right, var(--grid) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
@@ -63,13 +62,25 @@ input:focus-visible, .toolbar-button:focus-visible, .placed:focus-visible { outl
 }
 .canvas { display: block; max-width: none; flex: none; }
 
+.work-area { position: absolute; inset: 0; }
+.centre-point {
+  position: absolute; left: 50%; top: 50%; z-index: 2; pointer-events: none;
+  width: 10px; height: 10px; transform: translate(-50%, -50%);
+  border: 2px solid var(--accent); border-radius: 50%; background: var(--panel);
+}
+
 .placed {
-  flex: none; display: block; padding: 0.5rem; margin: 0;
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: block; padding: 0.5rem; margin: 0;
   background: transparent; border: 1px dashed transparent; border-radius: 4px; cursor: pointer;
 }
 .placed:hover { border-color: var(--line); }
 .placed[aria-pressed='true'] { border-color: var(--accent); }
-.empty-hint { margin: auto; color: var(--muted); font-size: 0.95rem; }
+.empty-hint {
+  position: absolute; left: 50%; top: calc(50% + 1.25rem); transform: translateX(-50%);
+  margin: 0; width: max-content; max-width: 90%; text-align: center;
+  color: var(--muted); font-size: 0.95rem;
+}
 
 @media (max-width: 640px) {
   .layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }

@@ -1,6 +1,6 @@
 # paper-cutout
 
-A small React app that draws shapes at their true size in millimetres. Click a shape in the toolbar to place it in the work area, then select it and type its dimensions. The shape redraws on every keystroke over a 10 mm grid.
+A small React app that draws shapes at their true size in millimetres. Click a shape in the toolbar to place it in the work area, then select it and type its dimensions. The work area shows a centre point, and every placed shape is centred on it. The shape redraws on every keystroke over a 10 mm grid.
 
 Shapes: circle, square, rectangle, triangle and regular polygon.
 
@@ -28,7 +28,7 @@ To typecheck on its own, run `npx tsc --noEmit`.
 - The work area draws each placed shape in an SVG where 1 SVG unit is 1 mm. The SVG's width and height are set in `mm`, so it renders at real size.
 - Every placed shape keeps its own values. Values are not saved between page loads.
 - If a value is empty, out of range, or not a whole number where one is needed, that shape is hidden and a message appears in the panel. The page never shows `NaN`.
-- Placed shapes currently flow left to right in the work area. Centring them on a centre point is planned for a later update.
+- The work area always shows a centre point marker, even when it is empty. Every placed shape is centred on that point and stays centred when its dimensions change. Shapes placed later sit on top of earlier ones, so click a shape to select it.
 - Light and dark themes follow your system setting.
 
 On-screen size depends on the pixel density your display reports, so measure against the grid or a ruler if you need exact size. `docs/verification.md` has a checklist for doing this.
@@ -41,11 +41,11 @@ src/
   App.tsx                     page layout and state (placed shapes, which one is selected)
   placed.ts                   the PlacedShape type and createPlaced(), which starts a new shape at its defaults
   shapes.ts                   shape definitions, geometry helpers and validation
-  styles.css                  global styles, theme variables and the grid background
+  styles.css                  global styles, theme variables, the grid background and the centre point and centring layout
   components/
     ShapeToolbar.tsx          the toolbar of shape buttons that place shapes
     ShapeInputs.tsx           one number input per field of the selected shape
-    WorkArea.tsx              renders every placed shape and handles selecting one
+    WorkArea.tsx              renders the centre point and every placed shape, and handles selecting one
     ShapeCanvas.tsx           the SVG drawing of one shape
   test/setup.ts               test setup (jest-dom matchers, cleanup)
   shapes.test.ts              geometry, validation and accessible label tests
@@ -78,6 +78,8 @@ Add tests for the new shape's size and label in `src/shapes.test.ts`.
 | ViewBox | Calculated from the shape's own bounding box, not a fixed size, so shapes are never clipped or offset. |
 | Size limits | Dimensions run from 0.1 mm to 1000 mm. Change them in the `size()` helper in `src/shapes.ts`. |
 | Placing shapes | A toolbar button places a new shape every time it is clicked, with that shape's default values, and selects it. The work area is empty on load. |
+| Centre point | The work area always draws a small ring at its exact centre, including when it is empty. It ignores pointer events, so it never blocks clicking a shape. |
+| Centring | Every placed shape is positioned at the centre of the work area with CSS (`left: 50%; top: 50%` and `translate(-50%, -50%)`), so it stays centred whatever its size or the window size. Shapes are not draggable. |
 | Placed shape values | Each placed shape has its own id and its own values, so the same shape type can be placed more than once without the copies sharing values. |
 | Input handling | Raw input is kept as text so a field can be cleared and retyped. It is validated on every change and a shape is only drawn when all its fields are valid. |
 | Accessibility | Every input has a visible label, errors are announced through a `role="alert"` region, and the SVG has an accessible label that updates with the values. |

@@ -67,7 +67,7 @@ Notes:
 
 | Check | Expected | Pass |
 |---|---|---|
-| Fresh page load | The work area is empty and shows the hint to click a shape in the toolbar. No input fields are shown and there is no error message | ☐ |
+| Fresh page load | The work area is empty apart from a small ring (the centre point) in the middle of it, with the hint to click a shape in the toolbar just below it. No input fields are shown and there is no error message | ☐ |
 | Look at the shape toolbar | Buttons for Circle, Square, Rectangle, Triangle and Polygon are shown, and none is highlighted | ☐ |
 | Click each shape button | A new shape of that type appears in the work area at its default size, it is selected (solid outline), and the panel shows that shape's input fields | ☐ |
 | Click the same shape button twice | Two separate shapes are placed, and the newest one is selected | ☐ |
@@ -90,6 +90,19 @@ Notes:
 | Second Circle | Diameter 20, unaffected by changes to the first Circle | ☐ |
 
 Reloading the page empties the work area. That is expected, as shapes and values are not saved between visits.
+
+### 4.2 Centre point and centring
+
+| Check | Expected | Pass |
+|---|---|---|
+| Centre point on load | A small ring is visible at the middle of the work area before any shape is placed, and it is clearly visible against the grid | ☐ |
+| Place a Circle | The circle's middle sits exactly on the centre point, with the ring visible on top of it | ☐ |
+| Place a Rectangle, Triangle and Polygon in turn | Each one is centred on the same centre point, not offset by its size or where it points | ☐ |
+| Change a placed shape's dimensions (for example Diameter 20, then 50, then 5) | The shape grows and shrinks around the centre point and its middle does not move | ☐ |
+| Place several shapes | They all share the same centre and sit on top of one another, and only one centre point is shown | ☐ |
+| Click a shape in the overlap | The topmost shape under the pointer is selected, and the centre point does not block the click | ☐ |
+| Resize the browser window, and rotate to landscape on a phone | The centre point stays in the middle of the work area and the shapes stay centred on it | ☐ |
+| Set a shape's value to something invalid | The shape is hidden but the centre point stays visible | ☐ |
 
 ## 5. Invalid input
 
@@ -118,8 +131,8 @@ Also check:
 
 | Check | Expected | Pass |
 |---|---|---|
-| Place a Circle and set Diameter to 1000 | The drawing area scrolls inside itself | ☐ |
-| Place many shapes | They wrap onto new rows and the drawing area scrolls inside itself | ☐ |
+| Place a Circle and set Diameter to 1000 | The circle stays centred on the centre point and is cropped at the edges of the work area, and the page itself does not scroll | ☐ |
+| Place many shapes | They stack on the centre point, each centred, and the layout does not change | ☐ |
 | Same, whole page | The page itself never scrolls sideways | ☐ |
 | Same, browser zoom 50% to 200% | Layout stays intact | ☐ |
 
@@ -148,7 +161,7 @@ Check with a real phone, or browser developer tools set to a width of 640 px or 
 | Drawing area | Fills the remaining height and shows the grid | ☐ |
 | Shape toolbar | Buttons wrap onto extra rows if needed, none are cut off, and each is easy to tap | ☐ |
 | Inputs | Full width, tappable, number keyboard appears on a phone | ☐ |
-| Shape wider than the screen (for example Rectangle 300 x 20) | Scrolls inside the drawing area, not the page | ☐ |
+| Shape wider than the screen (for example Rectangle 300 x 20) | Stays centred on the centre point and is cropped at the sides of the drawing area, and the page does not scroll sideways | ☐ |
 | Rotate to landscape | Layout switches correctly at the breakpoint | ☐ |
 
 ## 9. Issues and fixes
