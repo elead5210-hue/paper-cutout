@@ -1,0 +1,60 @@
+:root {
+  --bg: #eef1f4; --panel: #ffffff; --ink: #1c2530; --muted: #5d6b7a;
+  --line: #c9d2dc; --grid: #dde3ea; --accent: #1f6f8b;
+  --accent-fill: rgba(31, 111, 139, 0.14); --err: #b3261e;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #12171d; --panel: #1a222b; --ink: #e6ebf0; --muted: #94a3b3;
+    --line: #364351; --grid: #232d38; --accent: #6cc4e0;
+    --accent-fill: rgba(108, 196, 224, 0.16); --err: #f2b8b5;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #12171d; --panel: #1a222b; --ink: #e6ebf0; --muted: #94a3b3;
+  --line: #364351; --grid: #232d38; --accent: #6cc4e0;
+  --accent-fill: rgba(108, 196, 224, 0.16); --err: #f2b8b5;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.layout { display: grid; grid-template-columns: 17rem 1fr; min-height: 100%; }
+.panel { background: var(--panel); border-right: 1px solid var(--line); padding: 1.5rem 1.25rem; }
+h1 { font-size: 1.1rem; font-weight: 600; margin: 0 0 1.5rem; }
+.group { margin-bottom: 1rem; }
+label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 0.4rem; }
+.field { display: flex; align-items: center; gap: 0.5rem; }
+.unit { color: var(--muted); font-size: 0.95rem; }
+
+input[type='number'], select {
+  width: 100%; font: inherit; font-size: 1.05rem; padding: 0.5rem 0.65rem;
+  color: var(--ink); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 4px;
+}
+input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.msg { min-height: 1.2rem; margin: 0.25rem 0 0; font-size: 0.85rem; color: var(--err); }
+.note { margin-top: 1.5rem; font-size: 0.8rem; line-height: 1.5; color: var(--muted); }
+
+.stage {
+  overflow: auto; display: flex; padding: 1.5rem;
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 10mm 10mm;
+}
+.canvas { margin: auto; display: block; max-width: none; flex: none; }
+
+@media (max-width: 640px) {
+  .layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .panel { border-right: 0; border-bottom: 1px solid var(--line); }
+}
