@@ -45,3 +45,35 @@ describe('validation', () => {
     expect(parseValues(polygon, { sides: '6', diameter: '20' }).ok).toBe(true)
   })
 })
+
+describe('accessible labels', () => {
+  const label = (id: string, values: Record<string, number>) => getShape(id).describe(values)
+
+  it('describes each shape at its default size', () => {
+    expect(label('circle', { diameter: 20 })).toBe('Circle, 20 millimetres diameter')
+    expect(label('square', { side: 20 })).toBe('Square, 20 millimetres per side')
+    expect(label('rectangle', { width: 30, height: 20 })).toBe('Rectangle, 30 by 20 millimetres')
+    expect(label('triangle', { side: 20 })).toBe('Equilateral triangle, 20 millimetres per side')
+    expect(label('polygon', { sides: 6, diameter: 20 })).toBe(
+      'Regular polygon with 6 sides, 20 millimetres diameter'
+    )
+  })
+
+  it('uses the singular unit for a value of 1', () => {
+    expect(label('circle', { diameter: 1 })).toBe('Circle, 1 millimetre diameter')
+    expect(label('rectangle', { width: 30, height: 1 })).toBe('Rectangle, 30 by 1 millimetre')
+  })
+
+  it('keeps decimal values as entered', () => {
+    expect(label('square', { side: 12.5 })).toBe('Square, 12.5 millimetres per side')
+  })
+
+  it('changes when the values change', () => {
+    expect(label('rectangle', { width: 30, height: 20 })).not.toBe(
+      label('rectangle', { width: 50, height: 12 })
+    )
+    expect(label('polygon', { sides: 8, diameter: 40 })).toBe(
+      'Regular polygon with 8 sides, 40 millimetres diameter'
+    )
+  })
+})

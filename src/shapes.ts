@@ -24,6 +24,8 @@ export interface ShapeDef {
   label: string
   fields: Field[]
   build: (values: Record<string, number>) => Drawable
+  /** Plain-language description used as the SVG's accessible label. */
+  describe: (values: Record<string, number>) => string
 }
 
 /** Regular polygon points around (0,0), first vertex pointing up, then shifted so the bbox starts at 0,0. */
@@ -56,6 +58,8 @@ const size = (key: string, label: string, defaultValue: number): Field => ({
   key, label, unit: 'mm', defaultValue, min: 0.1, max: 1000,
 })
 
+const mm = (n: number) => `${n} ${n === 1 ? 'millimetre' : 'millimetres'}`
+
 export const SHAPES: ShapeDef[] = [
   {
     id: 'circle',
@@ -66,6 +70,7 @@ export const SHAPES: ShapeDef[] = [
       height: diameter,
       element: { type: 'circle', r: diameter / 2 },
     }),
+    describe: ({ diameter }) => `Circle, ${mm(diameter)} diameter`,
   },
   {
     id: 'square',
@@ -73,6 +78,7 @@ export const SHAPES: ShapeDef[] = [
     fields: [size('side', 'Side length', 20)],
     build: ({ side }) =>
       polygonDrawable([[0, 0], [side, 0], [side, side], [0, side]]),
+    describe: ({ side }) => `Square, ${mm(side)} per side`,
   },
   {
     id: 'rectangle',
@@ -80,6 +86,7 @@ export const SHAPES: ShapeDef[] = [
     fields: [size('width', 'Width', 30), size('height', 'Height', 20)],
     build: ({ width, height }) =>
       polygonDrawable([[0, 0], [width, 0], [width, height], [0, height]]),
+    describe: ({ width, height }) => `Rectangle, ${width} by ${mm(height)}`,
   },
   {
     // Equilateral, point up. Circumradius = side / √3, so height = side × √3 / 2.
@@ -87,6 +94,7 @@ export const SHAPES: ShapeDef[] = [
     label: 'Triangle',
     fields: [size('side', 'Side length', 20)],
     build: ({ side }) => polygonDrawable(regularPolygonPoints(3, side / Math.sqrt(3))),
+    describe: ({ side }) => `Equilateral triangle, ${mm(side)} per side`,
   },
   {
     // Regular polygon sized by circumscribed diameter (corner to corner), point up.
@@ -97,6 +105,7 @@ export const SHAPES: ShapeDef[] = [
       size('diameter', 'Diameter', 20),
     ],
     build: ({ sides, diameter }) => polygonDrawable(regularPolygonPoints(sides, diameter / 2)),
+    describe: ({ sides, diameter }) => `Regular polygon with ${sides} sides, ${mm(diameter)} diameter`,
   },
 ]
 

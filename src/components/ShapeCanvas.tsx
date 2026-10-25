@@ -13,8 +13,7 @@ export default function ShapeCanvas({ shape, values }: Props) {
   const w = width + STROKE
   const h = height + STROKE
 
-  const label = `${shape.label}: ` +
-    shape.fields.map((f) => `${f.label} ${values[f.key]}${f.unit ? ` ${f.unit}` : ''}`).join(', ')
+  const label = shape.describe(values)
 
   const common = {
     fill: 'var(--accent-fill)',

@@ -34,13 +34,13 @@
       "feature_id": null,
       "title": "Verify the acceptance criteria in a browser",
       "summary": "Check each of the five shapes against a ruler or measurement tool, and test dark mode and the narrow-screen layout. Confirm that switching shapes keeps values and that bad input shows a message instead of a broken page, then record the results and fix anything that fails.",
-      "detail": "{\"planState\":\"tasks_created\",\"planPromptText\":\"Goal: Verify the acceptance criteria in a browser\\nDescription: Check each of the five shapes against a ruler or measurement tool, and test dark mode and the narrow-screen layout. Confirm that switching shapes keeps values and that bad input shows a message instead of a broken page, then record the results and fix anything that fails.\\n\\nBelow is the current file tree for this project: one path per line,\\nfollowed by a short content fingerprint (format:\\nL<byte length>:H<8-char hash> - see shared/fingerprint.js if you’ve\\nseen this project before). No file contents are included here.\\n\\nPlan the set of file changes needed to implement the goal above.\\nRespond with ONLY this JSON object, no other text before or after it:\\n{\\n  \\\"tasks\\\": [\\n    {\\n      \\\"path\\\": \\\"components/example/example.js\\\",\\n      \\\"action\\\": \\\"create\\\" | \\\"modify\\\" | \\\"delete\\\",\\n      \\\"description\\\": \\\"one-line description of the change\\\",\\n      \\\"needsFileContent\\\": true,\\n      \\\"needsMetadata\\\": false,\\n      \\\"confident\\\": true\\n    }\\n  ]\\n}\\n\\n- needsFileContent: true unless this task is a plain delete with\\n  nothing else to write.\\n- needsMetadata: true only if this task needs you to author extra\\n  structured data beyond the file’s content (leave false if unsure).\\n- confident: for \\\"modify\\\"/\\\"delete\\\" tasks, whether your memory of\\n  that file’s current content matches the fingerprint shown above.\\n  Always true for \\\"create\\\" tasks (there’s nothing to remember yet).\\n\\nCurrent file tree:\\nindex.html  L317:H07fab284\\ninit.md  L10:H5b173971\\npackage.json  L500:Hd05e2134\\nsrc/App.tsx  L1590:Hd51214f4\\nsrc/components/ShapeCanvas.tsx  L1173:Hb7cd662f\\nsrc/components/ShapeInputs.tsx  L887:H1747e119\\nsrc/components/ShapeSelect.tsx  L507:H4eeda525\\nsrc/main.tsx  L225:H32e7e1bb\\nsrc/shapes.test.ts  L1661:H02f8ca25\\nsrc/shapes.ts  L4121:H219d768c\\nsrc/styles.css  L2416:H7f59a549\\ntsconfig.json  L300:Ha447bb7a\\nvite.config.ts  L130:H81d3e0e7\"}",
+      "detail": "{\"planState\":\"tasks_created\",\"planPromptText\":\"Goal: Verify the acceptance criteria in a browser\\nDescription: Check each of the five shapes against a ruler or measurement tool, and test dark mode and the narrow-screen layout. Confirm that switching shapes keeps values and that bad input shows a message instead of a broken page, then record the results and fix anything that fails.\\n\\nBelow is the current file tree for this project: one path per line,\\nfollowed by a short content fingerprint (format:\\nL<byte length>:H<8-char hash> - see shared/fingerprint.js if you’ve\\nseen this project before). No file contents are included here.\\n\\nPlan the set of file changes needed to implement the goal above.\\nRespond with ONLY this JSON object, no other text before or after it:\\n{\\n  \\\"tasks\\\": [\\n    {\\n      \\\"path\\\": \\\"components/example/example.js\\\",\\n      \\\"action\\\": \\\"create\\\" | \\\"modify\\\" | \\\"delete\\\",\\n      \\\"description\\\": \\\"one-line description of the change\\\",\\n      \\\"needsFileContent\\\": true,\\n      \\\"needsMetadata\\\": false,\\n      \\\"confident\\\": true\\n    }\\n  ]\\n}\\n\\n- needsFileContent: true unless this task is a plain delete with\\n  nothing else to write.\\n- needsMetadata: true only if this task needs you to author extra\\n  structured data beyond the file’s content (leave false if unsure).\\n- confident: for \\\"modify\\\"/\\\"delete\\\" tasks, whether your memory of\\n  that file’s current content matches the fingerprint shown above.\\n  Always true for \\\"create\\\" tasks (there’s nothing to remember yet).\\n\\nCurrent file tree:\\nindex.html  L317:H07fab284\\ninit.md  L10:H5b173971\\npackage.json  L500:Hd05e2134\\nsrc/App.tsx  L1590:Hd51214f4\\nsrc/components/ShapeCanvas.tsx  L1173:Hb7cd662f\\nsrc/components/ShapeInputs.tsx  L887:H1747e119\\nsrc/components/ShapeSelect.tsx  L507:H4eeda525\\nsrc/main.tsx  L225:H32e7e1bb\\nsrc/shapes.test.ts  L1661:H02f8ca25\\nsrc/shapes.ts  L4121:H219d768c\\nsrc/styles.css  L2416:H7f59a549\\ntsconfig.json  L300:Ha447bb7a\\nvite.config.ts  L130:H81d3e0e7\",\"pushOutcome\":{\"status\":\"pushed\",\"sha\":\"810e7b76a8f5670c1fd60eb7265cbaa22c31b106\",\"at\":\"2026-10-25T11:52:16.000Z\"}}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": "",
       "createdAt": "2026-10-25T11:50:29.625Z",
-      "updatedAt": "2026-10-25T11:50:56.386Z"
+      "updatedAt": "2026-10-25T11:52:16.026Z"
     },
     {
       "roadmap_node_id": "rmn_2c5235724ebe4df9a07c8b4e",
@@ -54,13 +54,13 @@
       "feature_id": null,
       "title": "Align the accessible labels with the brief",
       "summary": "The SVG label currently reads \"Rectangle: Width 30 mm, Height 20 mm\", but the brief asked for wording like \"Rectangle, 30 by 20 millimetres\". Update the label text for each shape and confirm errors are announced.",
-      "detail": "",
+      "detail": "{\"planState\":\"tasks_created\",\"planPromptText\":\"Goal: Align the accessible labels with the brief\\nDescription: The SVG label currently reads \\\"Rectangle: Width 30 mm, Height 20 mm\\\", but the brief asked for wording like \\\"Rectangle, 30 by 20 millimetres\\\". Update the label text for each shape and confirm errors are announced.\\n\\nBelow is the current file tree for this project: one path per line,\\nfollowed by a short content fingerprint (format:\\nL<byte length>:H<8-char hash> - see shared/fingerprint.js if you’ve\\nseen this project before). No file contents are included here.\\n\\nPlan the set of file changes needed to implement the goal above.\\nRespond with ONLY this JSON object, no other text before or after it:\\n{\\n  \\\"tasks\\\": [\\n    {\\n      \\\"path\\\": \\\"components/example/example.js\\\",\\n      \\\"action\\\": \\\"create\\\" | \\\"modify\\\" | \\\"delete\\\",\\n      \\\"description\\\": \\\"one-line description of the change\\\",\\n      \\\"needsFileContent\\\": true,\\n      \\\"needsMetadata\\\": false,\\n      \\\"confident\\\": true\\n    }\\n  ]\\n}\\n\\n- needsFileContent: true unless this task is a plain delete with\\n  nothing else to write.\\n- needsMetadata: true only if this task needs you to author extra\\n  structured data beyond the file’s content (leave false if unsure).\\n- confident: for \\\"modify\\\"/\\\"delete\\\" tasks, whether your memory of\\n  that file’s current content matches the fingerprint shown above.\\n  Always true for \\\"create\\\" tasks (there’s nothing to remember yet).\\n\\nCurrent file tree:\\ndocs/verification.md  L7000:Hc3338df5\\nindex.html  L317:H07fab284\\ninit.md  L10:H5b173971\\npackage.json  L500:Hd05e2134\\nsrc/App.tsx  L1590:Hd51214f4\\nsrc/components/ShapeCanvas.tsx  L1173:Hb7cd662f\\nsrc/components/ShapeInputs.tsx  L887:H1747e119\\nsrc/components/ShapeSelect.tsx  L507:H4eeda525\\nsrc/main.tsx  L225:H32e7e1bb\\nsrc/shapes.test.ts  L1661:H02f8ca25\\nsrc/shapes.ts  L4121:H219d768c\\nsrc/styles.css  L2416:H7f59a549\\ntsconfig.json  L300:Ha447bb7a\\nvite.config.ts  L130:H81d3e0e7\"}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": "",
       "createdAt": "2026-10-25T11:50:29.625Z",
-      "updatedAt": "2026-10-25T11:50:29.625Z"
+      "updatedAt": "2026-10-25T11:52:49.407Z"
     },
     {
       "roadmap_node_id": "rmn_3c15fc909af211c49a67f4e5",
@@ -161,6 +161,66 @@
       "notes": "",
       "createdAt": "2026-10-25T11:50:56.265Z",
       "updatedAt": "2026-10-25T11:51:58.806Z"
+    },
+    {
+      "roadmap_node_id": "rmn_dcc46e5a3e8baab29733a5be",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_2c5235724ebe4df9a07c8b4e",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 0,
+      "feature_id": null,
+      "title": "src/shapes.ts",
+      "summary": "Add a describe(values) function to ShapeDef and implement it for each shape, producing labels like \"Rectangle, 30 by 20 millimetres\", \"Circle, 20 millimetres diameter\" and \"Hexagon-style polygon with 6 sides, 20 millimetres diameter\"",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Add a describe(values) function to ShapeDef and implement it for each shape, producing labels like \\\"Rectangle, 30 by 20 millimetres\\\", \\\"Circle, 20 millimetres diameter\\\" and \\\"Hexagon-style polygon with 6 sides, 20 millimetres diameter\\\"\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T11:52:49.012Z",
+      "updatedAt": "2026-10-25T11:53:10.695Z"
+    },
+    {
+      "roadmap_node_id": "rmn_9401b7d1e2dcea5ce1e4df6a",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_2c5235724ebe4df9a07c8b4e",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 1,
+      "feature_id": null,
+      "title": "src/components/ShapeCanvas.tsx",
+      "summary": "Replace the generated \"Label value unit\" aria-label with shape.describe(values) so the SVG label updates with each shape's own wording",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Replace the generated \\\"Label value unit\\\" aria-label with shape.describe(values) so the SVG label updates with each shape's own wording\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T11:52:49.139Z",
+      "updatedAt": "2026-10-25T11:53:31.537Z"
+    },
+    {
+      "roadmap_node_id": "rmn_1a8bfc60ef276a599a8d1eb5",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_2c5235724ebe4df9a07c8b4e",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 2,
+      "feature_id": null,
+      "title": "src/shapes.test.ts",
+      "summary": "Add unit tests asserting the describe() text for all five shapes, including singular and plural wording and a check that the label updates when values change",
+      "detail": "{\"fileChangeMode\":\"patch\",\"action\":\"modify\",\"description\":\"Add unit tests asserting the describe() text for all five shapes, including singular and plural wording and a check that the label updates when values change\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"done\",\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": "",
+      "createdAt": "2026-10-25T11:52:49.293Z",
+      "updatedAt": "2026-10-25T11:53:54.071Z"
     }
   ]
 }
