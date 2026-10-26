@@ -114,13 +114,13 @@
       "feature_id": null,
       "title": "Circle angular snap points",
       "summary": "For circles, snapping occurs at fixed angles of 0, 45, 90, 135, 180 and 325 degrees, wrapping back to 0/360.",
-      "detail": null,
+      "detail": "{\"planState\":\"tasks_created\"}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:10:25.938Z",
-      "updated_at": "2026-10-26T09:10:25.938Z"
+      "updated_at": "2026-10-26T09:40:08.203Z"
     },
     {
       "roadmap_node_id": "rmn_1628e9cd294700ec57732b97",
@@ -189,7 +189,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 0,
       "feature_id": null,
       "title": "src/sideSnap.ts",
@@ -200,7 +200,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:34:25.301Z",
-      "updated_at": "2026-10-26T09:34:25.301Z"
+      "updated_at": "2026-10-26T09:34:49.156Z"
+    },
+    {
+      "roadmap_node_id": "rmn_507d8802cec40e0577dada59",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_7bb75a2145b6519f5c54e26a",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 0,
+      "feature_id": null,
+      "title": "src/circleSnap.ts",
+      "summary": "Add pure helpers for circle snap points: the fixed angle list (0, 45, 90, 135, 180, 225, 270, 315 with wrap-around back to 0/360), nearest-angle lookup from a pointer position with wrap-around, and the point and outward placement position for a new shape at a given angle.",
+      "detail": "{\"action\":\"create\",\"description\":\"Add pure helpers for circle snap points: the fixed angle list (0, 45, 90, 135, 180, 225, 270, 315 with wrap-around back to 0/360), nearest-angle lookup from a pointer position with wrap-around, and the point and outward placement position for a new shape at a given angle.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:40:08.010Z",
+      "updated_at": "2026-10-26T09:40:08.010Z"
     },
     {
       "roadmap_node_id": "rmn_d81039b779d1fc447a9f004e",
@@ -269,7 +289,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 1,
       "feature_id": null,
       "title": "src/sideSnap.test.ts",
@@ -280,7 +300,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:34:25.335Z",
-      "updated_at": "2026-10-26T09:34:25.335Z"
+      "updated_at": "2026-10-26T09:35:11.508Z"
+    },
+    {
+      "roadmap_node_id": "rmn_a9fdd02369363286c180c0b8",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_7bb75a2145b6519f5c54e26a",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 1,
+      "feature_id": null,
+      "title": "src/circleSnap.test.ts",
+      "summary": "Add unit tests for the angle list, nearest-angle selection (including wrap-around near 0/360), pointer-to-angle conversion, and placement positions at each snap angle.",
+      "detail": "{\"action\":\"create\",\"description\":\"Add unit tests for the angle list, nearest-angle selection (including wrap-around near 0/360), pointer-to-angle conversion, and placement positions at each snap angle.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:40:08.035Z",
+      "updated_at": "2026-10-26T09:40:08.035Z"
     },
     {
       "roadmap_node_id": "rmn_16e193e62ab4e9452364ad52",
@@ -349,7 +389,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 2,
       "feature_id": null,
       "title": "src/placed.ts",
@@ -360,7 +400,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:34:25.365Z",
-      "updated_at": "2026-10-26T09:34:25.365Z"
+      "updated_at": "2026-10-26T09:35:38.328Z"
+    },
+    {
+      "roadmap_node_id": "rmn_d83a41f268bede565724b105",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_7bb75a2145b6519f5c54e26a",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 2,
+      "feature_id": null,
+      "title": "src/components/WorkArea.tsx",
+      "summary": "When the hovered existing object is a circle, compute the nearest snap angle from the pointer and the circle's measured bounds, store it as hover state, and use it (instead of a side) to compute the placement position on click.",
+      "detail": "{\"action\":\"modify\",\"description\":\"When the hovered existing object is a circle, compute the nearest snap angle from the pointer and the circle's measured bounds, store it as hover state, and use it (instead of a side) to compute the placement position on click.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:40:08.060Z",
+      "updated_at": "2026-10-26T09:40:08.060Z"
     },
     {
       "roadmap_node_id": "rmn_8908cd8d723f07590431efdc",
@@ -429,7 +489,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 3,
       "feature_id": null,
       "title": "src/component.ts",
@@ -440,7 +500,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:34:25.403Z",
-      "updated_at": "2026-10-26T09:34:25.403Z"
+      "updated_at": "2026-10-26T09:36:08.971Z"
+    },
+    {
+      "roadmap_node_id": "rmn_e66bcfcc0ca0900b39b2e0b0",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_7bb75a2145b6519f5c54e26a",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 3,
+      "feature_id": null,
+      "title": "src/components/ShapeCanvas.tsx",
+      "summary": "Accept an optional highlighted snap angle for circles and draw a marker on the circle's outline at that angle instead of a side line.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Accept an optional highlighted snap angle for circles and draw a marker on the circle's outline at that angle instead of a side line.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:40:08.079Z",
+      "updated_at": "2026-10-26T09:40:08.079Z"
     },
     {
       "roadmap_node_id": "rmn_494d0d517a8a0211213917ee",
@@ -509,7 +589,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 4,
       "feature_id": null,
       "title": "src/components/WorkArea.tsx",
@@ -520,7 +600,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:34:25.432Z",
-      "updated_at": "2026-10-26T09:34:25.432Z"
+      "updated_at": "2026-10-26T09:37:09.719Z"
+    },
+    {
+      "roadmap_node_id": "rmn_f5b7bee6dfc6e99fca93185d",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_7bb75a2145b6519f5c54e26a",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 4,
+      "feature_id": null,
+      "title": "src/styles.css",
+      "summary": "Add styles for the circle snap-angle marker, visible in light and dark themes.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Add styles for the circle snap-angle marker, visible in light and dark themes.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:40:08.100Z",
+      "updated_at": "2026-10-26T09:40:08.100Z"
     },
     {
       "roadmap_node_id": "rmn_bceb63a15eb511271cd2f940",
@@ -589,7 +689,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 5,
       "feature_id": null,
       "title": "src/App.tsx",
@@ -600,7 +700,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:34:25.468Z",
-      "updated_at": "2026-10-26T09:34:25.468Z"
+      "updated_at": "2026-10-26T09:37:38.147Z"
+    },
+    {
+      "roadmap_node_id": "rmn_38a47882bf100bd3d9e8740d",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_7bb75a2145b6519f5c54e26a",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 5,
+      "feature_id": null,
+      "title": "src/App.test.tsx",
+      "summary": "Add UI tests that hovering a circle while armed marks the nearest fixed angle, that clicking places the new shape at that angle, and that non-circle shapes still use side snapping.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Add UI tests that hovering a circle while armed marks the nearest fixed angle, that clicking places the new shape at that angle, and that non-circle shapes still use side snapping.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:40:08.125Z",
+      "updated_at": "2026-10-26T09:40:08.125Z"
     },
     {
       "roadmap_node_id": "rmn_8bbfc4dbc90df716b85567c8",
@@ -669,7 +789,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 6,
       "feature_id": null,
       "title": "src/styles.css",
@@ -680,7 +800,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:34:25.515Z",
-      "updated_at": "2026-10-26T09:34:25.515Z"
+      "updated_at": "2026-10-26T09:38:13.614Z"
+    },
+    {
+      "roadmap_node_id": "rmn_546f9c5ce7db05fbc37de104",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_7bb75a2145b6519f5c54e26a",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 6,
+      "feature_id": null,
+      "title": "docs/verification.md",
+      "summary": "Document manual verification steps for circle angular snap points, including wrap-around between 315 and 0/360 degrees.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Document manual verification steps for circle angular snap points, including wrap-around between 315 and 0/360 degrees.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:40:08.171Z",
+      "updated_at": "2026-10-26T09:40:08.171Z"
     },
     {
       "roadmap_node_id": "rmn_c39fc49f6b5947fe0fbc7758",
@@ -709,7 +849,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 7,
       "feature_id": null,
       "title": "src/App.test.tsx",
@@ -720,7 +860,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:34:25.542Z",
-      "updated_at": "2026-10-26T09:34:25.542Z"
+      "updated_at": "2026-10-26T09:39:05.480Z"
     },
     {
       "roadmap_node_id": "rmn_3625a0432e53b5ad37da509a",
@@ -749,7 +889,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 8,
       "feature_id": null,
       "title": "docs/verification.md",
@@ -760,7 +900,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:34:25.568Z",
-      "updated_at": "2026-10-26T09:34:25.568Z"
+      "updated_at": "2026-10-26T09:39:44.900Z"
     },
     {
       "roadmap_node_id": "rmn_fe0eec25c9324a0746339928",

@@ -17,15 +17,36 @@ interface Props {
    * new shape is armed). Omit or pass null for no highlight.
    */
   highlightSide?: HoverSide | null
+  /**
+   * For circles: the snap angle to highlight, in degrees, with 0 at the right and
+   * increasing clockwise on screen (SVG's y-down convention). A marker is drawn on the
+   * circle's outline at that angle instead of a side line. Omit or pass null for none.
+   */
+  highlightAngle?: number | null
 }
 
-export default function ShapeCanvas({ shape, values, guides = [], highlightSide = null }: Props) {
+export default function ShapeCanvas({
+  shape,
+  values,
+  guides = [],
+  highlightSide = null,
+  highlightAngle = null,
+}: Props) {
   const { width, height, element } = shape.build(values)
   const pad = STROKE / 2
   const w = width + STROKE
   const h = height + STROKE
 
   const label = shape.describe(values)
+
+  // Point on the circle's outline at the highlighted angle (circles only).
+  const angleMarker =
+    element.type === 'circle' && highlightAngle != null
+      ? {
+          x: width / 2 + element.r * Math.cos((highlightAngle * Math.PI) / 180),
+          y: height / 2 + element.r * Math.sin((highlightAngle * Math.PI) / 180),
+        }
+      : null
 
   const common = {
     fill: 'var(--accent-fill)',
@@ -49,7 +70,17 @@ export default function ShapeCanvas({ shape, values, guides = [], highlightSide 
       ) : (
         <polygon points={element.points.map(([x, y]) => `${x},${y}`).join(' ')} {...common} />
       )}
-      {highlightSide && (
+      {angleMarker && (
+        <circle
+          className="angle-highlight"
+          data-testid="angle-highlight"
+          data-angle={highlightAngle}
+          cx={angleMarker.x}
+          cy={angleMarker.y}
+          r={STROKE * 3}
+        />
+      )}
+      {highlightSide && element.type !== 'circle' && (
         <line
           className="side-highlight"
           data-testid="side-highlight"

@@ -247,6 +247,56 @@ While a shape is armed and a side of an existing object is highlighted (see 4.7)
 | Touch device | Touching a placed shape while armed highlights the nearest side, and tapping it places the new shape against that side | ☐ |
 | Reload the page | The work area is empty again, as snapped positions are not saved between visits | ☐ |
 
+### 4.9 Circle angular snap points
+
+While a shape is armed (see 4.6), hovering a circle marks the nearest fixed angle on its outline instead of highlighting a side, and clicking places the new shape at that angle. The fixed angles are every 45 degrees: 0, 45, 90, 135, 180, 225, 270 and 315. Angles are measured clockwise on screen from the right-hand point of the circle, so 0 is right, 90 is bottom, 180 is left and 270 is top. The marker is a small dot on the outline. In the browser developer tools it appears as an element with `data-testid="angle-highlight"` and a `data-angle` attribute holding the angle in degrees (0 to 315). Non-circle shapes keep side snapping (see 4.7 and 4.8). Place a Circle first and arm another shape (for example a Square) before you start.
+
+| Check | Expected | Pass |
+|---|---|---|
+| Arm a shape, then hover the circle | A single dot appears on the circle's outline, and no side line is drawn on the circle | ☐ |
+| Hover just outside the circle (within about 8 px) | The dot is still shown, on the outline point nearest the pointer's direction | ☐ |
+| Hover well away from every object | No dot is shown | ☐ |
+| Nothing armed, hover the circle | No dot is shown | ☐ |
+| Move the pointer to the right of the circle's centre, level with it | The dot sits on the right-hand point and `data-angle` is 0 | ☐ |
+| Move the pointer straight below the centre | The dot sits on the bottom point and `data-angle` is 90 | ☐ |
+| Move the pointer straight left of the centre | The dot sits on the left-hand point and `data-angle` is 180 | ☐ |
+| Move the pointer straight above the centre | The dot sits on the top point and `data-angle` is 270 | ☐ |
+| Move the pointer diagonally into each of the four corners of the circle's bounding box | The dot sits at 45, 135, 225 and 315 in turn | ☐ |
+| Sweep the pointer slowly clockwise once around the circle | The dot jumps from one fixed angle to the next (it never rests between them), always to the angle nearest the pointer, and only one dot is shown at a time | ☐ |
+| Hover the circle's distance from its centre at different radii (close to the centre, then at the edge) | The marked angle depends only on the direction from the centre, not on the distance | ☐ |
+
+#### Wrap-around between 315 and 0/360
+
+The angle after 315 is 0 (the same point as 360), so the halfway point between them is 337.5 degrees, in the upper-right quarter just above the right-hand point. Test both sides of it and the right-hand point itself.
+
+| Check | Expected | Pass |
+|---|---|---|
+| Hover on the direction of 315 (up and to the right at 45 degrees above level) | The dot sits at 315 | ☐ |
+| Sweep the pointer clockwise from 315 towards the right-hand point, staying at the circle's edge | The dot stays at 315 until the pointer passes the halfway point (22.5 degrees above level), then jumps straight to 0 | ☐ |
+| Hover just above the right-hand point (about 10 degrees above level) | The dot sits on the right-hand point and `data-angle` reads 0, not 360 and not a negative number | ☐ |
+| Hover just below the right-hand point (about 10 degrees below level) | The dot also sits on the right-hand point and `data-angle` reads 0 | ☐ |
+| Sweep the pointer anticlockwise from 45 through 0 and on to 315 | The dot moves 45, then 0, then 315 with no stall, no flicker and no jump to the wrong side of the circle | ☐ |
+| Sweep through the wrap-around point several times in each direction | The result is the same every time, and the dot never disappears while the pointer stays near the circle | ☐ |
+| Hover exactly on the halfway point between 315 and 0 | The dot sits on either 315 or 0, whichever is chosen is the same each time, and no other angle is shown | ☐ |
+
+#### Placing at the marked angle
+
+| Check | Expected | Pass |
+|---|---|---|
+| Hover the 0 angle and click | The new shape is placed touching the circle's right-hand point, centred on the line through the circle's centre, with no visible gap and no overlap | ☐ |
+| Repeat at 90, 180 and 270 | The new shape is placed against the bottom, left and top of the circle in turn | ☐ |
+| Repeat at 45, 135, 225 and 315 | The new shape is placed diagonally against the circle at that angle, touching the outline without overlapping it | ☐ |
+| Hover and click at the wrap-around, just above the right-hand point | The new shape is placed at 0, exactly where it is placed when you click just below the right-hand point | ☐ |
+| After the click | A new component is created and selected, the armed button is no longer highlighted, and the preview and the dot disappear | ☐ |
+| Untick "Snap to objects", arm a shape, hover the circle | No dot is shown, and clicking places the shape at the default position | ☐ |
+| Place a Rectangle, arm a shape and hover it | The Rectangle still shows a side line (top, right, bottom or left) and no dot | ☐ |
+| Place a Circle and a Rectangle, arm a shape and move from one to the other | The circle shows a dot and the Rectangle shows a side line, never both on one object | ☐ |
+| Change the circle's Diameter, then hover it again | The dot sits on the new outline at the same fixed angles | ☐ |
+| Dark and light mode | The dot is clearly visible against the grid and the circle in both themes, and is easy to tell apart from the selected outline and the dashed snap guides | ☐ |
+| Browser zoom 50% to 200% | The dot stays on the outline at the correct angle | ☐ |
+| Touch device | Touching the circle while armed shows the dot at the nearest fixed angle, and tapping places the new shape there | ☐ |
+| Reload the page | No dot is shown, as nothing is armed | ☐ |
+
 ## 5. Invalid input
 
 For each case, place the shape from the toolbar and enter the value in its field. The shape should disappear, a message should appear in the control panel, and the page should not crash or show NaN. Then enter a valid value and confirm the shape comes back.

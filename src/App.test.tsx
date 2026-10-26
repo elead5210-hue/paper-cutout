@@ -770,6 +770,143 @@ describe('click to snap to the highlighted side', () => {
   })
 })
 
+describe('circle angle snapping', () => {
+  const angleMarker = () => screen.queryByTestId('angle-highlight')
+  const sideMarker = () => screen.queryByTestId('side-highlight')
+
+  const circleLabel = 'Circle, 20 millimetres diameter'
+  const rectangleLabel = 'Rectangle, 30 by 20 millimetres'
+  const squareLabel = 'Square, 20 millimetres per side'
+
+  // jsdom has no layout, so give the placed shape fixed bounds. The circle spans
+  // x 100-200, y 100-200, so its centre is (150, 150).
+  const mockBounds = (el: HTMLElement, box: { left: number; top: number; right: number; bottom: number }) => {
+    el.getBoundingClientRect = () =>
+      ({
+        x: box.left,
+        y: box.top,
+        ...box,
+        width: box.right - box.left,
+        height: box.bottom - box.top,
+        toJSON: () => ({}),
+      }) as DOMRect
+  }
+
+  const movePointer = (user: User, clientX: number, clientY: number) =>
+    user.pointer({ target: screen.getByTestId('work-area'), coords: { clientX, clientY } })
+
+  const clickAt = (user: User, clientX: number, clientY: number) =>
+    user.pointer({
+      keys: '[MouseLeft]',
+      target: placedButton(circleLabel),
+      coords: { clientX, clientY },
+    })
+
+  const setupCircle = async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await chooseShape(user, 'circle')
+    mockBounds(placedButton(circleLabel), { left: 100, top: 100, right: 200, bottom: 200 })
+    await armShape(user, 'square')
+    return user
+  }
+
+  it('marks the nearest fixed angle on the circle while a shape is armed', async () => {
+    const user = await setupCircle()
+
+    // Just below the right-hand point of the outline: nearest fixed angle is 0 degrees.
+    await movePointer(user, 198, 152)
+    expect(angleMarker()).toBeInTheDocument()
+    expect(angleMarker()).toHaveAttribute('data-angle', '0')
+
+    // Just right of the bottom point of the outline: nearest fixed angle is 90 degrees.
+    await movePointer(user, 152, 198)
+    expect(angleMarker()).toHaveAttribute('data-angle', '90')
+  })
+
+  it('draws a marker on the outline instead of a side line for a circle', async () => {
+    const user = await setupCircle()
+
+    await movePointer(user, 198, 152)
+    expect(angleMarker()).toBeInTheDocument()
+    expect(sideMarker()).not.toBeInTheDocument()
+  })
+
+  it('shows no angle marker when nothing is armed', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await chooseShape(user, 'circle')
+    mockBounds(placedButton(circleLabel), { left: 100, top: 100, right: 200, bottom: 200 })
+
+    await movePointer(user, 198, 152)
+    expect(angleMarker()).not.toBeInTheDocument()
+  })
+
+  it('removes the angle marker when the pointer leaves the work area or the shape is cancelled', async () => {
+    const user = await setupCircle()
+
+    await movePointer(user, 198, 152)
+    expect(angleMarker()).toBeInTheDocument()
+    await user.unhover(screen.getByTestId('work-area'))
+    expect(angleMarker()).not.toBeInTheDocument()
+
+    await movePointer(user, 198, 152)
+    expect(angleMarker()).toBeInTheDocument()
+    await user.keyboard('{Escape}')
+    expect(angleMarker()).not.toBeInTheDocument()
+  })
+
+  it('places the new shape at the marked angle when clicked', async () => {
+    const user = await setupCircle()
+
+    await movePointer(user, 198, 152)
+    expect(angleMarker()).toHaveAttribute('data-angle', '0')
+    await clickAt(user, 198, 152)
+
+    // A second component was created, snapped away from the centre position.
+    expect(document.querySelectorAll('[data-component]')).toHaveLength(2)
+    const snapped = placedButton(squareLabel)
+    expect(snapped).toHaveAttribute('data-component', 'Component 2')
+    expect(snapped.getAttribute('style') ?? '').toContain('px')
+
+    // Disarmed, selected and no marker left behind.
+    expect(screen.getByRole('button', { name: 'Square' })).toHaveAttribute('aria-pressed', 'false')
+    expect(snapped).toHaveAttribute('aria-pressed', 'true')
+    expect(angleMarker()).not.toBeInTheDocument()
+  })
+
+  it('places the shape at a different position for a different marked angle', async () => {
+    const first = await setupCircle()
+    await movePointer(first, 198, 152)
+    await clickAt(first, 198, 152)
+    const rightStyle = placedButton(squareLabel).getAttribute('style')
+    expect(rightStyle).toBeTruthy()
+
+    document.body.innerHTML = ''
+    const second = await setupCircle()
+    await movePointer(second, 152, 198)
+    expect(angleMarker()).toHaveAttribute('data-angle', '90')
+    await clickAt(second, 152, 198)
+    const bottomStyle = placedButton(squareLabel).getAttribute('style')
+    expect(bottomStyle).toBeTruthy()
+
+    expect(bottomStyle).not.toEqual(rightStyle)
+  })
+
+  it('still uses side snapping for non-circle shapes', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await chooseShape(user, 'rectangle')
+    mockBounds(placedButton(rectangleLabel), { left: 100, top: 100, right: 200, bottom: 150 })
+    await armShape(user, 'circle')
+
+    await movePointer(user, 150, 102)
+    expect(sideMarker()).toBeInTheDocument()
+    expect(sideMarker()).toHaveAttribute('data-side', 'top')
+    expect(angleMarker()).not.toBeInTheDocument()
+  })
+})
+
 describe('invalid input', () => {
   it('hides the shape and announces a message when the field is empty', async () => {
     const user = userEvent.setup()
