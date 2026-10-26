@@ -194,6 +194,32 @@ Clicking a shape in the shape selector arms that shape. A semi-transparent drawi
 | Touch device | Touching and dragging in the work area moves the preview, and the page does not scroll unexpectedly | ☐ |
 | Reload the page | No shape is armed, as the setting is not saved between visits | ☐ |
 
+### 4.7 Hovered snap side highlight
+
+While a shape is armed (see 4.6), moving the pointer over an existing object, or within about 8 px of it, highlights the side of that object nearest the pointer (top, right, bottom or left) so you can see where the new shape will snap. The highlight is a thick line along that side of the object's bounding box. In the browser developer tools it appears as an element with `data-testid="side-highlight"` and a `data-side` attribute naming the side.
+
+| Check | Expected | Pass |
+|---|---|---|
+| Fresh page load, or a shape placed but none armed | Moving the pointer over a placed shape shows no side highlight | ☐ |
+| Arm a shape, then move the pointer over a placed shape | One side of that shape's bounding box is highlighted with a thick line in the highlight colour | ☐ |
+| Move the pointer near the top edge of the placed shape | The top side is highlighted | ☐ |
+| Move the pointer near the bottom edge | The bottom side is highlighted | ☐ |
+| Move the pointer near the left edge | The left side is highlighted | ☐ |
+| Move the pointer near the right edge | The right side is highlighted | ☐ |
+| Move the pointer slowly around the shape, including the corners | Only one side is highlighted at a time, and it switches to whichever side is nearest the pointer | ☐ |
+| Move the pointer just outside the shape (within about 8 px) | The nearest side is still highlighted | ☐ |
+| Move the pointer well away from every placed shape | No side is highlighted | ☐ |
+| Place two or more overlapping shapes, then hover the overlap | Only the topmost shape under the pointer shows a highlighted side | ☐ |
+| Move the pointer from one placed shape to another | The highlight leaves the first shape and appears on the second, and never shows on both | ☐ |
+| Move the pointer out of the work area | The highlight disappears | ☐ |
+| Press Escape, or click the armed toolbar button again | The highlight disappears along with the preview | ☐ |
+| Click an empty spot to place the armed shape | The highlight disappears once the shape is placed | ☐ |
+| Make a placed shape invalid (hidden), then hover where it was | No highlight is shown for the hidden shape | ☐ |
+| Highlight in dark and light mode | The highlight is clearly visible against both the grid and the shape, and is easy to tell apart from the selected outline and the dashed snap guides | ☐ |
+| Browser zoom 50% to 200% | The highlight stays on the correct side and keeps a similar line thickness | ☐ |
+| Touch device | Touching or dragging over a placed shape highlights the nearest side, and it clears when the finger lifts or leaves the work area | ☐ |
+| Reload the page | No highlight is shown, as nothing is armed | ☐ |
+
 ## 5. Invalid input
 
 For each case, place the shape from the toolbar and enter the value in its field. The shape should disappear, a message should appear in the control panel, and the page should not crash or show NaN. Then enter a valid value and confirm the shape comes back.

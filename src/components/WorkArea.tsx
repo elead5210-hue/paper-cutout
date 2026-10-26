@@ -1,7 +1,8 @@
-import { useEffect, useState, type PointerEvent } from 'react'
+import { useEffect, useRef, useState, type PointerEvent } from 'react'
 import { getShape, parseValues } from '../shapes'
 import type { Component } from '../component'
 import type { SnapGuide } from '../snapping'
+import { hoveredTargetSide, type HoverSide } from '../hoverSide'
 import ShapeCanvas from './ShapeCanvas'
 import CursorPreview from './CursorPreview'
 
@@ -35,6 +36,10 @@ export default function WorkArea({
 }: Props) {
   // Pointer position in px relative to the work area, or null when the pointer is outside it.
   const [pointer, setPointer] = useState<{ x: number; y: number } | null>(null)
+  // The existing object under the pointer and which of its sides is nearest, shown while a shape is armed.
+  const [hovered, setHovered] = useState<{ id: string; side: HoverSide } | null>(null)
+  // Placed shape buttons, keyed by component id, so their bounds can be measured.
+  const placedRefs = useRef<Map<string, HTMLButtonElement>>(new Map())
 
   // Escape cancels the armed shape.
   useEffect(() => {
@@ -49,6 +54,23 @@ export default function WorkArea({
   const trackPointer = (e: PointerEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
     setPointer({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+
+    if (!armedShapeId) {
+      setHovered(null)
+      return
+    }
+    // Measure each placed shape in the same client coordinate space as the pointer.
+    const targets: Array<{ id: string; bounds: { x: number; y: number; width: number; height: number } }> = []
+    for (const c of components) {
+      const el = placedRefs.current.get(c.id)
+      if (!el) continue
+      const b = el.getBoundingClientRect()
+      targets.push({ id: c.id, bounds: { x: b.left, y: b.top, width: b.width, height: b.height } })
+    }
+    const hit = hoveredTargetSide({ x: e.clientX, y: e.clientY }, targets)
+    setHovered((prev) =>
+      prev?.id === hit?.id && prev?.side === hit?.side ? prev : hit,
+    )
   }
 
   const showPreview = armedShapeId !== null && pointer !== null
@@ -61,7 +83,10 @@ export default function WorkArea({
       data-armed={armedShapeId ?? undefined}
       onPointerMove={trackPointer}
       onPointerEnter={trackPointer}
-      onPointerLeave={() => setPointer(null)}
+      onPointerLeave={() => {
+        setPointer(null)
+        setHovered(null)
+      }}
       onClick={(e) => {
         // Only clicks on empty work area place the armed shape, not clicks on placed shapes.
         if (armedShapeId && e.target === e.currentTarget) onPlaceArmed?.(armedShapeId)
@@ -85,6 +110,10 @@ export default function WorkArea({
         return (
           <button
             key={c.id}
+            ref={(el) => {
+              if (el) placedRefs.current.set(c.id, el)
+              else placedRefs.current.delete(c.id)
+            }}
             type="button"
             className="placed"
             data-component={c.name}
@@ -96,6 +125,7 @@ export default function WorkArea({
               shape={shape}
               values={result.values}
               guides={snapEnabled ? (guidesById[c.id] ?? NO_GUIDES) : NO_GUIDES}
+              highlightSide={armedShapeId && hovered?.id === c.id ? hovered.side : null}
             />
           </button>
         )

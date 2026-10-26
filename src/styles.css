@@ -1,19 +1,19 @@
 :root {
   --bg: #eef1f4; --panel: #ffffff; --ink: #1c2530; --muted: #5d6b7a;
   --line: #c9d2dc; --grid: #dde3ea; --accent: #1f6f8b;
-  --accent-fill: rgba(31, 111, 139, 0.14); --err: #b3261e;
+  --accent-fill: rgba(31, 111, 139, 0.14); --err: #b3261e; --highlight: #d9480f;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     --bg: #12171d; --panel: #1a222b; --ink: #e6ebf0; --muted: #94a3b3;
     --line: #364351; --grid: #232d38; --accent: #6cc4e0;
-    --accent-fill: rgba(108, 196, 224, 0.16); --err: #f2b8b5;
+    --accent-fill: rgba(108, 196, 224, 0.16); --err: #f2b8b5; --highlight: #ffa94d;
   }
 }
 :root[data-theme='dark'] {
   --bg: #12171d; --panel: #1a222b; --ink: #e6ebf0; --muted: #94a3b3;
   --line: #364351; --grid: #232d38; --accent: #6cc4e0;
-  --accent-fill: rgba(108, 196, 224, 0.16); --err: #f2b8b5;
+  --accent-fill: rgba(108, 196, 224, 0.16); --err: #f2b8b5; --highlight: #ffa94d;
 }
 
 * { box-sizing: border-box; }
@@ -73,6 +73,11 @@ input:focus-visible, .toolbar-button:focus-visible, .placed:focus-visible, .tree
 .snap-guide {
   stroke: var(--accent); stroke-width: 0.3; stroke-dasharray: 1 1;
   vector-effect: non-scaling-stroke; pointer-events: none; opacity: 0.9;
+}
+
+.side-highlight {
+  stroke: var(--highlight); stroke-width: 1.2; stroke-linecap: round;
+  vector-effect: non-scaling-stroke; pointer-events: none;
 }
 
 .work-area { position: absolute; inset: 0; }

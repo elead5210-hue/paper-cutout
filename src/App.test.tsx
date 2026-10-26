@@ -546,6 +546,102 @@ describe('cursor-following shape preview', () => {
   })
 })
 
+describe('hovered snap side highlight', () => {
+  const highlight = () => screen.queryByTestId('side-highlight')
+
+  // jsdom has no layout, so give the placed shape fixed bounds: x 100-200, y 100-150.
+  const mockBounds = (el: HTMLElement) => {
+    el.getBoundingClientRect = () =>
+      ({
+        x: 100,
+        y: 100,
+        left: 100,
+        top: 100,
+        right: 200,
+        bottom: 150,
+        width: 100,
+        height: 50,
+        toJSON: () => ({}),
+      }) as DOMRect
+  }
+
+  const movePointer = (user: User, clientX: number, clientY: number) =>
+    user.pointer({ target: screen.getByTestId('work-area'), coords: { clientX, clientY } })
+
+  const setup = async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await chooseShape(user, 'rectangle')
+    mockBounds(placedButton('Rectangle, 30 by 20 millimetres'))
+    await armShape(user, 'circle')
+    return user
+  }
+
+  it('shows no highlight when nothing is armed', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await chooseShape(user, 'rectangle')
+    mockBounds(placedButton('Rectangle, 30 by 20 millimetres'))
+
+    await movePointer(user, 150, 102)
+    expect(highlight()).not.toBeInTheDocument()
+  })
+
+  it('highlights the hovered side of an existing object while a shape is armed', async () => {
+    const user = await setup()
+
+    await movePointer(user, 150, 102)
+    expect(highlight()).toBeInTheDocument()
+    expect(highlight()).toHaveAttribute('data-side', 'top')
+  })
+
+  it('moves the highlight to the nearest side as the pointer moves', async () => {
+    const user = await setup()
+
+    await movePointer(user, 150, 102)
+    expect(highlight()).toHaveAttribute('data-side', 'top')
+
+    await movePointer(user, 102, 125)
+    expect(highlight()).toHaveAttribute('data-side', 'left')
+
+    await movePointer(user, 198, 125)
+    expect(highlight()).toHaveAttribute('data-side', 'right')
+
+    await movePointer(user, 150, 148)
+    expect(highlight()).toHaveAttribute('data-side', 'bottom')
+  })
+
+  it('shows no highlight when the pointer is away from every object', async () => {
+    const user = await setup()
+
+    await movePointer(user, 150, 102)
+    expect(highlight()).toBeInTheDocument()
+
+    await movePointer(user, 400, 400)
+    expect(highlight()).not.toBeInTheDocument()
+  })
+
+  it('removes the highlight when the pointer leaves the work area', async () => {
+    const user = await setup()
+
+    await movePointer(user, 150, 102)
+    expect(highlight()).toBeInTheDocument()
+
+    await user.unhover(screen.getByTestId('work-area'))
+    expect(highlight()).not.toBeInTheDocument()
+  })
+
+  it('removes the highlight when the armed shape is cancelled', async () => {
+    const user = await setup()
+
+    await movePointer(user, 150, 102)
+    expect(highlight()).toBeInTheDocument()
+
+    await user.keyboard('{Escape}')
+    expect(highlight()).not.toBeInTheDocument()
+  })
+})
+
 describe('invalid input', () => {
   it('hides the shape and announces a message when the field is empty', async () => {
     const user = userEvent.setup()
