@@ -1,16 +1,33 @@
 import { getShape, parseValues } from '../shapes'
 import type { Component } from '../component'
+import type { SnapGuide } from '../snapping'
 import ShapeCanvas from './ShapeCanvas'
+
+const NO_GUIDES: ReadonlyArray<SnapGuide> = []
 
 interface Props {
   components: Component[]
   selectedId: string | null
   onSelect: (id: string) => void
+  /** Whether snapping to existing objects is switched on. */
+  snapEnabled?: boolean
+  /** Snap guides to draw per component id, in that component's own canvas space (mm). */
+  guidesById?: Readonly<Record<string, ReadonlyArray<SnapGuide>>>
 }
 
-export default function WorkArea({ components, selectedId, onSelect }: Props) {
+export default function WorkArea({
+  components,
+  selectedId,
+  onSelect,
+  snapEnabled = true,
+  guidesById = {},
+}: Props) {
   return (
-    <div className="work-area" data-testid="work-area">
+    <div
+      className="work-area"
+      data-testid="work-area"
+      data-snap={snapEnabled ? 'on' : 'off'}
+    >
       <span
         className="centre-point"
         role="img"
@@ -36,7 +53,11 @@ export default function WorkArea({ components, selectedId, onSelect }: Props) {
             aria-pressed={c.id === selectedId}
             onClick={() => onSelect(c.id)}
           >
-            <ShapeCanvas shape={shape} values={result.values} />
+            <ShapeCanvas
+              shape={shape}
+              values={result.values}
+              guides={snapEnabled ? (guidesById[c.id] ?? NO_GUIDES) : NO_GUIDES}
+            />
           </button>
         )
       })}

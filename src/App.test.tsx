@@ -381,6 +381,69 @@ describe('centre point', () => {
   })
 })
 
+describe('snapping to existing objects', () => {
+  const snapToggle = () => screen.getByRole('checkbox', { name: 'Snap to objects' })
+
+  it('offers a snap toggle that is on by default', () => {
+    render(<App />)
+
+    expect(snapToggle()).toBeChecked()
+    expect(screen.getByTestId('work-area')).toHaveAttribute('data-snap', 'on')
+  })
+
+  it('turns snapping off and on again from the toggle', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await user.click(snapToggle())
+    expect(snapToggle()).not.toBeChecked()
+    expect(screen.getByTestId('work-area')).toHaveAttribute('data-snap', 'off')
+
+    await user.click(snapToggle())
+    expect(snapToggle()).toBeChecked()
+    expect(screen.getByTestId('work-area')).toHaveAttribute('data-snap', 'on')
+  })
+
+  it('keeps the toggle state when further shapes are placed as nested components', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await user.click(snapToggle())
+    await chooseShape(user, 'square')
+
+    expect(snapToggle()).not.toBeChecked()
+    expect(screen.getByTestId('work-area')).toHaveAttribute('data-snap', 'off')
+    expect(within(treeNode('Component 2')).getByText('Square')).toBeInTheDocument()
+  })
+
+  it('draws no snap guides when snapping is off', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await user.click(snapToggle())
+    await chooseShape(user, 'circle')
+    await chooseShape(user, 'square')
+
+    expect(screen.queryAllByTestId('snap-guide')).toHaveLength(0)
+  })
+
+  it('does not change shape placement or editing', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+    await user.click(snapToggle())
+    await setField(user, 'Diameter', '30')
+
+    expect(screen.getByRole('img', { name: 'Circle, 30 millimetres diameter' })).toBeInTheDocument()
+    expect(placedButton('Circle, 30 millimetres diameter')).toHaveAttribute(
+      'data-component',
+      'Component 1'
+    )
+  })
+})
+
 describe('invalid input', () => {
   it('hides the shape and announces a message when the field is empty', async () => {
     const user = userEvent.setup()

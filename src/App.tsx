@@ -11,6 +11,8 @@ export default function App() {
   // contains it, and each shape keeps its own values.
   const [components, setComponents] = useState<Component[]>([])
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  // Whether newly placed shapes snap to existing objects.
+  const [snapEnabled, setSnapEnabled] = useState(true)
 
   const selected = components.find((c) => c.id === selectedId) ?? null
   const shape = selected ? getShape(selected.shape.shapeId) : null
@@ -37,7 +39,12 @@ export default function App() {
     <div className="layout">
       <aside className="panel">
         <h1>Shape viewer</h1>
-        <ShapeToolbar shapes={SHAPES} onPlace={place} />
+        <ShapeToolbar
+          shapes={SHAPES}
+          onPlace={place}
+          snapEnabled={snapEnabled}
+          onSnapChange={setSnapEnabled}
+        />
         {selected && shape && (
           <ShapeInputs fields={shape.fields} raw={selected.shape.raw} onChange={setField} />
         )}
@@ -48,7 +55,12 @@ export default function App() {
         </p>
       </aside>
       <main className="stage">
-        <WorkArea components={components} selectedId={selectedId} onSelect={setSelectedId} />
+        <WorkArea
+          components={components}
+          selectedId={selectedId}
+          onSelect={setSelectedId}
+          snapEnabled={snapEnabled}
+        />
       </main>
       <HierarchyPanel components={components} selectedId={selectedId} onSelect={setSelectedId} />
     </div>

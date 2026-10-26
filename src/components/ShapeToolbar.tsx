@@ -3,9 +3,18 @@ import type { ShapeDef } from '../shapes'
 interface Props {
   shapes: ShapeDef[]
   onPlace: (shapeId: string) => void
+  /** Whether snapping to existing objects is switched on. */
+  snapEnabled?: boolean
+  /** Called with the new on/off value when the snap toggle is changed. */
+  onSnapChange?: (enabled: boolean) => void
 }
 
-export default function ShapeToolbar({ shapes, onPlace }: Props) {
+export default function ShapeToolbar({
+  shapes,
+  onPlace,
+  snapEnabled = true,
+  onSnapChange,
+}: Props) {
   return (
     <div className="toolbar" role="toolbar" aria-label="Shapes">
       {shapes.map((s) => (
@@ -18,6 +27,16 @@ export default function ShapeToolbar({ shapes, onPlace }: Props) {
           {s.label}
         </button>
       ))}
+      {onSnapChange && (
+        <label className="snap-toggle">
+          <input
+            type="checkbox"
+            checked={snapEnabled}
+            onChange={(e) => onSnapChange(e.target.checked)}
+          />
+          Snap to objects
+        </label>
+      )}
     </div>
   )
 }

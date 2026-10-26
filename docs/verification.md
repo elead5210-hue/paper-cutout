@@ -148,6 +148,29 @@ Each placed shape is added as part of a new component with a default name. The n
 | Screen reader (optional) | The panel is announced as "Hierarchy", the list as a tree of "Components", and the selected component is announced as selected | ☐ |
 | Reload the page | The panel is empty again, as components are not saved between visits | ☐ |
 
+### 4.5 Snapping to existing objects
+
+When a new shape is placed and added to the component tree as a nested child, it can snap to the edges, centres and corners of existing objects. The "Snap to objects" checkbox at the bottom of the shape toolbar switches this on or off. It is on by default. The work area carries a `data-snap` attribute ("on" or "off") that you can check in the browser developer tools.
+
+| Check | Expected | Pass |
+|---|---|---|
+| Fresh page load | A "Snap to objects" checkbox is shown in the toolbar and is ticked, and the work area has `data-snap="on"` | ☐ |
+| Untick the checkbox | It becomes unticked, `data-snap` changes to "off", and no snap guide lines are shown | ☐ |
+| Tick the checkbox again | It becomes ticked and `data-snap` returns to "on" | ☐ |
+| With snapping on, place a shape close to the edge of an existing object (within about 8 mm) | The new shape moves so its edge lines up exactly with the edge of the existing object, and a dashed guide line shows the alignment | ☐ |
+| Place a shape with its centre close to the centre of an existing object | The centres line up exactly and a dashed guide line is drawn along the aligned centre | ☐ |
+| Place a shape close to a corner of an existing object | Both axes snap, so the new shape's corner lands exactly on the existing object's corner, with a guide line on each axis | ☐ |
+| Place a shape more than about 8 mm away from every edge and centre of existing objects | The shape stays where it was placed and no guide lines are shown | ☐ |
+| Place a shape that is only close on one axis | Only that axis snaps, the other keeps its position, and a single guide line is shown | ☐ |
+| Place a shape that is nested inside another component | The snap is measured against the existing objects in the same space as the parent, and the shape stays correctly positioned relative to its parent after snapping | ☐ |
+| With snapping off, place shapes next to existing objects | Shapes are placed exactly where they were put, with no movement and no guide lines | ☐ |
+| Turn snapping off, place a shape, then turn it on and place another | Only the shape placed while snapping was on is snapped, and the earlier shape does not move | ☐ |
+| Make a snapped shape invalid, then fix it | The shape disappears while invalid and comes back in the same position, and it stays in its component and in the hierarchy panel | ☐ |
+| Snap toggle in dark and light mode | The checkbox and its label are readable, and the guide lines are visible against the grid in both themes | ☐ |
+| Keyboard | Tab reaches the checkbox, a clear focus outline shows, and Space toggles it | ☐ |
+| Narrow screen (640 px wide or less) | The checkbox sits on its own row in the toolbar, is easy to tap, and does not cut off any toolbar button | ☐ |
+| Reload the page | The checkbox is ticked again, as the setting is not saved between visits | ☐ |
+
 ## 5. Invalid input
 
 For each case, place the shape from the toolbar and enter the value in its field. The shape should disappear, a message should appear in the control panel, and the page should not crash or show NaN. Then enter a valid value and confirm the shape comes back.
