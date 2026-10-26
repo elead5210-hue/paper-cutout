@@ -54,13 +54,13 @@
       "feature_id": null,
       "title": "Verify the production build before release",
       "summary": "Confirm the app is ready to ship once the deployment files are in place. Re-run the automated checks (`npx tsc --noEmit`, `npm test`, `npm run build`) on the final commit. Serve the build with `npm run preview` and complete the browser acceptance checklist in `docs/verification.md`, including the environment details, calibration and true-size checks, and results log, which are currently blank. Also tidy the production page title (currently the generic 'Shape viewer') so the deployed site is identifiable as paper-cutout.",
-      "detail": null,
+      "detail": "{\"planState\":\"tasks_created\"}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T06:11:33.523Z",
-      "updated_at": "2026-10-26T06:11:33.523Z"
+      "updated_at": "2026-10-26T06:14:11.141Z"
     },
     {
       "roadmap_node_id": "rmn_99e125f69fb7e27d24fbbd6e",
@@ -69,7 +69,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 0,
       "feature_id": null,
       "title": "deploy-manager.json",
@@ -80,7 +80,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T06:12:33.263Z",
-      "updated_at": "2026-10-26T06:12:33.263Z"
+      "updated_at": "2026-10-26T06:12:52.446Z"
+    },
+    {
+      "roadmap_node_id": "rmn_207df08b1c6ada9a854bbce4",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_bba4f4636a6cc41c73b24dee",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 0,
+      "feature_id": null,
+      "title": "index.html",
+      "summary": "Change the page title from the generic 'Shape viewer' to 'paper-cutout' so the deployed site is identifiable",
+      "detail": "{\"action\":\"modify\",\"description\":\"Change the page title from the generic 'Shape viewer' to 'paper-cutout' so the deployed site is identifiable\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T06:14:11.115Z",
+      "updated_at": "2026-10-26T06:14:11.115Z"
     },
     {
       "roadmap_node_id": "rmn_b844723df56484035ad128c9",
@@ -89,7 +109,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 1,
       "feature_id": null,
       "title": ".nvmrc",
@@ -100,7 +120,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T06:12:33.276Z",
-      "updated_at": "2026-10-26T06:12:33.276Z"
+      "updated_at": "2026-10-26T06:13:03.819Z"
+    },
+    {
+      "roadmap_node_id": "rmn_08f31acc67980cb07982d8d8",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_bba4f4636a6cc41c73b24dee",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 1,
+      "feature_id": null,
+      "title": "docs/verification.md",
+      "summary": "Update the automated checks table for the final commit, add production-build steps (`npm run build`, then `npm run preview`) and a page-title check to the checklist, and leave the browser result fields for the tester to fill in",
+      "detail": "{\"action\":\"modify\",\"description\":\"Update the automated checks table for the final commit, add production-build steps (`npm run build`, then `npm run preview`) and a page-title check to the checklist, and leave the browser result fields for the tester to fill in\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T06:14:11.127Z",
+      "updated_at": "2026-10-26T06:14:11.127Z"
     },
     {
       "roadmap_node_id": "rmn_6df0893a261593b06c2fc4d9",
@@ -109,7 +149,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 2,
       "feature_id": null,
       "title": "vite.config.ts",
@@ -120,7 +160,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T06:12:33.289Z",
-      "updated_at": "2026-10-26T06:12:33.289Z"
+      "updated_at": "2026-10-26T06:13:14.710Z"
     },
     {
       "roadmap_node_id": "rmn_9f120e5f6b7b53e39eba0b6d",
@@ -129,7 +169,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 3,
       "feature_id": null,
       "title": "package.json",
@@ -140,7 +180,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T06:12:33.302Z",
-      "updated_at": "2026-10-26T06:12:33.302Z"
+      "updated_at": "2026-10-26T06:13:23.555Z"
     },
     {
       "roadmap_node_id": "rmn_fe7971bc30883d82a947e8e1",
@@ -149,7 +189,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 4,
       "feature_id": null,
       "title": ".gitignore",
@@ -160,7 +200,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T06:12:33.314Z",
-      "updated_at": "2026-10-26T06:12:33.314Z"
+      "updated_at": "2026-10-26T06:13:34.102Z"
     },
     {
       "roadmap_node_id": "rmn_1909f89f03d944de52794ce2",
@@ -169,7 +209,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 5,
       "feature_id": null,
       "title": "README.md",
@@ -180,7 +220,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T06:12:33.327Z",
-      "updated_at": "2026-10-26T06:12:33.327Z"
+      "updated_at": "2026-10-26T06:13:51.227Z"
     }
   ]
 }

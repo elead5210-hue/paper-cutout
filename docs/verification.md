@@ -23,11 +23,21 @@ Run from the project root. Re-run after any fix.
 | Command | Expected | Last result |
 |---|---|---|
 | `npm install` | completes without errors | |
-| `npx tsc --noEmit` | no output | Clean (2026-10-25) |
-| `npm test` | all tests pass | 9 of 9 passed (2026-10-25) |
-| `npm run build` | build succeeds | Succeeded (2026-10-25) |
+| `npx tsc --noEmit` | no output | |
+| `npm test` | all tests pass | |
+| `npm run build` | build succeeds and writes `dist/` | |
+| `npm run preview` | serves the production build from `dist/` without errors | |
 
 These do not replace the browser checks below. They cover the geometry numbers, not how anything looks or measures on screen.
+
+### 2.1 Production build checks
+
+Run these against the final commit, serving the app with `npm run build && npm run preview` (not the dev server), and record the commit in the Environment table. Clear the "Last result" column above and fill it in again from this run. Do not tick a box you have not checked yourself.
+
+- [ ] The browser tab title reads "paper-cutout", not "Shape viewer".
+- [ ] The page loads with no errors or failed requests in the browser console or network tab (JavaScript and CSS load from relative paths).
+- [ ] Placing a shape, selecting it and editing its dimensions works in the preview build.
+- [ ] Reloading the page shows an empty work area with the centre point.
 
 ## 3. True-size check
 
