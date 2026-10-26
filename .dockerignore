@@ -1,0 +1,13 @@
+// FILE: .dockerignore
+node_modules
+dist
+.git
+.intentforge
+responses
+docs
+*.log
+.env
+.env.*
+.DS_Store
+Dockerfile
+.dockerignore

@@ -23,24 +23,24 @@ To typecheck on its own, run `npx tsc --noEmit`.
 
 ## Deployment
 
-paper-cutout is a static single-page app, so it deploys as plain files with no server code. Deploy-Manager reads its settings from `deploy-manager.json` in the project root.
+paper-cutout is a static single-page app. Deploy-Manager clones the repository, builds the `Dockerfile` at the repository root and runs it as a single container, so there is no separate manifest or deployment config file.
 
-- **Node version:** 18 or newer. `.nvmrc` pins Node 20 for builds, and `package.json` declares `engines.node` as `>=18`.
-- **Install:** `npm install`
-- **Build:** `npm run build`, which typechecks and then writes the production site.
-- **Output directory:** `dist/`. This folder is generated and is not committed (it is listed in `.gitignore`).
-- **Single-page fallback:** requests for unknown paths are served `index.html`.
+- **Node version:** the `Dockerfile` builds with Node 20 (`node:20-alpine`). `package.json` declares `engines.node` as `>=18` for local use.
+- **Install:** `npm ci`, run in the Dockerfile's build stage.
+- **Build:** `npm run build`, run in the Dockerfile's build stage. It typechecks and then writes the production site.
+- **Output:** `dist/` is copied into an `nginx-unprivileged` image, which runs as a non-root user. `dist/` is generated and is not committed (it is listed in `.gitignore`).
+- **Port:** nginx listens on port 8000 on all interfaces, the container port Deploy-Manager publishes. `nginx.conf` also serves `index.html` for unknown paths.
+- **Environment variables:** none are needed, so the repository has no `.env.example`.
 - **Base path:** `vite.config.ts` sets `base: './'`, so built asset paths are relative and the app works at the root of a domain or under a sub-path.
 
-To check a production build locally before deploying:
+To check the same image locally before deploying (requires Docker):
 
 ```
-npm install
-npm run build
-npm run preview
+docker build --tag paper-cutout .
+docker run --rm --publish 8000:8000 paper-cutout
 ```
 
-Then open the address that `npm run preview` prints and confirm the page loads and shapes can be placed and edited.
+Then open http://localhost:8000 and confirm the page loads and shapes can be placed and edited. `npm run build` and `npm run preview` still work for a quick check without Docker.
 
 ## How it works
 
@@ -78,8 +78,9 @@ src/
   App.test.tsx                component tests for the behaviour
 docs/
   verification.md             browser acceptance checklist and results log
-deploy-manager.json           Deploy-Manager settings: static site, install and build commands, dist/ output, single-page fallback
-.nvmrc                        pinned Node version for builds
+Dockerfile                    multi-stage image: builds the app with Node 20, then serves dist/ with nginx as a non-root user on port 8000
+nginx.conf                    nginx server block that listens on port 8000 and falls back to index.html
+.dockerignore                 keeps node_modules, dist, docs and local files out of the Docker build context
 vite.config.ts                Vite and Vitest config, including the relative base path used for deployment
 ```
 
