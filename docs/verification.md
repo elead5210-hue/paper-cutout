@@ -79,8 +79,8 @@ Notes:
 |---|---|---|
 | Fresh page load | The work area is empty apart from a small ring (the centre point) in the middle of it, with the hint to click a shape in the toolbar just below it. No input fields are shown and there is no error message | ☐ |
 | Look at the shape toolbar | Buttons for Circle, Square, Rectangle, Triangle and Polygon are shown, and none is highlighted | ☐ |
-| Click each shape button | A new shape of that type appears in the work area at its default size, it is selected (solid outline), and the panel shows that shape's input fields | ☐ |
-| Click the same shape button twice | Two separate shapes are placed, and the newest one is selected | ☐ |
+| Click each shape button, then click an empty spot in the work area | Clicking the button only arms the shape (see 4.6). The click in the work area then places a new shape of that type at its default size, it is selected (solid outline), and the panel shows that shape's input fields | ☐ |
+| Arm the same shape and place it twice | Two separate shapes are placed, and the newest one is selected | ☐ |
 | Click a placed shape | It becomes selected, the others lose their outline, and the panel shows that shape's own fields and values | ☐ |
 | Type in a field | Only the selected shape redraws, on every keystroke and not only on blur | ☐ |
 
@@ -170,6 +170,29 @@ When a new shape is placed and added to the component tree as a nested child, it
 | Keyboard | Tab reaches the checkbox, a clear focus outline shows, and Space toggles it | ☐ |
 | Narrow screen (640 px wide or less) | The checkbox sits on its own row in the toolbar, is easy to tap, and does not cut off any toolbar button | ☐ |
 | Reload the page | The checkbox is ticked again, as the setting is not saved between visits | ☐ |
+
+### 4.6 Cursor-following shape preview
+
+Clicking a shape in the shape selector arms that shape. A semi-transparent drawing of it follows the cursor around the work area until it is placed or cancelled. The armed toolbar button has `aria-pressed="true"` and the work area gets a `data-armed` attribute with the shape id. The preview element has `data-testid="cursor-preview"`.
+
+| Check | Expected | Pass |
+|---|---|---|
+| Fresh page load | No preview is shown, no toolbar button is highlighted, and the work area shows the normal cursor | ☐ |
+| Click a shape button (for example Circle) | The button is highlighted as pressed, nothing is placed yet, and no component is created | ☐ |
+| Move the pointer into the work area | A faint drawing of the armed shape appears, centred on the pointer, at the same size the shape will have when placed | ☐ |
+| Move the pointer around the work area | The preview follows the pointer smoothly with no noticeable lag, and the cursor shows as a crosshair | ☐ |
+| Move the pointer over a placed shape and over the centre point | The preview stays visible and does not block clicks or hovering on shapes underneath it | ☐ |
+| Move the pointer out of the work area (onto the side panels) | The preview disappears, and reappears when the pointer comes back | ☐ |
+| Click each of the five shape buttons in turn | The preview changes to match the most recently clicked shape and only one button is highlighted at a time | ☐ |
+| Click the armed button again | The shape is disarmed, the button is no longer highlighted, and the preview disappears | ☐ |
+| Click an empty spot in the work area while armed | The shape is placed as a new component and selected, the preview disappears and no button stays highlighted | ☐ |
+| Click an already placed shape while armed | That shape is selected as normal and no new shape is placed | ☐ |
+| Press Escape while armed | The preview disappears, the button is no longer highlighted, and nothing is placed | ☐ |
+| Arm a shape, then edit a field for the selected shape | The preview still shows the armed shape at its default size and is not affected by the edit | ☐ |
+| Preview in dark and light mode | The preview is visible against the grid in both themes but clearly fainter than placed shapes | ☐ |
+| Keyboard | Tab reaches each shape button, Enter or Space arms it, and Escape cancels it | ☐ |
+| Touch device | Touching and dragging in the work area moves the preview, and the page does not scroll unexpectedly | ☐ |
+| Reload the page | No shape is armed, as the setting is not saved between visits | ☐ |
 
 ## 5. Invalid input
 

@@ -13,15 +13,23 @@ export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   // Whether newly placed shapes snap to existing objects.
   const [snapEnabled, setSnapEnabled] = useState(true)
+  // The shape type armed for placement. While set, a preview of it follows the cursor over the work area.
+  const [armedShapeId, setArmedShapeId] = useState<string | null>(null)
 
   const selected = components.find((c) => c.id === selectedId) ?? null
   const shape = selected ? getShape(selected.shape.shapeId) : null
   const result = selected && shape ? parseValues(shape, selected.shape.raw) : null
 
+  // Clicking a toolbar button arms that shape; clicking the armed button again disarms it.
+  const arm = (shapeId: string) => {
+    setArmedShapeId((current) => (current === shapeId ? null : shapeId))
+  }
+
   const place = (shapeId: string) => {
     const next = createComponent(shapeId, components)
     setComponents((prev) => [...prev, next])
     setSelectedId(next.id)
+    setArmedShapeId(null)
   }
 
   const setField = (key: string, value: string) => {
@@ -41,7 +49,8 @@ export default function App() {
         <h1>Shape viewer</h1>
         <ShapeToolbar
           shapes={SHAPES}
-          onPlace={place}
+          onPlace={arm}
+          armedShapeId={armedShapeId}
           snapEnabled={snapEnabled}
           onSnapChange={setSnapEnabled}
         />
@@ -60,6 +69,9 @@ export default function App() {
           selectedId={selectedId}
           onSelect={setSelectedId}
           snapEnabled={snapEnabled}
+          armedShapeId={armedShapeId}
+          onPlaceArmed={place}
+          onCancelArmed={() => setArmedShapeId(null)}
         />
       </main>
       <HierarchyPanel components={components} selectedId={selectedId} onSelect={setSelectedId} />

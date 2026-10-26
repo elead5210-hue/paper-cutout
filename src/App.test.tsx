@@ -11,9 +11,15 @@ const setField = async (user: User, label: string, value: string) => {
   if (value !== '') await user.type(input, value)
 }
 
-// Clicking a toolbar button places a new shape in the work area and selects it.
-const chooseShape = (user: User, id: string) =>
+// Clicking a toolbar button arms that shape (a preview follows the cursor); clicking the
+// work area then places it as a new component and selects it.
+const armShape = (user: User, id: string) =>
   user.click(screen.getByRole('button', { name: new RegExp(`^${id}$`, 'i') }))
+
+const chooseShape = async (user: User, id: string) => {
+  await armShape(user, id)
+  await user.click(screen.getByTestId('work-area'))
+}
 
 // The button wrapping a placed shape, found through the shape's accessible label.
 const placedButton = (name: string) => screen.getByRole('img', { name }).closest('button')!
@@ -47,7 +53,7 @@ describe('first load', () => {
     const toolbar = screen.getByRole('toolbar', { name: 'Shapes' })
     const buttons = Array.from(toolbar.querySelectorAll('button')).map((b) => b.textContent)
     expect(buttons).toEqual(['Circle', 'Square', 'Rectangle', 'Triangle', 'Polygon'])
-    expect(screen.getByRole('button', { name: 'Square' })).not.toHaveAttribute('aria-pressed')
+    expect(screen.getByRole('button', { name: 'Square' })).toHaveAttribute('aria-pressed', 'false')
   })
 
   it('places a shape at its default size when its button is clicked', async () => {
@@ -441,6 +447,102 @@ describe('snapping to existing objects', () => {
       'data-component',
       'Component 1'
     )
+  })
+})
+
+describe('cursor-following shape preview', () => {
+  const preview = () => screen.queryByTestId('cursor-preview')
+
+  it('shows no preview on load', () => {
+    render(<App />)
+
+    expect(preview()).not.toBeInTheDocument()
+  })
+
+  it('arms a shape without placing it when its toolbar button is clicked', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await armShape(user, 'circle')
+
+    expect(screen.getByRole('button', { name: 'Circle' })).toHaveAttribute('aria-pressed', 'true')
+    expect(document.querySelectorAll('[data-component]')).toHaveLength(0)
+  })
+
+  it('shows a preview of the armed shape once the pointer is over the work area', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await armShape(user, 'rectangle')
+    expect(preview()).not.toBeInTheDocument()
+
+    await user.hover(screen.getByTestId('work-area'))
+    expect(preview()).toBeInTheDocument()
+    expect(preview()).toHaveAttribute('data-shape', 'rectangle')
+  })
+
+  it('hides the preview when the pointer leaves the work area', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await armShape(user, 'circle')
+    await user.hover(screen.getByTestId('work-area'))
+    expect(preview()).toBeInTheDocument()
+
+    await user.unhover(screen.getByTestId('work-area'))
+    expect(preview()).not.toBeInTheDocument()
+  })
+
+  it('switches the preview when another shape is clicked in the toolbar', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await armShape(user, 'circle')
+    await user.hover(screen.getByTestId('work-area'))
+    await armShape(user, 'square')
+    await user.hover(screen.getByTestId('work-area'))
+
+    expect(preview()).toHaveAttribute('data-shape', 'square')
+    expect(screen.getByRole('button', { name: 'Circle' })).toHaveAttribute('aria-pressed', 'false')
+  })
+
+  it('places the shape and removes the preview when the work area is clicked', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await armShape(user, 'circle')
+    await user.click(screen.getByTestId('work-area'))
+
+    expect(preview()).not.toBeInTheDocument()
+    expect(placedButton('Circle, 20 millimetres diameter')).toHaveAttribute(
+      'data-component',
+      'Component 1'
+    )
+    expect(screen.getByRole('button', { name: 'Circle' })).toHaveAttribute('aria-pressed', 'false')
+  })
+
+  it('cancels the armed shape with Escape without placing anything', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await armShape(user, 'triangle')
+    await user.hover(screen.getByTestId('work-area'))
+    expect(preview()).toBeInTheDocument()
+
+    await user.keyboard('{Escape}')
+    expect(preview()).not.toBeInTheDocument()
+    expect(document.querySelectorAll('[data-component]')).toHaveLength(0)
+  })
+
+  it('disarms when the armed toolbar button is clicked again', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await armShape(user, 'square')
+    await armShape(user, 'square')
+
+    expect(screen.getByRole('button', { name: 'Square' })).toHaveAttribute('aria-pressed', 'false')
+    expect(preview()).not.toBeInTheDocument()
   })
 })
 

@@ -54,13 +54,13 @@
       "feature_id": null,
       "title": "Cursor-following shape preview",
       "summary": "After the user clicks another shape in the shape selector, a representation of the selected shape follows the cursor around the canvas.",
-      "detail": null,
+      "detail": "{\"planState\":\"tasks_created\"}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:10:25.938Z",
-      "updated_at": "2026-10-26T09:10:25.938Z"
+      "updated_at": "2026-10-26T09:21:58.454Z"
     },
     {
       "roadmap_node_id": "rmn_43e93bf73f93c0990e267e85",
@@ -129,7 +129,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 0,
       "feature_id": null,
       "title": "src/snapping.ts",
@@ -140,7 +140,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:11:31.970Z",
-      "updated_at": "2026-10-26T09:11:31.970Z"
+      "updated_at": "2026-10-26T09:12:27.415Z"
+    },
+    {
+      "roadmap_node_id": "rmn_d232a436492a5eb01fb17855",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_28e295fbb246f44ca4c638d0",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 0,
+      "feature_id": null,
+      "title": "src/components/CursorPreview.tsx",
+      "summary": "Add a component that renders the armed shape's drawing at the pointer position and follows mouse movement over the work area.",
+      "detail": "{\"action\":\"create\",\"description\":\"Add a component that renders the armed shape's drawing at the pointer position and follows mouse movement over the work area.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:21:58.281Z",
+      "updated_at": "2026-10-26T09:21:58.281Z"
     },
     {
       "roadmap_node_id": "rmn_d81039b779d1fc447a9f004e",
@@ -149,7 +169,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 1,
       "feature_id": null,
       "title": "src/snapping.test.ts",
@@ -160,7 +180,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:11:32.000Z",
-      "updated_at": "2026-10-26T09:11:32.000Z"
+      "updated_at": "2026-10-26T09:13:08.462Z"
+    },
+    {
+      "roadmap_node_id": "rmn_84a7220eb3c85157153c1e73",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_28e295fbb246f44ca4c638d0",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 1,
+      "feature_id": null,
+      "title": "src/App.tsx",
+      "summary": "Hold the armed (selected-for-placement) shape id in state, set it from the toolbar and clear it on placement or cancel, and pass it to the work area.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Hold the armed (selected-for-placement) shape id in state, set it from the toolbar and clear it on placement or cancel, and pass it to the work area.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:21:58.299Z",
+      "updated_at": "2026-10-26T09:21:58.299Z"
     },
     {
       "roadmap_node_id": "rmn_16e193e62ab4e9452364ad52",
@@ -169,7 +209,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 2,
       "feature_id": null,
       "title": "src/placed.ts",
@@ -180,7 +220,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:11:32.023Z",
-      "updated_at": "2026-10-26T09:11:32.023Z"
+      "updated_at": "2026-10-26T09:13:51.465Z"
+    },
+    {
+      "roadmap_node_id": "rmn_c1736eda6848aa125d335e92",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_28e295fbb246f44ca4c638d0",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 2,
+      "feature_id": null,
+      "title": "src/components/ShapeToolbar.tsx",
+      "summary": "Mark the armed shape's button as pressed and report clicks so the shape becomes the one following the cursor.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Mark the armed shape's button as pressed and report clicks so the shape becomes the one following the cursor.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:21:58.320Z",
+      "updated_at": "2026-10-26T09:21:58.320Z"
     },
     {
       "roadmap_node_id": "rmn_8908cd8d723f07590431efdc",
@@ -189,7 +249,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 3,
       "feature_id": null,
       "title": "src/component.ts",
@@ -200,7 +260,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:11:32.058Z",
-      "updated_at": "2026-10-26T09:11:32.058Z"
+      "updated_at": "2026-10-26T09:14:37.975Z"
+    },
+    {
+      "roadmap_node_id": "rmn_a5d39c51362b4f85cb3f2845",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_28e295fbb246f44ca4c638d0",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 3,
+      "feature_id": null,
+      "title": "src/components/WorkArea.tsx",
+      "summary": "Track pointer position over the work area, render the cursor preview for the armed shape, and place the shape on click or cancel on Escape.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Track pointer position over the work area, render the cursor preview for the armed shape, and place the shape on click or cancel on Escape.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:21:58.340Z",
+      "updated_at": "2026-10-26T09:21:58.340Z"
     },
     {
       "roadmap_node_id": "rmn_494d0d517a8a0211213917ee",
@@ -209,7 +289,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 4,
       "feature_id": null,
       "title": "src/components/ShapeCanvas.tsx",
@@ -220,7 +300,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:11:32.088Z",
-      "updated_at": "2026-10-26T09:11:32.088Z"
+      "updated_at": "2026-10-26T09:15:17.697Z"
+    },
+    {
+      "roadmap_node_id": "rmn_c5ea06cacb05aa5ea6e2368a",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_28e295fbb246f44ca4c638d0",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 4,
+      "feature_id": null,
+      "title": "src/styles.css",
+      "summary": "Add styles for the cursor preview (absolute positioning, semi-transparent, pointer-events none) and the pressed toolbar button state.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Add styles for the cursor preview (absolute positioning, semi-transparent, pointer-events none) and the pressed toolbar button state.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:21:58.358Z",
+      "updated_at": "2026-10-26T09:21:58.358Z"
     },
     {
       "roadmap_node_id": "rmn_bceb63a15eb511271cd2f940",
@@ -229,7 +329,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 5,
       "feature_id": null,
       "title": "src/components/WorkArea.tsx",
@@ -240,7 +340,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:11:32.129Z",
-      "updated_at": "2026-10-26T09:11:32.129Z"
+      "updated_at": "2026-10-26T09:15:55.747Z"
+    },
+    {
+      "roadmap_node_id": "rmn_fca1899930ee39a7c25e531c",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_28e295fbb246f44ca4c638d0",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 5,
+      "feature_id": null,
+      "title": "src/App.test.tsx",
+      "summary": "Update existing placement tests for the new arm-then-place flow and add tests that the preview appears, follows the pointer, and disappears after placement or Escape.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Update existing placement tests for the new arm-then-place flow and add tests that the preview appears, follows the pointer, and disappears after placement or Escape.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:21:58.406Z",
+      "updated_at": "2026-10-26T09:21:58.406Z"
     },
     {
       "roadmap_node_id": "rmn_8bbfc4dbc90df716b85567c8",
@@ -249,7 +369,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 6,
       "feature_id": null,
       "title": "src/components/ShapeToolbar.tsx",
@@ -260,7 +380,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:11:32.149Z",
-      "updated_at": "2026-10-26T09:11:32.149Z"
+      "updated_at": "2026-10-26T09:16:48.016Z"
+    },
+    {
+      "roadmap_node_id": "rmn_969b212b76b92fa6b2f932ae",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_28e295fbb246f44ca4c638d0",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 6,
+      "feature_id": null,
+      "title": "docs/verification.md",
+      "summary": "Document manual verification steps for the cursor-following shape preview.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Document manual verification steps for the cursor-following shape preview.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-26T09:21:58.425Z",
+      "updated_at": "2026-10-26T09:21:58.425Z"
     },
     {
       "roadmap_node_id": "rmn_c39fc49f6b5947fe0fbc7758",
@@ -269,7 +409,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 7,
       "feature_id": null,
       "title": "src/App.tsx",
@@ -280,7 +420,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:11:32.168Z",
-      "updated_at": "2026-10-26T09:11:32.168Z"
+      "updated_at": "2026-10-26T09:17:33.802Z"
     },
     {
       "roadmap_node_id": "rmn_3625a0432e53b5ad37da509a",
@@ -289,7 +429,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 8,
       "feature_id": null,
       "title": "src/styles.css",
@@ -300,7 +440,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:11:32.193Z",
-      "updated_at": "2026-10-26T09:11:32.193Z"
+      "updated_at": "2026-10-26T09:18:14.242Z"
     },
     {
       "roadmap_node_id": "rmn_fe0eec25c9324a0746339928",
@@ -309,7 +449,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 9,
       "feature_id": null,
       "title": "src/component.test.ts",
@@ -320,7 +460,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:11:32.212Z",
-      "updated_at": "2026-10-26T09:11:32.212Z"
+      "updated_at": "2026-10-26T09:20:04.236Z"
     },
     {
       "roadmap_node_id": "rmn_ccfc5f26d02a2dd961ac5d6c",
@@ -329,7 +469,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 10,
       "feature_id": null,
       "title": "src/App.test.tsx",
@@ -340,7 +480,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:11:32.233Z",
-      "updated_at": "2026-10-26T09:11:32.233Z"
+      "updated_at": "2026-10-26T09:20:45.184Z"
     },
     {
       "roadmap_node_id": "rmn_469d230d8f04e635b5478667",
@@ -349,7 +489,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 11,
       "feature_id": null,
       "title": "docs/verification.md",
@@ -360,7 +500,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-26T09:11:32.260Z",
-      "updated_at": "2026-10-26T09:11:32.260Z"
+      "updated_at": "2026-10-26T09:21:32.032Z"
     }
   ]
 }
