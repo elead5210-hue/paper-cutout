@@ -1,4 +1,4 @@
-import { createPlaced, type PlacedShape } from './placed'
+import { createPlaced, type PlacedPosition, type PlacedShape } from './placed'
 import type { Rect, SnapTarget } from './snapping'
 
 /** A named component. Every shape added to the work area lives inside one. */
@@ -33,13 +33,18 @@ export function nextDefaultName(existing: readonly Component[]): string {
 /**
  * Create a component around a new instance of a shape at its default values,
  * named with the next free default name given the components that already exist.
+ * An optional position offsets the shape from the centre point (e.g. when snapped to a side).
  */
-export function createComponent(shapeId: string, existing: readonly Component[]): Component {
+export function createComponent(
+  shapeId: string,
+  existing: readonly Component[],
+  position?: PlacedPosition,
+): Component {
   counter += 1
   return {
     id: `component-${counter}`,
     name: nextDefaultName(existing),
-    shape: createPlaced(shapeId),
+    shape: createPlaced(shapeId, position),
   }
 }
 

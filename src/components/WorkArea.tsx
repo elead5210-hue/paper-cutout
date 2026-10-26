@@ -3,6 +3,8 @@ import { getShape, parseValues } from '../shapes'
 import type { Component } from '../component'
 import type { SnapGuide } from '../snapping'
 import { hoveredTargetSide, type HoverSide } from '../hoverSide'
+import { snapCentreToSide } from '../sideSnap'
+import type { PlacedPosition } from '../placed'
 import ShapeCanvas from './ShapeCanvas'
 import CursorPreview from './CursorPreview'
 
@@ -19,7 +21,7 @@ interface Props {
   /** The shape armed for placement; a preview of it follows the cursor while set. */
   armedShapeId?: string | null
   /** Called with the armed shape id when the work area is clicked while a shape is armed. */
-  onPlaceArmed?: (shapeId: string) => void
+  onPlaceArmed?: (shapeId: string, position?: PlacedPosition) => void
   /** Called when the armed shape is cancelled (Escape pressed). */
   onCancelArmed?: () => void
 }
@@ -40,6 +42,7 @@ export default function WorkArea({
   const [hovered, setHovered] = useState<{ id: string; side: HoverSide } | null>(null)
   // Placed shape buttons, keyed by component id, so their bounds can be measured.
   const placedRefs = useRef<Map<string, HTMLButtonElement>>(new Map())
+  const workRef = useRef<HTMLDivElement>(null)
 
   // Escape cancels the armed shape.
   useEffect(() => {
@@ -55,7 +58,7 @@ export default function WorkArea({
     const rect = e.currentTarget.getBoundingClientRect()
     setPointer({ x: e.clientX - rect.left, y: e.clientY - rect.top })
 
-    if (!armedShapeId) {
+    if (!armedShapeId || !snapEnabled) {
       setHovered(null)
       return
     }
@@ -73,10 +76,41 @@ export default function WorkArea({
     )
   }
 
+  // Where the armed shape goes if placed now: flush against the highlighted side of the hovered
+  // object, as an offset of its centre from the work area's centre. Undefined means no snap.
+  const snappedPosition = (): PlacedPosition | undefined => {
+    if (!snapEnabled || !hovered) return undefined
+    const targetEl = placedRefs.current.get(hovered.id)
+    const area = workRef.current
+    const previewEl = area?.querySelector('[data-testid="cursor-preview"]')
+    if (!targetEl || !area || !previewEl) return undefined
+
+    const t = targetEl.getBoundingClientRect()
+    const targetSvg = targetEl.firstElementChild?.getBoundingClientRect()
+    const p = previewEl.getBoundingClientRect()
+    // The new shape's button gets the same padding and border as the target's.
+    const extraW = targetSvg ? t.width - targetSvg.width : 0
+    const extraH = targetSvg ? t.height - targetSvg.height : 0
+
+    const centre = snapCentreToSide(
+      { x: t.left, y: t.top, width: t.width, height: t.height },
+      hovered.side,
+      { width: p.width + extraW, height: p.height + extraH },
+    )
+    if (!centre) return undefined
+
+    const a = area.getBoundingClientRect()
+    return {
+      x: centre.x - (a.left + a.width / 2),
+      y: centre.y - (a.top + a.height / 2),
+    }
+  }
+
   const showPreview = armedShapeId !== null && pointer !== null
 
   return (
     <div
+      ref={workRef}
       className="work-area"
       data-testid="work-area"
       data-snap={snapEnabled ? 'on' : 'off'}
@@ -89,7 +123,9 @@ export default function WorkArea({
       }}
       onClick={(e) => {
         // Only clicks on empty work area place the armed shape, not clicks on placed shapes.
-        if (armedShapeId && e.target === e.currentTarget) onPlaceArmed?.(armedShapeId)
+        if (armedShapeId && e.target === e.currentTarget) {
+          onPlaceArmed?.(armedShapeId, snappedPosition())
+        }
       }}
     >
       <span
@@ -119,7 +155,19 @@ export default function WorkArea({
             data-component={c.name}
             title={c.name}
             aria-pressed={c.id === selectedId}
-            onClick={() => onSelect(c.id)}
+            style={
+              c.shape.position
+                ? {
+                    transform: `translate(calc(-50% + ${c.shape.position.x}px), calc(-50% + ${c.shape.position.y}px))`,
+                  }
+                : undefined
+            }
+            onClick={() => {
+              // While armed, clicking the object with a side highlighted snaps the new shape to it.
+              const position = armedShapeId ? snappedPosition() : undefined
+              if (armedShapeId && position) onPlaceArmed?.(armedShapeId, position)
+              else onSelect(c.id)
+            }}
           >
             <ShapeCanvas
               shape={shape}

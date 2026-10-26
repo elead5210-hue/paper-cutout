@@ -186,7 +186,7 @@ Clicking a shape in the shape selector arms that shape. A semi-transparent drawi
 | Click each of the five shape buttons in turn | The preview changes to match the most recently clicked shape and only one button is highlighted at a time | ☐ |
 | Click the armed button again | The shape is disarmed, the button is no longer highlighted, and the preview disappears | ☐ |
 | Click an empty spot in the work area while armed | The shape is placed as a new component and selected, the preview disappears and no button stays highlighted | ☐ |
-| Click an already placed shape while armed | That shape is selected as normal and no new shape is placed | ☐ |
+| Click an already placed shape while armed, with no side highlighted | That shape is selected as normal and no new shape is placed | ☐ |
 | Press Escape while armed | The preview disappears, the button is no longer highlighted, and nothing is placed | ☐ |
 | Arm a shape, then edit a field for the selected shape | The preview still shows the armed shape at its default size and is not affected by the edit | ☐ |
 | Preview in dark and light mode | The preview is visible against the grid in both themes but clearly fainter than placed shapes | ☐ |
@@ -219,6 +219,33 @@ While a shape is armed (see 4.6), moving the pointer over an existing object, or
 | Browser zoom 50% to 200% | The highlight stays on the correct side and keeps a similar line thickness | ☐ |
 | Touch device | Touching or dragging over a placed shape highlights the nearest side, and it clears when the finger lifts or leaves the work area | ☐ |
 | Reload the page | No highlight is shown, as nothing is armed | ☐ |
+
+### 4.8 Click to snap to the highlighted side
+
+While a shape is armed and a side of an existing object is highlighted (see 4.7), clicking places the new shape flush against that side, outside the existing object and centred along the shared side. The "Snap to objects" checkbox (see 4.5) must be ticked. A snapped shape is stored with an offset from the centre point, which appears as a `transform` in the `style` attribute of its button in the browser developer tools. A shape placed without snapping has no `style` attribute.
+
+| Check | Expected | Pass |
+|---|---|---|
+| Place a Rectangle, arm a Circle, hover near the top edge of the Rectangle so the top side is highlighted, then click | A new Circle is placed directly above the Rectangle with its bottom edge touching the Rectangle's top edge, centred horizontally on it | ☐ |
+| Repeat with the bottom side highlighted | The new shape sits directly below the Rectangle, top edge touching the Rectangle's bottom edge, centred horizontally | ☐ |
+| Repeat with the left side highlighted | The new shape sits directly left of the Rectangle, right edge touching the Rectangle's left edge, centred vertically | ☐ |
+| Repeat with the right side highlighted | The new shape sits directly right of the Rectangle, left edge touching the Rectangle's right edge, centred vertically | ☐ |
+| Check the join between the two shapes | There is no visible gap and no overlap between the two bounding boxes | ☐ |
+| After the click | A new component is created and selected, the armed button is no longer highlighted, and the preview and side highlight disappear | ☐ |
+| Click on the highlighted object itself (not empty space) | The click snaps the new shape, and the existing object is not selected | ☐ |
+| Click an empty spot with no side highlighted | The shape is placed at its default position on the centre point, with no `style` attribute | ☐ |
+| Arm a shape, click a placed shape with no side highlighted | The placed shape is selected as normal and no new shape is placed | ☐ |
+| Untick "Snap to objects", arm a shape, hover a placed shape | No side is highlighted, and clicking places the shape at the default position | ☐ |
+| Snap a shape to a side, then snap another shape to a side of the first | Shapes can be chained, and each one lines up flush with the one it was snapped to | ☐ |
+| Snap shapes of different sizes (for example a Circle of 50 mm against a Rectangle of 12 mm) | The new shape is flush against the side and centred along it, overhanging the existing object evenly on both ends | ☐ |
+| Snap a shape, then change its dimensions | The shape resizes and keeps its centre where it was placed; it does not jump back to the centre point | ☐ |
+| Make a snapped shape invalid, then fix it | It disappears while invalid and returns in the same position | ☐ |
+| Snap a shape, then click it and the object it was snapped to | Each is selected in turn, and the hierarchy panel follows the selection | ☐ |
+| Browser zoom 50% to 200% | Snapped shapes still sit flush against the highlighted side | ☐ |
+| Resize the browser window after snapping | The snapped shape keeps its offset from the centre point and stays aligned with the object beside it | ☐ |
+| Dark and light mode | Snapped shapes and the highlight are drawn the same as other shapes in both themes | ☐ |
+| Touch device | Touching a placed shape while armed highlights the nearest side, and tapping it places the new shape against that side | ☐ |
+| Reload the page | The work area is empty again, as snapped positions are not saved between visits | ☐ |
 
 ## 5. Invalid input
 

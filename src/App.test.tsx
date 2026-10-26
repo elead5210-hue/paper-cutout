@@ -642,6 +642,134 @@ describe('hovered snap side highlight', () => {
   })
 })
 
+describe('click to snap to the highlighted side', () => {
+  // jsdom has no layout, so give the placed shape fixed bounds: x 100-200, y 100-150.
+  const mockBounds = (el: HTMLElement) => {
+    el.getBoundingClientRect = () =>
+      ({
+        x: 100,
+        y: 100,
+        left: 100,
+        top: 100,
+        right: 200,
+        bottom: 150,
+        width: 100,
+        height: 50,
+        toJSON: () => ({}),
+      }) as DOMRect
+  }
+
+  const rectangleLabel = 'Rectangle, 30 by 20 millimetres'
+  const circleLabel = 'Circle, 20 millimetres diameter'
+
+  const hoverRectangle = (user: User, clientX: number, clientY: number) =>
+    user.pointer({ target: placedButton(rectangleLabel), coords: { clientX, clientY } })
+
+  const clickRectangle = (user: User, clientX: number, clientY: number) =>
+    user.pointer({
+      keys: '[MouseLeft]',
+      target: placedButton(rectangleLabel),
+      coords: { clientX, clientY },
+    })
+
+  const setup = async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await chooseShape(user, 'rectangle')
+    mockBounds(placedButton(rectangleLabel))
+    await armShape(user, 'circle')
+    return user
+  }
+
+  it('places the new shape against the highlighted side on the second click', async () => {
+    const user = await setup()
+
+    await hoverRectangle(user, 150, 102)
+    expect(screen.getByTestId('side-highlight')).toHaveAttribute('data-side', 'top')
+
+    await clickRectangle(user, 150, 102)
+
+    // A second component was created instead of just selecting the existing one.
+    expect(document.querySelectorAll('[data-component]')).toHaveLength(2)
+    const snapped = placedButton(circleLabel)
+    expect(snapped).toHaveAttribute('data-component', 'Component 2')
+
+    // Snapped above the rectangle: centred on it horizontally, one shape-height up.
+    const style = snapped.getAttribute('style') ?? ''
+    expect(style).toContain('translate')
+    expect(style).toContain('150px')
+    expect(style).toContain('75px')
+  })
+
+  it('disarms and selects the new shape after snapping', async () => {
+    const user = await setup()
+
+    await hoverRectangle(user, 150, 102)
+    await clickRectangle(user, 150, 102)
+
+    expect(screen.getByRole('button', { name: 'Circle' })).toHaveAttribute('aria-pressed', 'false')
+    expect(screen.queryByTestId('cursor-preview')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('side-highlight')).not.toBeInTheDocument()
+    expect(placedButton(circleLabel)).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByLabelText('Diameter')).toHaveValue(20)
+  })
+
+  it('uses the highlighted side that is under the pointer when clicking', async () => {
+    const user = await setup()
+
+    await hoverRectangle(user, 198, 125)
+    expect(screen.getByTestId('side-highlight')).toHaveAttribute('data-side', 'right')
+
+    await clickRectangle(user, 198, 125)
+
+    // Snapped to the right: one object-width to the right of the centre of the rectangle.
+    const style = placedButton(circleLabel).getAttribute('style') ?? ''
+    expect(style).toContain('200px')
+    expect(style).toContain('125px')
+  })
+
+  it('places the shape at the default position when no side is highlighted', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await chooseShape(user, 'rectangle')
+    mockBounds(placedButton(rectangleLabel))
+    await armShape(user, 'circle')
+
+    // Pointer is far from every object, so nothing is highlighted.
+    await user.pointer({
+      target: screen.getByTestId('work-area'),
+      coords: { clientX: 400, clientY: 400 },
+    })
+    expect(screen.queryByTestId('side-highlight')).not.toBeInTheDocument()
+
+    await user.click(screen.getByTestId('work-area'))
+
+    expect(document.querySelectorAll('[data-component]')).toHaveLength(2)
+    expect(placedButton(circleLabel)).not.toHaveAttribute('style')
+  })
+
+  it('leaves a shape placed without snapping at the centre', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+
+    await chooseShape(user, 'circle')
+
+    expect(placedButton(circleLabel)).not.toHaveAttribute('style')
+  })
+
+  it('selects the object as normal when clicked with nothing armed', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await chooseShape(user, 'rectangle')
+    await chooseShape(user, 'circle')
+
+    await user.click(placedButton(rectangleLabel))
+
+    expect(document.querySelectorAll('[data-component]')).toHaveLength(2)
+    expect(placedButton(rectangleLabel)).toHaveAttribute('aria-pressed', 'true')
+  })
+})
+
 describe('invalid input', () => {
   it('hides the shape and announces a message when the field is empty', async () => {
     const user = userEvent.setup()

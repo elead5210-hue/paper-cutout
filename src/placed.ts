@@ -17,6 +17,12 @@ export interface PlacedSnap {
 /** Axis list re-exported for callers that iterate over snap axes. */
 export const SNAP_AXES: ReadonlyArray<SnapAxis> = ['x', 'y']
 
+/** Offset of a placed shape's centre from the work area's centre point, in px. */
+export interface PlacedPosition {
+  x: number
+  y: number
+}
+
 /** One shape that has been placed in the work area. */
 export interface PlacedShape {
   /** Unique per placed instance, so the same shape type can be placed more than once. */
@@ -27,19 +33,22 @@ export interface PlacedShape {
   raw: RawValues
   /** Snap result stored when the shape was added as a nested child; absent if it did not snap. */
   snap?: PlacedSnap
+  /** Offset from the centre point where the shape was placed (e.g. snapped to a side); absent means centred. */
+  position?: PlacedPosition
 }
 
 let counter = 0
 
 /** Start a new instance of a shape with that shape's default values. */
-export function createPlaced(shapeId: string): PlacedShape {
+export function createPlaced(shapeId: string, position?: PlacedPosition): PlacedShape {
   const def = getShape(shapeId)
   counter += 1
-  return {
+  const placed: PlacedShape = {
     id: `placed-${counter}`,
     shapeId: def.id,
     raw: defaultRaw(def),
   }
+  return position ? { ...placed, position } : placed
 }
 
 /** Return a copy of a placed shape with its snap result stored (or cleared when null). */

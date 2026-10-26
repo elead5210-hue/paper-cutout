@@ -93,7 +93,9 @@ input:focus-visible, .toolbar-button:focus-visible, .placed:focus-visible, .tree
 }
 
 .placed {
-  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  --offset-x: 0px; --offset-y: 0px;
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(calc(-50% + var(--offset-x)), calc(-50% + var(--offset-y)));
   display: block; padding: 0.5rem; margin: 0;
   background: transparent; border: 1px dashed transparent; border-radius: 4px; cursor: pointer;
 }

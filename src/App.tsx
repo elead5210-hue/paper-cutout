@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { SHAPES, getShape, parseValues } from './shapes'
 import { createComponent, type Component } from './component'
+import type { PlacedPosition } from './placed'
 import ShapeToolbar from './components/ShapeToolbar'
 import ShapeInputs from './components/ShapeInputs'
 import WorkArea from './components/WorkArea'
@@ -25,8 +26,9 @@ export default function App() {
     setArmedShapeId((current) => (current === shapeId ? null : shapeId))
   }
 
-  const place = (shapeId: string) => {
-    const next = createComponent(shapeId, components)
+  // An optional position (offset from the centre point) is given when the shape was snapped to a side.
+  const place = (shapeId: string, position?: PlacedPosition) => {
+    const next = createComponent(shapeId, components, position)
     setComponents((prev) => [...prev, next])
     setSelectedId(next.id)
     setArmedShapeId(null)
