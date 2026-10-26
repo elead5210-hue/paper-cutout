@@ -1,0 +1,14 @@
+// FILE: deploy-manager.json
+{
+  "name": "paper-cutout",
+  "type": "static",
+  "runtime": {
+    "node": "20"
+  },
+  "install": "npm install",
+  "build": "npm run build",
+  "output": "dist",
+  "spa": {
+    "fallback": "index.html"
+  }
+}

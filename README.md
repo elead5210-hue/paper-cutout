@@ -21,6 +21,27 @@ npm run preview  # serve the production build locally
 
 To typecheck on its own, run `npx tsc --noEmit`.
 
+## Deployment
+
+paper-cutout is a static single-page app, so it deploys as plain files with no server code. Deploy-Manager reads its settings from `deploy-manager.json` in the project root.
+
+- **Node version:** 18 or newer. `.nvmrc` pins Node 20 for builds, and `package.json` declares `engines.node` as `>=18`.
+- **Install:** `npm install`
+- **Build:** `npm run build`, which typechecks and then writes the production site.
+- **Output directory:** `dist/`. This folder is generated and is not committed (it is listed in `.gitignore`).
+- **Single-page fallback:** requests for unknown paths are served `index.html`.
+- **Base path:** `vite.config.ts` sets `base: './'`, so built asset paths are relative and the app works at the root of a domain or under a sub-path.
+
+To check a production build locally before deploying:
+
+```
+npm install
+npm run build
+npm run preview
+```
+
+Then open the address that `npm run preview` prints and confirm the page loads and shapes can be placed and edited.
+
 ## How it works
 
 - The work area starts empty. Clicking a button in the toolbar places a new shape at that shape's default size and selects it. Clicking the same button again places another shape.
@@ -57,6 +78,9 @@ src/
   App.test.tsx                component tests for the behaviour
 docs/
   verification.md             browser acceptance checklist and results log
+deploy-manager.json           Deploy-Manager settings: static site, install and build commands, dist/ output, single-page fallback
+.nvmrc                        pinned Node version for builds
+vite.config.ts                Vite and Vitest config, including the relative base path used for deployment
 ```
 
 ## Adding a shape
