@@ -134,6 +134,8 @@ function findBestAxisMatch(
     if (candidate.axis !== axis) continue;
 
     for (const { anchor, value } of shapeAnchors) {
+      // Like-for-like only: start to start, center to center, end to end.
+      if (anchor !== candidate.targetAnchor) continue;
       const delta = candidate.value - value;
       const distance = Math.abs(delta);
       if (distance > threshold) continue;
