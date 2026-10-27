@@ -4,7 +4,7 @@
   "runtime": {
     "node": "20"
   },
-  "install": "npm install",
+  "install": "npm ci",
   "build": "npm run build",
   "output": "dist",
   "spa": {
