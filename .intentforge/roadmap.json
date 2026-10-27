@@ -54,13 +54,13 @@
       "feature_id": null,
       "title": "Add build verification and clean up dependency vulnerabilities",
       "summary": "Run `npm test` and `tsc` in CI or a pre-deploy check so syntax and type errors are caught before the Docker image is built. Triage the 6 `npm audit` findings (2 critical, 1 high, 3 moderate), upgrading dev-only packages such as vite, vitest and jsdom where safe. Replace the deprecated `whatwg-encoding` dependency. Pin the Node version consistently across `.nvmrc`, `package.json` engines and the Dockerfile base image.",
-      "detail": null,
+      "detail": "{\"planState\":\"tasks_created\"}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T08:38:30.532Z",
-      "updated_at": "2026-10-27T08:38:30.532Z"
+      "updated_at": "2026-10-27T08:52:01.104Z"
     },
     {
       "roadmap_node_id": "rmn_79c537691f6f13738dd304bd",
@@ -69,7 +69,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 0,
       "feature_id": null,
       "title": ".dockerignore",
@@ -80,7 +80,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T08:41:09.739Z",
-      "updated_at": "2026-10-27T08:41:09.739Z"
+      "updated_at": "2026-10-27T08:42:30.865Z"
+    },
+    {
+      "roadmap_node_id": "rmn_41984b4a2e06f69d6e999890",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_cd41d1154d6ace330f8e9b6b",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 0,
+      "feature_id": null,
+      "title": "package.json",
+      "summary": "Add engines.node pin, add typecheck and verify scripts (tsc --noEmit + npm test), upgrade vite/vitest/jsdom and related dev deps to patched versions, and replace the deprecated whatwg-encoding dependency",
+      "detail": "{\"action\":\"modify\",\"description\":\"Add engines.node pin, add typecheck and verify scripts (tsc --noEmit + npm test), upgrade vite/vitest/jsdom and related dev deps to patched versions, and replace the deprecated whatwg-encoding dependency\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T08:52:00.857Z",
+      "updated_at": "2026-10-27T08:52:00.857Z"
     },
     {
       "roadmap_node_id": "rmn_7b8323c236110997b224c1b2",
@@ -89,7 +109,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 1,
       "feature_id": null,
       "title": ".nvmrc",
@@ -100,7 +120,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T08:41:09.764Z",
-      "updated_at": "2026-10-27T08:41:09.764Z"
+      "updated_at": "2026-10-27T08:43:21.933Z"
+    },
+    {
+      "roadmap_node_id": "rmn_33e888e7e5250e746c597b6c",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_cd41d1154d6ace330f8e9b6b",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 1,
+      "feature_id": null,
+      "title": "package-lock.json",
+      "summary": "Regenerate lockfile to reflect upgraded dev dependencies, removal of whatwg-encoding and resolved npm audit findings",
+      "detail": "{\"action\":\"modify\",\"description\":\"Regenerate lockfile to reflect upgraded dev dependencies, removal of whatwg-encoding and resolved npm audit findings\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":false,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T08:52:00.882Z",
+      "updated_at": "2026-10-27T08:52:00.882Z"
     },
     {
       "roadmap_node_id": "rmn_22e498efe3784964bc858ea2",
@@ -109,7 +149,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 2,
       "feature_id": null,
       "title": "src/sideSnap.ts",
@@ -120,7 +160,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T08:41:09.809Z",
-      "updated_at": "2026-10-27T08:41:09.809Z"
+      "updated_at": "2026-10-27T08:43:53.436Z"
+    },
+    {
+      "roadmap_node_id": "rmn_cd227f654a2585cdc12ba6f4",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_cd41d1154d6ace330f8e9b6b",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 2,
+      "feature_id": null,
+      "title": ".nvmrc",
+      "summary": "Pin Node version consistently with package.json engines and the Dockerfile base image",
+      "detail": "{\"action\":\"modify\",\"description\":\"Pin Node version consistently with package.json engines and the Dockerfile base image\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T08:52:00.917Z",
+      "updated_at": "2026-10-27T08:52:00.917Z"
     },
     {
       "roadmap_node_id": "rmn_58f658a3b1b5ea7c948d9751",
@@ -129,7 +189,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 3,
       "feature_id": null,
       "title": "src/snapping.ts",
@@ -140,7 +200,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T08:41:09.858Z",
-      "updated_at": "2026-10-27T08:41:09.858Z"
+      "updated_at": "2026-10-27T08:44:30.922Z"
+    },
+    {
+      "roadmap_node_id": "rmn_a4d5b0b8d2bdad1e1d4b33bf",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_cd41d1154d6ace330f8e9b6b",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 3,
+      "feature_id": null,
+      "title": "Dockerfile",
+      "summary": "Align Node base image tag with the pinned version and run typecheck and tests in the build stage before building",
+      "detail": "{\"action\":\"modify\",\"description\":\"Align Node base image tag with the pinned version and run typecheck and tests in the build stage before building\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T08:52:00.985Z",
+      "updated_at": "2026-10-27T08:52:00.985Z"
     },
     {
       "roadmap_node_id": "rmn_20f1a02d2010aad1808afd20",
@@ -149,7 +229,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 4,
       "feature_id": null,
       "title": "src/circleSnap.ts",
@@ -160,7 +240,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T08:41:09.898Z",
-      "updated_at": "2026-10-27T08:41:09.898Z"
+      "updated_at": "2026-10-27T08:45:57.048Z"
+    },
+    {
+      "roadmap_node_id": "rmn_d9f4ddb760a3f04debba5fa3",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_cd41d1154d6ace330f8e9b6b",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 4,
+      "feature_id": null,
+      "title": ".github/workflows/ci.yml",
+      "summary": "Add CI workflow using .nvmrc that runs npm ci, tsc typecheck, npm test and npm run build, plus npm audit, before deploy",
+      "detail": "{\"action\":\"create\",\"description\":\"Add CI workflow using .nvmrc that runs npm ci, tsc typecheck, npm test and npm run build, plus npm audit, before deploy\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T08:52:01.010Z",
+      "updated_at": "2026-10-27T08:52:01.010Z"
     },
     {
       "roadmap_node_id": "rmn_d9fab35c75a369c37abf938e",
@@ -169,7 +269,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 5,
       "feature_id": null,
       "title": "src/hoverSide.ts",
@@ -180,7 +280,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T08:41:09.936Z",
-      "updated_at": "2026-10-27T08:41:09.936Z"
+      "updated_at": "2026-10-27T08:46:28.851Z"
+    },
+    {
+      "roadmap_node_id": "rmn_9981e012cbfc6bd250780021",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_cd41d1154d6ace330f8e9b6b",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 5,
+      "feature_id": null,
+      "title": "docs/verification.md",
+      "summary": "Document the pre-deploy verification steps, Node version pin and the npm audit triage outcome",
+      "detail": "{\"action\":\"modify\",\"description\":\"Document the pre-deploy verification steps, Node version pin and the npm audit triage outcome\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T08:52:01.056Z",
+      "updated_at": "2026-10-27T08:52:01.056Z"
     },
     {
       "roadmap_node_id": "rmn_e4892ca6059279005c8ab5a2",
@@ -189,7 +309,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 6,
       "feature_id": null,
       "title": "src/components/CursorPreview.tsx",
@@ -200,7 +320,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T08:41:09.956Z",
-      "updated_at": "2026-10-27T08:41:09.956Z"
+      "updated_at": "2026-10-27T08:47:10.625Z"
+    },
+    {
+      "roadmap_node_id": "rmn_a6e103ef2407b3d44dec0041",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_cd41d1154d6ace330f8e9b6b",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 6,
+      "feature_id": null,
+      "title": "README.md",
+      "summary": "Note the required Node version and the verify script for local pre-deploy checks",
+      "detail": "{\"action\":\"modify\",\"description\":\"Note the required Node version and the verify script for local pre-deploy checks\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":false,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T08:52:01.070Z",
+      "updated_at": "2026-10-27T08:52:01.070Z"
     },
     {
       "roadmap_node_id": "rmn_3f29a35a8db30d7bccf1a992",
@@ -209,7 +349,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 7,
       "feature_id": null,
       "title": "src/sideSnap.test.ts",
@@ -220,7 +360,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T08:41:09.976Z",
-      "updated_at": "2026-10-27T08:41:09.976Z"
+      "updated_at": "2026-10-27T08:48:04.887Z"
     },
     {
       "roadmap_node_id": "rmn_f8abac39d5de949c93719cd3",
@@ -229,7 +369,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 8,
       "feature_id": null,
       "title": "src/snapping.test.ts",
@@ -240,7 +380,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T08:41:09.999Z",
-      "updated_at": "2026-10-27T08:41:09.999Z"
+      "updated_at": "2026-10-27T08:49:27.473Z"
     },
     {
       "roadmap_node_id": "rmn_633aadec051ecc767bec5142",
@@ -249,7 +389,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 9,
       "feature_id": null,
       "title": "src/circleSnap.test.ts",
@@ -260,7 +400,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T08:41:10.017Z",
-      "updated_at": "2026-10-27T08:41:10.017Z"
+      "updated_at": "2026-10-27T08:50:41.806Z"
     },
     {
       "roadmap_node_id": "rmn_937e4a477f16adccaae32732",
@@ -269,7 +409,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 10,
       "feature_id": null,
       "title": "src/hoverSide.test.ts",
@@ -280,7 +420,7 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T08:41:10.035Z",
-      "updated_at": "2026-10-27T08:41:10.035Z"
+      "updated_at": "2026-10-27T08:51:43.385Z"
     }
   ]
 }

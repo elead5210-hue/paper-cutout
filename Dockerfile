@@ -1,5 +1,5 @@
 # Build stage: install dependencies and compile the Vite app into static files.
-FROM node:20-alpine AS build
+FROM node:20.19.0-alpine AS build
 
 WORKDIR /app
 

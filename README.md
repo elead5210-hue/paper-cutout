@@ -6,8 +6,10 @@ Shapes: circle, square, rectangle, triangle and regular polygon.
 
 ## Requirements
 
-- Node.js 18 or newer
+- Node.js 20.19.0 or newer in the 20.x line (pinned in `.nvmrc` and `package.json` `engines.node`; the `Dockerfile` uses the matching `node:20` base image)
 - npm
+
+Run `nvm use` in the project root to switch to the pinned Node version.
 
 ## Run, test and build
 
@@ -17,15 +19,17 @@ npm run dev      # start the dev server with hot reload
 npm test         # run the unit and component tests once
 npm run build    # typecheck, then create a production build in dist/
 npm run preview  # serve the production build locally
+npm run typecheck  # typecheck only (tsc --noEmit)
+npm run verify   # typecheck, run tests, then build: the pre-deploy check
 ```
 
-To typecheck on its own, run `npx tsc --noEmit`.
+Run `npm run verify` before deploying so syntax and type errors are caught before the Docker image is built. The same checks run in CI (`.github/workflows/ci.yml`) along with `npm audit`.
 
 ## Deployment
 
 paper-cutout is a static single-page app. Deploy-Manager clones the repository, builds the `Dockerfile` at the repository root and runs it as a single container, so there is no separate manifest or deployment config file.
 
-- **Node version:** the `Dockerfile` builds with Node 20 (`node:20-alpine`). `package.json` declares `engines.node` as `>=18` for local use.
+- **Node version:** the Node version is pinned consistently in `.nvmrc` (`20.19.0`), `package.json` `engines.node` (`>=20.19.0 <21`) and the `Dockerfile` base image (`node:20-alpine`). Update all three together.
 - **Install:** `npm ci`, run in the Dockerfile's build stage.
 - **Build:** `npm run build`, run in the Dockerfile's build stage. It typechecks and then writes the production site.
 - **Output:** `dist/` is copied into an `nginx-unprivileged` image, which runs as a non-root user. `dist/` is generated and is not committed (it is listed in `.gitignore`).
