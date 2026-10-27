@@ -73,7 +73,7 @@ describe('nearestSnapAngle', () => {
     expect(nearestSnapAngle(350)).toBe(0)
     expect(nearestSnapAngle(359)).toBe(0)
     expect(nearestSnapAngle(10)).toBe(0)
-    expect(nearestSnapAngle(338)).toBe(315)
+    expect(nearestSnapAngle(336)).toBe(315)
     expect(nearestSnapAngle(-10)).toBe(0)
     expect(nearestSnapAngle(370)).toBe(0)
   })
