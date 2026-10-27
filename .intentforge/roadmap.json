@@ -114,13 +114,13 @@
       "feature_id": null,
       "title": "Triage dependency vulnerabilities",
       "summary": "npm audit reports 3 vulnerabilities (2 critical, 1 moderate), including tinypool prototype pollution via vitest@3.2.7. The fix is vitest 5.x, a breaking change. These are dev-only dependencies and the CI audit step is non-blocking, but the roadmap asked for them to be triaged.",
-      "detail": null,
+      "detail": "{\"planState\":\"tasks_created\"}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T09:50:33.598Z",
-      "updated_at": "2026-10-27T09:50:33.598Z"
+      "updated_at": "2026-10-27T09:57:35.975Z"
     },
     {
       "roadmap_node_id": "rmn_bba8560166771b1b81baac9a",
@@ -209,7 +209,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 0,
       "feature_id": null,
       "title": "src/hoverSide.test.ts",
@@ -220,7 +220,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T09:57:08.839Z",
-      "updated_at": "2026-10-27T09:57:08.839Z"
+      "updated_at": "2026-10-27T09:57:21.308Z"
+    },
+    {
+      "roadmap_node_id": "rmn_f56881cae87a20c42fad8f0d",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_625903e2979d01770964dab2",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 0,
+      "feature_id": null,
+      "title": "package.json",
+      "summary": "Upgrade vitest (and its tinypool dependency) to a patched version and bump related dev dependencies such as jsdom where safe.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Upgrade vitest (and its tinypool dependency) to a patched version and bump related dev dependencies such as jsdom where safe.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T09:57:35.927Z",
+      "updated_at": "2026-10-27T09:57:35.927Z"
     },
     {
       "roadmap_node_id": "rmn_279f8b2c8653174eaed19f2b",
@@ -241,6 +261,46 @@
       "notes": null,
       "created_at": "2026-10-27T09:50:58.844Z",
       "updated_at": "2026-10-27T09:55:58.428Z"
+    },
+    {
+      "roadmap_node_id": "rmn_3f306f0a0eecedf013ed88b9",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_625903e2979d01770964dab2",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 1,
+      "feature_id": null,
+      "title": "package-lock.json",
+      "summary": "Regenerate the lockfile so the upgraded dev dependencies resolve to versions with no critical audit findings.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Regenerate the lockfile so the upgraded dev dependencies resolve to versions with no critical audit findings.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T09:57:35.937Z",
+      "updated_at": "2026-10-27T09:57:35.937Z"
+    },
+    {
+      "roadmap_node_id": "rmn_51bbbfd71c49f30d053c31fa",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_625903e2979d01770964dab2",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 2,
+      "feature_id": null,
+      "title": "vite.config.ts",
+      "summary": "Adjust the Vitest config only if the vitest upgrade requires option changes.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Adjust the Vitest config only if the vitest upgrade requires option changes.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":false,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T09:57:35.963Z",
+      "updated_at": "2026-10-27T09:57:35.963Z"
     }
   ]
 }

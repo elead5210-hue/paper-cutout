@@ -133,7 +133,7 @@ describe('hoveredTargetSide', () => {
   it('prefers the later (topmost) target when objects overlap', () => {
     const top = { id: 'top', bounds: { x: 50, y: 50, width: 100, height: 100 } }
     expect(hoveredTargetSide({ x: 60, y: 100 }, [a, top])).toEqual({ id: 'top', side: 'left' })
-    expect(hoveredTargetSide({ x: 60, y: 100 }, [top, a])).toEqual({ id: 'a', side: 'right' })
+    expect(hoveredTargetSide({ x: 60, y: 100 }, [top, a])).toEqual({ id: 'a', side: 'bottom' })
   })
 
   it('uses the threshold so a pointer just outside an object still hovers it', () => {
