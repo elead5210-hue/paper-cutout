@@ -134,13 +134,13 @@
       "feature_id": null,
       "title": "Clean up config, docs and Node version",
       "summary": "Delete deploy-manager.json or make it match the README, which says Deploy-Manager uses the Dockerfile with no separate manifest. Delete the unused ShapeSelect.tsx or wire it in. Update the README structure section and the click-to-place description to the current arm-then-place flow. Confirm the build on Node 20.19.0, as pinned in the Dockerfile and .nvmrc, before deploying.",
-      "detail": null,
+      "detail": "{\"planState\":\"tasks_created\"}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T09:50:33.598Z",
-      "updated_at": "2026-10-27T09:50:33.598Z"
+      "updated_at": "2026-10-27T09:59:42.304Z"
     },
     {
       "roadmap_node_id": "rmn_ee952171003919525aa8bef0",
@@ -229,7 +229,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 0,
       "feature_id": null,
       "title": "package.json",
@@ -240,7 +240,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T09:57:35.927Z",
-      "updated_at": "2026-10-27T09:57:35.927Z"
+      "updated_at": "2026-10-27T09:58:16.447Z"
+    },
+    {
+      "roadmap_node_id": "rmn_33d65bfc51e85561ccd4cf12",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_bba8560166771b1b81baac9a",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 0,
+      "feature_id": null,
+      "title": "deploy-manager.json",
+      "summary": "Remove the stray manifest, since Deploy-Manager builds the Dockerfile and the README says no separate manifest exists.",
+      "detail": "{\"action\":\"delete\",\"description\":\"Remove the stray manifest, since Deploy-Manager builds the Dockerfile and the README says no separate manifest exists.\",\"needsFileContent\":false,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"not_needed\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T09:59:42.271Z",
+      "updated_at": "2026-10-27T09:59:42.271Z"
     },
     {
       "roadmap_node_id": "rmn_279f8b2c8653174eaed19f2b",
@@ -269,7 +289,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 1,
       "feature_id": null,
       "title": "package-lock.json",
@@ -280,7 +300,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T09:57:35.937Z",
-      "updated_at": "2026-10-27T09:57:35.937Z"
+      "updated_at": "2026-10-27T09:59:03.925Z"
+    },
+    {
+      "roadmap_node_id": "rmn_7d1aa5d442f67fd898db3c9a",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_bba8560166771b1b81baac9a",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "done",
+      "order": 1,
+      "feature_id": null,
+      "title": "src/components/ShapeSelect.tsx",
+      "summary": "Remove the unused ShapeSelect component, which nothing imports.",
+      "detail": "{\"action\":\"delete\",\"description\":\"Remove the unused ShapeSelect component, which nothing imports.\",\"needsFileContent\":false,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"not_needed\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T09:59:42.276Z",
+      "updated_at": "2026-10-27T09:59:42.276Z"
     },
     {
       "roadmap_node_id": "rmn_51bbbfd71c49f30d053c31fa",
@@ -289,7 +329,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 2,
       "feature_id": null,
       "title": "vite.config.ts",
@@ -300,7 +340,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T09:57:35.963Z",
-      "updated_at": "2026-10-27T09:57:35.963Z"
+      "updated_at": "2026-10-27T09:59:16.413Z"
+    },
+    {
+      "roadmap_node_id": "rmn_dbc9a8da381fa3002d317a8c",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_bba8560166771b1b81baac9a",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 2,
+      "feature_id": null,
+      "title": "README.md",
+      "summary": "Update the project structure and how-it-works sections to list snapping, sideSnap, circleSnap, hoverSide and CursorPreview and describe the arm-then-click-to-place flow; drop ShapeSelect.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Update the project structure and how-it-works sections to list snapping, sideSnap, circleSnap, hoverSide and CursorPreview and describe the arm-then-click-to-place flow; drop ShapeSelect.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T09:59:42.282Z",
+      "updated_at": "2026-10-27T09:59:42.282Z"
     }
   ]
 }

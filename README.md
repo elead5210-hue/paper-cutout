@@ -1,6 +1,6 @@
 # paper-cutout
 
-A small React app that draws shapes at their true size in millimetres. Click a shape in the toolbar to place it in the work area, then select it and type its dimensions. The work area shows a centre point, and every placed shape is centred on it. A hierarchy panel on the right lists each component and its shape in a file-explorer style tree. The shape redraws on every keystroke over a 10 mm grid.
+A small React app that draws shapes at their true size in millimetres. Click a shape in the toolbar to arm it, click the work area to place it, then type its dimensions. The work area shows a centre point, and every placed shape is centred on it. A hierarchy panel on the right lists each component and its shape in a file-explorer style tree. The shape redraws on every keystroke over a 10 mm grid.
 
 Shapes: circle, square, rectangle, triangle and regular polygon.
 
@@ -48,7 +48,7 @@ Then open http://localhost:8000 and confirm the page loads and shapes can be pla
 
 ## How it works
 
-- The work area starts empty. Clicking a button in the toolbar places a new shape at that shape's default size and selects it. Clicking the same button again places another shape.
+- The work area starts empty. Clicking a button in the toolbar arms that shape, and a semi-transparent preview of it follows the cursor over the work area. Clicking the same button again, or pressing Escape, disarms it. Clicking the work area places a new shape at its default size and selects it. While a shape is armed and "Snap to objects" is on, the nearest side of a hovered object (or, for a circle, the nearest 45 degree angle) is highlighted, and clicking places the new shape flush against it instead of at the centre.
 - Every placed shape is added as part of a new component. The component gets a default name ("Component 1", "Component 2", and so on) and contains the shape that was just added to the canvas area. The name is exposed on the placed shape as a `data-component` attribute and as its tooltip.
 - The hierarchy panel on the right lists every component by name in a tree. Each component is a top-level row, and the shape that was added to the canvas area as part of it is nested beneath as its child. Click a component's row to select it, which also selects its shape in the work area. The selected row is highlighted and marked with `aria-selected`. The panel shows "No components yet." until a shape is placed.
 - The left panel holds the toolbar and one number input per dimension of the selected shape. Click a placed shape (its component) in the work area to select it and edit its dimensions. The selected shape has a solid outline and is marked with `aria-pressed`.
@@ -70,13 +70,18 @@ src/
   component.test.ts           tests for default naming, unique ids and default values
   placed.ts                   the PlacedShape type and createPlaced(), which starts a new shape at its defaults
   shapes.ts                   shape definitions, geometry helpers and validation
+  snapping.ts                 pure helpers that line a shape's start, centre and end up with those of other objects
+  hoverSide.ts                pure helpers that find which side of an object the pointer is nearest to
+  sideSnap.ts                 pure helpers that place a new shape flush against a chosen side of an object
+  circleSnap.ts               pure helpers for the fixed 45 degree snap angles around a circle
   styles.css                  global styles, theme variables, the grid background, the centre point and centring layout and the hierarchy tree
   components/
-    ShapeToolbar.tsx          the toolbar of shape buttons that place shapes
+    ShapeToolbar.tsx          the toolbar of shape buttons that arm a shape for placement, plus the snap toggle
     ShapeInputs.tsx           one number input per field of the selected shape
-    WorkArea.tsx              renders the centre point and every component's shape, and handles selecting one
+    WorkArea.tsx              renders the centre point and every component's shape, handles selecting one, and places the armed shape (with side and circle-angle snapping) on click
     HierarchyPanel.tsx        the right-hand tree of components, each with its shape nested as a child, and selecting a component from it
     ShapeCanvas.tsx           the SVG drawing of one shape
+    CursorPreview.tsx         the semi-transparent preview of the armed shape that follows the cursor
   test/setup.ts               test setup (jest-dom matchers, cleanup)
   shapes.test.ts              geometry, validation and accessible label tests
   App.test.tsx                component tests for the behaviour
@@ -111,7 +116,7 @@ Add tests for the new shape's size and label in `src/shapes.test.ts`.
 | Stroke | 0.3 mm, centred on the outline. The viewBox is padded by half the stroke width so nothing clips. The outline therefore extends about 0.15 mm beyond the stated size on each side. |
 | ViewBox | Calculated from the shape's own bounding box, not a fixed size, so shapes are never clipped or offset. |
 | Size limits | Dimensions run from 0.1 mm to 1000 mm. Change them in the `size()` helper in `src/shapes.ts`. |
-| Placing shapes | A toolbar button places a new shape every time it is clicked, with that shape's default values, and selects it. The work area is empty on load. |
+| Placing shapes | A toolbar button arms a shape, and clicking the work area places it with that shape's default values and selects it. The work area is empty on load. |
 | Centre point | The work area always draws a small ring at its exact centre, including when it is empty. It ignores pointer events, so it never blocks clicking a shape. |
 | Centring | Every placed shape is positioned at the centre of the work area with CSS (`left: 50%; top: 50%` and `translate(-50%, -50%)`), so it stays centred whatever its size or the window size. Shapes are not draggable. |
 | Components | Placing a shape creates a component that contains it: `{ id, name, shape }`. The shape is the `PlacedShape` with its own values, so edits to a shape change only the component it belongs to. |
