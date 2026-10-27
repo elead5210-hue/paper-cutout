@@ -1,4 +1,3 @@
-// FILE: src/components/CursorPreview.tsx
 import { defaultRaw, getShape, parseValues } from '../shapes'
 import ShapeCanvas from './ShapeCanvas'
 

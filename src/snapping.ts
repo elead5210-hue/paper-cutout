@@ -1,4 +1,3 @@
-// FILE: src/snapping.ts
 /**
  * Pure snapping helpers.
  *

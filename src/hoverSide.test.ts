@@ -1,4 +1,3 @@
-// FILE: src/hoverSide.test.ts
 import { describe, expect, it } from 'vitest'
 import {
   DEFAULT_HOVER_THRESHOLD,

@@ -1,4 +1,3 @@
-// FILE: src/snapping.test.ts
 import { describe, expect, it } from "vitest";
 import {
   DEFAULT_SNAP_THRESHOLD,

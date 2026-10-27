@@ -1,4 +1,3 @@
-// FILE: src/hoverSide.ts
 /**
  * Pure hit-testing helper for the "highlight hovered snap side" feature.
  *

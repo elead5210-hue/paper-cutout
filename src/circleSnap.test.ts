@@ -1,5 +1,3 @@
-```ts
-// FILE: src/circleSnap.test.ts
 import { describe, expect, it } from 'vitest'
 import {
   CIRCLE_SNAP_ANGLES,
@@ -194,4 +192,3 @@ describe('snapCentreToAngle', () => {
     expect(snapCentreToAngle({ x: NaN, y: 0 }, 10, size, 0)).toBeNull()
   })
 })
-```

@@ -1,4 +1,3 @@
-// FILE: src/circleSnap.ts
 /**
  * Pure helpers for circle angular snap points.
  *

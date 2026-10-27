@@ -1,4 +1,3 @@
-// FILE: src/sideSnap.ts
 /**
  * Pure helper for the "click to snap to selected side" feature.
  *
