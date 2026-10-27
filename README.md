@@ -25,6 +25,10 @@ npm run verify   # typecheck, run tests, then build: the pre-deploy check
 
 Run `npm run verify` before deploying so syntax and type errors are caught before the Docker image is built. The same checks run in CI (`.github/workflows/ci.yml`) along with `npm audit`.
 
+### Editing config files
+
+Edit config files (`package.json`, `.nvmrc` and similar) in a plain-text or code editor, not a word processor or a note-taking app. Those apps can silently replace straight quotes with smart (curly) quotes, which breaks JSON and other config syntax. Run `npm run validate:config` before pushing to confirm the config files are still valid.
+
 ## Deployment
 
 paper-cutout is a static single-page app. Deploy-Manager clones the repository, builds the `Dockerfile` at the repository root and runs it as a single container, so there is no separate manifest or deployment config file.

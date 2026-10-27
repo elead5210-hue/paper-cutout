@@ -74,13 +74,13 @@
       "feature_id": null,
       "title": "Add safeguards against invalid config reaching deploys",
       "summary": "Prevent a repeat of this failure by adding a pre-deploy or CI check that validates package.json parses as JSON and that `npm ci` and the Docker build succeed. Add a .dockerignore and a note on editing config files in plain-text editors to avoid smart-quote substitution.",
-      "detail": null,
+      "detail": "{\"planState\":\"tasks_created\"}",
       "linked_element_ids": [],
       "finalized": false,
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T10:02:04.281Z",
-      "updated_at": "2026-10-27T10:02:04.281Z"
+      "updated_at": "2026-10-27T10:04:26.696Z"
     },
     {
       "roadmap_node_id": "rmn_1f9fd02288573a80e34826e8",
@@ -109,7 +109,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 0,
       "feature_id": null,
       "title": "Dockerfile",
@@ -120,7 +120,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T10:03:20.628Z",
-      "updated_at": "2026-10-27T10:03:20.628Z"
+      "updated_at": "2026-10-27T10:03:31.856Z"
+    },
+    {
+      "roadmap_node_id": "rmn_38dc4804f9b44adf00b0aa02",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_8b9763889e47182809faac12",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 0,
+      "feature_id": null,
+      "title": "scripts/validate-config.mjs",
+      "summary": "Add a Node script that parses package.json (and other JSON config files such as deploy-manager.json) with JSON.parse and exits non-zero with a clear error, flagging curly quotes, if parsing fails.",
+      "detail": "{\"action\":\"create\",\"description\":\"Add a Node script that parses package.json (and other JSON config files such as deploy-manager.json) with JSON.parse and exits non-zero with a clear error, flagging curly quotes, if parsing fails.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":true,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T10:04:26.643Z",
+      "updated_at": "2026-10-27T10:04:26.643Z"
     },
     {
       "roadmap_node_id": "rmn_b130a2fb3549df0ce09d83a4",
@@ -149,7 +169,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 1,
       "feature_id": null,
       "title": "nginx.conf",
@@ -160,7 +180,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T10:03:20.639Z",
-      "updated_at": "2026-10-27T10:03:20.639Z"
+      "updated_at": "2026-10-27T10:03:41.667Z"
+    },
+    {
+      "roadmap_node_id": "rmn_a14464bd5a624f23a0ae98c5",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_8b9763889e47182809faac12",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 1,
+      "feature_id": null,
+      "title": "package.json",
+      "summary": "Add a `validate:config` script that runs the validator, and chain it into `prebuild` so a malformed config fails early.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Add a `validate:config` script that runs the validator, and chain it into `prebuild` so a malformed config fails early.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":false,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T10:04:26.655Z",
+      "updated_at": "2026-10-27T10:04:26.655Z"
     },
     {
       "roadmap_node_id": "rmn_71d914d417101409f4c0cd66",
@@ -169,7 +209,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 2,
       "feature_id": null,
       "title": ".dockerignore",
@@ -180,7 +220,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T10:03:20.667Z",
-      "updated_at": "2026-10-27T10:03:20.667Z"
+      "updated_at": "2026-10-27T10:03:53.613Z"
+    },
+    {
+      "roadmap_node_id": "rmn_1d452deaf7167a96d393ed64",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_8b9763889e47182809faac12",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 2,
+      "feature_id": null,
+      "title": ".github/workflows/ci.yml",
+      "summary": "Add CI steps that run the config validator before install, then `npm ci`, tests, build, and a `docker build` of the Dockerfile so a broken config fails before deploy.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Add CI steps that run the config validator before install, then `npm ci`, tests, build, and a `docker build` of the Dockerfile so a broken config fails before deploy.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":false,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T10:04:26.682Z",
+      "updated_at": "2026-10-27T10:04:26.682Z"
     },
     {
       "roadmap_node_id": "rmn_7fdb9d2af0bac29f5cc5935f",
@@ -189,7 +249,7 @@
       "type": "task",
       "depth": 2,
       "locked": false,
-      "status": "in_progress",
+      "status": "done",
       "order": 3,
       "feature_id": null,
       "title": "deploy-manager.json",
@@ -200,7 +260,27 @@
       "blocked_by": [],
       "notes": null,
       "created_at": "2026-10-27T10:03:20.678Z",
-      "updated_at": "2026-10-27T10:03:20.678Z"
+      "updated_at": "2026-10-27T10:04:09.776Z"
+    },
+    {
+      "roadmap_node_id": "rmn_60b26578a94b6b71876062e2",
+      "project_id": "70b4a9ba-22e4-4322-9aea-6cf9bb7689c9",
+      "parent_roadmap_node_id": "rmn_8b9763889e47182809faac12",
+      "type": "task",
+      "depth": 2,
+      "locked": false,
+      "status": "in_progress",
+      "order": 3,
+      "feature_id": null,
+      "title": "README.md",
+      "summary": "Add a short note on editing config files (package.json etc.) in a plain-text or code editor to avoid smart-quote substitution, and on running `npm run validate:config` before pushing.",
+      "detail": "{\"action\":\"modify\",\"description\":\"Add a short note on editing config files (package.json etc.) in a plain-text or code editor to avoid smart-quote substitution, and on running `npm run validate:config` before pushing.\",\"needsFileContent\":true,\"needsMetadata\":false,\"confident\":false,\"fileStatus\":\"pending\",\"fileChangeMode\":null,\"metadataStatus\":\"not_needed\",\"metadata\":null}",
+      "linked_element_ids": [],
+      "finalized": false,
+      "blocked_by": [],
+      "notes": null,
+      "created_at": "2026-10-27T10:04:26.688Z",
+      "updated_at": "2026-10-27T10:04:26.688Z"
     }
   ]
 }
